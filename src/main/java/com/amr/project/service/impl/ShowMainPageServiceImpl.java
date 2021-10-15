@@ -10,6 +10,7 @@ import com.amr.project.service.abstracts.ShowMainPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class ShowMainPageServiceImpl implements ShowMainPageService {
 
@@ -25,6 +26,15 @@ public class ShowMainPageServiceImpl implements ShowMainPageService {
         this.shopMainPageDao = shopMainPageDao;
         this.categoryDao = categoryDao;
         this.mainPageShowConverter = mainPageShowConverter;
+    }
+
+    @Override
+    public ShowMainPageDTO findItemsByCategory(Long categoryId) {
+        return new ShowMainPageDTO(
+                mainPageShowConverter.shopListToListShopMainPageDTO(shopMainPageDao.findPopularShops()),
+                mainPageShowConverter.itemListToListItemMainPageDTO(itemMainPageDao.findItemsByCategoryId(categoryId)),
+                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class))
+        );
     }
 
     @Override

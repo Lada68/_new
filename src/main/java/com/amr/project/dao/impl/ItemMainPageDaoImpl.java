@@ -8,7 +8,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ItemMainPageImpl extends ReadWriteDaoImpl<Item, Long> implements ItemMainPageDao {
+public class ItemMainPageDaoImpl extends ReadWriteDaoImpl<Item, Long> implements ItemMainPageDao {
+
+    @Override
+    public List<Item> findItemsByCategoryId(Long categoryId) {
+        return em.createQuery("SELECT u FROM Item u JOIN u.categories i where i.id = :id", Item.class)
+                .setParameter("id", categoryId).getResultList();
+    }
 
     @Override
     public List<Item> findPopularItems() {
