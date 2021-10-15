@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao {
     @Override
     public User findUserByUsername(String username) {
-        return em.createQuery("select User from User as u where u.username=:username", User.class).setParameter("username", username).getSingleResult();
+        return em.createQuery("select c from User c where c.username like :username", User.class).setParameter("username", username).getSingleResult();
     }
 }
