@@ -22,7 +22,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
                 .authorityListToSet(authentication.getAuthorities());
         
         httpServletResponse.sendRedirect(
-                roles.contains("ADMIN")
+                roles.contains("ROLE_ADMIN")
                         ? "/admin"
                         : "/"
         );
