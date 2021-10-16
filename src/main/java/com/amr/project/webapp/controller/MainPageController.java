@@ -1,11 +1,13 @@
 package com.amr.project.webapp.controller;
 
 
+import com.amr.project.model.dto.ShowMainPageDTO;
 import com.amr.project.service.abstracts.ShowMainPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainPageController {
@@ -18,8 +20,14 @@ public class MainPageController {
     }
 
     @GetMapping
-    public String showMainPage(Model model) {
-        model.addAttribute("mainPageDto", showMainPageService.show());
+    public String showMainPage(@RequestParam(value = "searchName", required = false) String searchName, Model model) {
+        ShowMainPageDTO showMainPageDTO;
+        if (searchName != null){
+            showMainPageDTO = showMainPageService.showSearch(searchName);
+        } else {
+            showMainPageDTO = showMainPageService.show();
+        }
+        model.addAttribute("mainPageDto", showMainPageDTO);
         return "index";
     }
 }

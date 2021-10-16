@@ -28,11 +28,25 @@ public class ShowMainPageServiceImpl implements ShowMainPageService {
     }
 
     @Override
+    public ShowMainPageDTO showSearch(String s) {
+
+        return new ShowMainPageDTO(
+                mainPageShowConverter.shopListToListShopMainPageDTO(shopMainPageDao.searchShops(s)),
+                mainPageShowConverter.itemListToListItemMainPageDTO(itemMainPageDao.searchItems(s)),
+                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class)),
+                "Поиск товаров",
+                "Поиск магазинов"
+        );
+    }
+
+    @Override
     public ShowMainPageDTO show() {
         return new ShowMainPageDTO(
                 mainPageShowConverter.shopListToListShopMainPageDTO(shopMainPageDao.findPopularShops()),
                 mainPageShowConverter.itemListToListItemMainPageDTO(itemMainPageDao.findPopularItems()),
-                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class))
+                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class)),
+                "Подборка популярных товаров",
+                "Подборка популярных магазинов"
         );
     }
 }
