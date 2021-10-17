@@ -1,9 +1,11 @@
 package com.amr.project.model.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table(name = "cities")
