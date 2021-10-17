@@ -62,6 +62,12 @@ public class DatabaseInitializer {
         categories.forEach(categoryDao::persist);
 
         users = getUsers();
+        //USER Можно пока одного юзера сделать фискированным чтобы время сэкономить?
+        users.get(0).setUsername("user");
+        users.get(0).setPassword("user");
+        users.get(0).setRoles(null);
+        users.get(0).addRole(roles.iterator().next());
+        //USER Можно пока одного юзера сделать фискированным чтобы время сэкономить?
         users.forEach(user -> {
             user.getAddress().forEach(addressDao::persist);
             userDao.persist(user);

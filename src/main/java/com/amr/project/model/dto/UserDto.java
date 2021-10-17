@@ -1,9 +1,12 @@
 package com.amr.project.model.dto;
 
+import lombok.*;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+@Data
 public class UserDto {
     private Long id;
     private String username;

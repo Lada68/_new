@@ -1,39 +1,37 @@
 package com.amr.project.webapp.rest_controller;
 
-import com.amr.project.model.dto.UserDto;
-import com.amr.project.model.entity.City;
-import com.amr.project.model.entity.Country;
-import com.amr.project.model.entity.User;
-import com.amr.project.model.enums.Gender;
+import com.amr.project.converter.PrincipalMapper;
+import com.amr.project.dao.abstracts.UserDao;
+import com.amr.project.model.entity.*;
 import com.amr.project.service.abstracts.ReadWriteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class UserPageRestController {
-    ReadWriteService<User,Long> readWriteService;
+
+    private final PrincipalMapper principalMapper;
+    private final UserDao userDao; // надо будет вметсо этого потом добавить в ReadWriteServices getbyname
+    private final ReadWriteService<Image,Long> rwImage; // ВРЕМЕННО - потом разобраться с фото пользователей
 
     @GetMapping("/users/principal")
     public Object getUserPrincipal(Principal principal) {
-        User user = new User();
-        user.setUsername("Тест");
-        user.setAge(34);
-        user.setGender(Gender.MALE);
-        user.addAddress(null);
-        user.setPhone("12-041-24");
-        System.out.println(principal);
-        return user;
- //       return  readWriteService.getByKey(User.class,((User) principal).getId()).orElse(null), new UserDto());
+
+        User userPrincipal = userDao.findUserByUsername(principal.getName()); // надо будет вметсо этого потом добавить в ReadWriteServices getbyname
+
+        Image image = rwImage.getByKey(Image.class, 1L).orElse(null); // ВРЕМЕННО - потом разобраться с фото пользователей
+        userPrincipal.setImages(List.of(image));                               // ВРЕМЕННО - потом разобраться с фото пользователей
+
+        return principalMapper.userToPrincipalDto(userPrincipal);
+
     }
-
-
-//    public Object getUserPrincipal(Principal principal) {
-//        return  converter.EntityToDTO(readWriteService.getByKey(User.class,((User) principal).getId()).orElse(null), new UserDto());
-//    }
 }
 
 

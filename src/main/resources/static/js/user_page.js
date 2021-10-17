@@ -1,11 +1,14 @@
 async function initUserPage() {
     let user = await getUserPrincipal()
+    console.log(user)
     writeUserData(user)
 }
 
 function writeUserData(user) {
     let userData = document.querySelectorAll('.user_data')
-    document.user_foto.src = user.images;
+    console.log(user)
+//    document.user_foto.src = user.images.url   // картинка по URL
+    document.user_foto.src = "data:image/png;base64,"+user.images.picture  // картинка из файла
     userData[0].innerHTML = user.username;
     userData[1].innerHTML = "Возраст: " + user.age;
     userData[2].innerHTML = "Пол: " + user.gender;
