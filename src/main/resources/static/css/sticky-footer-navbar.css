@@ -1,5 +1,6 @@
 main > .container {
   padding: 60px 15px 0;
+  min-width: 768px;
 }
 
 .footer {
@@ -26,6 +27,19 @@ code {
   border-radius: .25rem;
 }
 
+.mini-img-list img {
+  height: 4rem;
+  opacity: 0.5;
+}
+
+.mini-img-list img:hover, .mini-img-list .active img {
+  opacity: 1;
+}
+
+.top-panel {
+
+}
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
@@ -40,5 +54,3 @@ code {
     font-size: 3.5rem;
   }
 }
-
-
