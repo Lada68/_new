@@ -30,4 +30,10 @@ public class MainPageController {
         model.addAttribute("mainPageDto", showMainPageDTO);
         return "index";
     }
+
+    @GetMapping("/category/{id}")
+    public String showMainCategory(Model model, @PathVariable Long id) {
+        model.addAttribute("mainPageDto", showMainPageService.findItemsByCategory(id));
+        return "index";
+    }
 }
