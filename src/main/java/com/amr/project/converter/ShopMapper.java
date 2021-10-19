@@ -4,12 +4,9 @@ import com.amr.project.model.dto.*;
 import com.amr.project.model.entity.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface ShopMapper {
-    ShopMapper INSTANCE = Mappers.getMapper(ShopMapper.class);
-
     @Mapping(target = "username", source = "user.username")
     ShopDto shopToDto(Shop shop);
 
