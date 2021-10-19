@@ -16,8 +16,11 @@ import java.util.List;
 public class CartRestController {
     private SimpleRWService<Item, Long> itemService;
 
-    public CartRestController(SimpleRWService<Item, Long> itemService) {
+    private CartItemMapper cartItemMapper;
+
+    public CartRestController(SimpleRWService<Item, Long> itemService, CartItemMapper cartItemMapper) {
         this.itemService = itemService;
+        this.cartItemMapper = cartItemMapper;
     }
 
     @GetMapping("/cart")
@@ -74,6 +77,6 @@ public class CartRestController {
     }
 
     private CartItemDto convert(Item item) {
-        return CartItemMapper.INSTANCE.CartItemToDto(new CartItem(item.getId(), item, item.getShop(), null, 1));
+        return cartItemMapper.CartItemToDto(new CartItem(item.getId(), item, item.getShop(), null, 1));
     }
 }
