@@ -22,4 +22,11 @@ public class ItemMainPageDaoImpl extends ReadWriteDaoImpl<Item, Long> implements
                 .setMaxResults(4)
                 .getResultList();
     }
+
+    @Override
+    public List<Item> searchItems(String search) {
+        return em.createQuery("Select u from Item u where u.name LIKE :param", Item.class)
+                .setParameter("param", "%" + search + "%")
+                .getResultList();
+    }
 }

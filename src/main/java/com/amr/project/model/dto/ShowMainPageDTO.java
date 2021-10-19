@@ -14,4 +14,6 @@ public class ShowMainPageDTO {
     List<ShopMainPageDTO> popularShop;
     List<ItemMainPageDTO> popularItem;
     List<CategoryMainPageDto> category;
+    String items;
+    String shops;
 }
