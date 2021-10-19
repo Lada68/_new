@@ -87,8 +87,8 @@ public class DatabaseInitializer {
     private Set<Role> getRoles() {
         Set<Role> roles = new HashSet<>();
 
-        roles.add(new Role("ROLE_USER"));
-        roles.add(new Role("ROLE_ADMIN"));
+        roles.add(new Role("USER"));
+        roles.add(new Role("ADMIN"));
 
         return roles;
     }
