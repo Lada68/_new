@@ -29,11 +29,14 @@ public class ShowMainPageServiceImpl implements ShowMainPageService {
     }
 
     @Override
-    public ShowMainPageDTO findItemsByCategory(Long categoryId) {
+    public ShowMainPageDTO showSearch(String s) {
+
         return new ShowMainPageDTO(
-                mainPageShowConverter.shopListToListShopMainPageDTO(shopMainPageDao.findPopularShops()),
-                mainPageShowConverter.itemListToListItemMainPageDTO(itemMainPageDao.findItemsByCategoryId(categoryId)),
-                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class))
+                mainPageShowConverter.shopListToListShopMainPageDTO(shopMainPageDao.searchShops(s)),
+                mainPageShowConverter.itemListToListItemMainPageDTO(itemMainPageDao.searchItems(s)),
+                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class)),
+                "Поиск товаров",
+                "Поиск магазинов"
         );
     }
 
@@ -42,7 +45,9 @@ public class ShowMainPageServiceImpl implements ShowMainPageService {
         return new ShowMainPageDTO(
                 mainPageShowConverter.shopListToListShopMainPageDTO(shopMainPageDao.findPopularShops()),
                 mainPageShowConverter.itemListToListItemMainPageDTO(itemMainPageDao.findPopularItems()),
-                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class))
+                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class)),
+                "Подборка популярных товаров",
+                "Подборка популярных магазинов"
         );
     }
 }

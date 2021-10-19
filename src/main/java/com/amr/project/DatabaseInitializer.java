@@ -87,8 +87,8 @@ public class DatabaseInitializer {
     private Set<Role> getRoles() {
         Set<Role> roles = new HashSet<>();
 
-        roles.add(new Role("ROLE_USER"));
-        roles.add(new Role("ROLE_ADMIN"));
+        roles.add(new Role("USER"));
+        roles.add(new Role("ADMIN"));
 
         return roles;
     }
@@ -115,6 +115,8 @@ public class DatabaseInitializer {
 
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setActivate(true);
+        user.setActivationCode("1");
         user.setEmail(user.getFirstName().toLowerCase() + user.getLastName().toLowerCase() + "@mail.com");
         user.setAge(Integer.parseInt(randomNumberString(2)));
         user.setUsername(user.getFirstName().toLowerCase() + user.getAge());
