@@ -4,7 +4,6 @@ import com.amr.project.model.dto.CartItemDto;
 import com.amr.project.model.entity.CartItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring", uses = ShopMapper.class)
 public interface CartItemMapper {
