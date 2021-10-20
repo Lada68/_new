@@ -14,8 +14,8 @@ public class UserDto {
     private String gender;
     private String email;
     private String phone;
-    private AddressDto address;
-    private ImageDto images;
+    private List<AddressDto> address;
+    private List<ImageDto> images;
     private Calendar birthday;
     private List<OrderDto> orders = new ArrayList<>();
     private List<ShopDto> shops = new ArrayList<>();

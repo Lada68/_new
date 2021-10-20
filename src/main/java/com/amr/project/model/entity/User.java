@@ -80,6 +80,15 @@ public class User implements UserDetails {
         this.roles.add(role);
     }
 
+    public void addImages(Image image) {
+        if (this.images == null) {
+            this.images = new ArrayList<>();
+        }
+        this.images.add(image);
+    }
+
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
