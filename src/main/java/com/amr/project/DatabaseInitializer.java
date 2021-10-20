@@ -131,8 +131,12 @@ public class DatabaseInitializer {
         user.addAddress(getRandomAddress());
         user.addAddress(getRandomAddress());
         user.addAddress(getRandomAddress());
+        user.addAddress(getRandomAddress());
+        user.addAddress(getRandomAddress());
         user.addRole(randomListElement(new ArrayList<>(roles)));
         user.setGender(gender);
+        user.addImages(getRandomImage());
+        user.addImages(getRandomImage());
         user.addImages(getRandomImage());
         user.addImages(getRandomImage());
         user.addImages(getRandomImage());

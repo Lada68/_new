@@ -35,7 +35,7 @@ function userFoto(images) {
 
         let img = document.createElement("img");
         img.className = "d-block w-100"
-        img.style = "border-radius: 40%; border: solid black; max-width: 255px"
+        img.style = "border-radius: 50%; border: solid black; max-width: 255px"
         img.alt = i + "slide"
         img.src = "data:image/png;base64," + image.picture
 
