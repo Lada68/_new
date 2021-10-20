@@ -25,4 +25,8 @@ public class City {
         this.name = name;
         this.country = country;
     }
+
+    public City() {
+
+    }
 }
