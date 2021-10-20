@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class DatabaseInitializer {
@@ -22,6 +23,7 @@ public class DatabaseInitializer {
     private final ItemDao itemDao;
     private final ImageDao imageDao;
     private final ShopDao shopDao;
+    private final ReviewDao reviewDao;
 
     private List<Category> categories;
     private List<Country> countries;
@@ -30,11 +32,12 @@ public class DatabaseInitializer {
     private List<User> users;
     private List<Item> items;
     private List<Shop> shops;
+    private List<Review> reviews;
 
     @Autowired
     public DatabaseInitializer(RoleDao roleDao, UserDao userDao, AddressDao addressDao,
                                CountryDao countryDao, CityDao cityDao, CategoryDao categoryDao,
-                               ItemDao itemDao, ImageDao imageDao, ShopDao shopDao) {
+                               ItemDao itemDao, ImageDao imageDao, ShopDao shopDao, ReviewDao reviewDao) {
 
         this.roleDao = roleDao;
         this.userDao = userDao;
@@ -45,6 +48,7 @@ public class DatabaseInitializer {
         this.itemDao = itemDao;
         this.imageDao = imageDao;
         this.shopDao = shopDao;
+        this.reviewDao = reviewDao;
     }
 
     @PostConstruct
@@ -78,6 +82,9 @@ public class DatabaseInitializer {
             item.getImages().forEach(imageDao::persist);
             itemDao.persist(item);
         });
+
+        reviews = getReviews();
+        reviews.forEach(reviewDao::persist);
 
     }
 
@@ -306,6 +313,98 @@ public class DatabaseInitializer {
         items.add(item6);
 
         return items;
+    }
+
+    private List<Review> getReviews() {
+        List<Review> reviews = new ArrayList<>();
+
+        reviews.add(getReview(
+                "Хорошие таблетки, посуда чистая",
+                "Единственное, когда открываешь упаковку с таблеткой, красный шарик выпадает.",
+                "Запах очень концентрированный, но аллергии нет."
+        ));
+        reviews.add(getReview(
+                "Хорошо отмывает, нет запаха",
+                "нет.",
+                "Отличные таблетки, пользуюсь давно, довольна"
+        ));
+        reviews.add(getReview(
+                "Цена ",
+                "Плохо отмывает .",
+                "Сравнивал с другой маркой - отмывает заметно хуже "
+        ));
+        reviews.add(getReview(
+                "Качество на 5+ ",
+                "Нет ",
+                "Спасибо ozon за скидки,такие таблетки в розничных магазинах стоят в 2-3 раза дороже "
+        ));
+        reviews.add(getReview(
+                "Компактный, тихий, яркий дизайн, быстро греет, шнур средней длинны, поворот на греющей платформе на 360",
+                "Не обнаружено и надеюсь не будет  ",
+                "Прекрасный вариант для работы. Преобрести удалось с хорошей скидкой. Нагревается быстро. Работает не громко. Запах пластика отсутствует. Закипает вода на 1 литр за 3 минуты "
+        ));
+        reviews.add(getReview(
+                "легкий, при нагреве тихий, после первых двух кипячений посторонние запахи улетучились. Очень доволен. ",
+                "не выявлено",
+                "Сенсор не подвел, соотношение цена-качество на отличном уровне"
+        ));
+        reviews.add(getReview(
+                "компактный, удобно, веселый цвет",
+                "пока не выявлено ",
+                "Удачная компактная конструкция небольшого объема, закипание быстрое, несмотря на невысокую мощность. Веселые расцветки на любой вкус. Фильтрующий элемент в носике, крышка открывается полностью, заливать воду и мыть удобно. Покупкой доволен "
+        ));
+        reviews.add(getReview(
+                "Маленький, яркий, экономичный в расходе электричества",
+                "Запах пластика есть, но это было ожидаемо",
+                "Нужен был именно небольшой чайник, а главное со средней мощностью, потому что прежний регулярно вышибал нам предохранитель. Из всех вариантов выбрала этот и пока не жалею. "
+        ));
+        reviews.add(getReview(
+                "красивый  ",
+                "немного пахнет пластиком  ",
+                "после кипячения остался запах пластика, но думаю со временем пройдет. а так в целом красивый, небольшой чайничек. купили в поездку  "
+        ));
+        reviews.add(getReview(
+                "Очень удобный размер чайника. Не большой, компактный. Удобен для работы и можно взять с собой в поездку.",
+                "пока не обнаружила",
+                "Первоначально был запах пластика. Но после мытья и 1 кипячения воды, запах исчез. Чайник работает довольно таки тихо. 1 литр воды кипятит примерно 5-6 минут."
+        ));
+        reviews.add(getReview(
+                "Нормальная мышь ",
+                "Неустойчива в горизонтальном положении",
+                "Мышь нормальная, темболее за свои деньги. Один только минус у нее, на поверхности у этой мыши 5 точек соприкосновения с поверхностью, причем одна из них в середине с одной стороны,"
+        ));
+        reviews.add(getReview(
+                "Качественная мышь. Удобная. Полноразмерная. Легко менять батарейки. Есть выключатель. ",
+                "Не обнаружено ",
+                "18 месецев на одной батарейке, посмотрим.."
+        ));
+        reviews.add(getReview(
+                "мышь полноразмерная, поэтому очень удобно лежит в руке, приятный на ощупь пластик",
+                "из мелких: достаточно громкие щелчки. ну как громкие, скорее, обычные.",
+                "почему-то не считывает вращение колёсико, если его крутить медленно."
+        ));
+        reviews.add(getReview(
+                "Отличная мышка за свои деньги. ",
+                "Пока очень нравится, недостатков не выявили",
+                "Мышь удобно лежит в руке, работает отлично без нареканий, удобно кликать и открывать документы.  "
+        ));
+        reviews.add(getReview(
+                "Цена, качество, удобство в использовании  ",
+                "недостатков не выявила  ",
+                "Я уже на протяжении долгих лет пользуюсь мышками исключительно от логитек. "
+        ));
+
+        return reviews;
+    }
+
+    private Review getReview(String dignity, String flaw, String comment) {
+        return new Review(dignity, flaw, comment,
+                new Date(),
+                new Random().nextInt(5) + 1,
+                randomListElement(items),
+                randomListElement(users),
+                randomListElement(shops)
+        );
     }
 
     /* Utilities */

@@ -1,12 +1,14 @@
 package com.amr.project.model.entity;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "reviews")
 public class Review {
 
@@ -34,4 +36,15 @@ public class Review {
     private boolean isModerated;
     private boolean isModerateAccept;
     private String moderatedRejectReason;
+
+    public Review(String dignity, String flaw, String text, Date date, Integer rating, Item item, User user, Shop shop) {
+        this.dignity = dignity;
+        this.flaw = flaw;
+        this.text = text;
+        this.date = date;
+        this.rating = rating;
+        this.item = item;
+        this.user = user;
+        this.shop = shop;
+    }
 }
