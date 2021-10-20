@@ -20,13 +20,19 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-          <div class="dropdown mt-2 mr-3">
+        <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarCollapse">
+          <a class="mr-3" href="/"><img class="mainlogo" th:src="@{/img/logo/logo.png}" alt=""></a>
+          <div class="dropdown mr-3">
             <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Каталог
             </button>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" th:href="@{/category/{categoryId}(categoryId=${category.getId()})}" th:each="category: ${categories}">
+                      <th:block th:text="${category.getName()}"></th:block>
+                  </a>
+              </div>
           </div>
-          <form class="block mt-2 mr-3 w-100">
+          <form class="block mr-3 w-100">
             <div class="input-group">
               <input type="text" class="form-control" aria-describedby="button-2">
               <div class="input-group-append">
@@ -34,9 +40,9 @@
               </div>
             </div>
           </form>
-          <a href="#" class="btn btn-outline-warning mt-2 mr-3" role="button" aria-pressed="true">Корзина</a>
-          <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-outline-primary mt-2" data-toggle="modal" data-target="#loginModal">Войти</button>
-          <a sec:authorize="isAuthenticated()" class="btn btn-outline-warning mt-2" href="/logout">Выйти</a>
+          <a href="#" class="btn btn-outline-warning mr-3" role="button" aria-pressed="true">Корзина</a>
+          <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#loginModal">Войти</button>
+          <a sec:authorize="isAuthenticated()" class="btn btn-outline-warning" href="/logout">Выйти</a>
       </div>
       </div>
   </nav>
@@ -44,31 +50,23 @@
 
 <!-- Begin item page content -->
 <main role="main" class="flex-shrink-0">
-  <div class="container py-2">
-    <h1 class="pt-4 pt-2">Harman kardon mini</h1>
+  <div class="container pt-0">
+    <h1 class="pt-2" th:text="${item.getName()}"></h1>
     <div class="top-panel mb-2">
         <span class="rating mr-3"><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
         <span class="reviews mr-3"><a id="toReviews" href="">Отзывы: 2</a></span>
-        <span class="favorite mr-3"><a href="/user/id/favorite">В избранное</a></span>
+        <span class="favorite mr-3"><a th:href="@{/user/{id}/favorite(id=${item.getId()})}">В избранное</a></span>
     </div>
     <div class="row">
         <div class="w-75 px-3">
             <div class="card mb-5">
                 <div id="indicators" class="carousel slide" data-interval="false">
                     <ol class="carousel-indicators">
-                        <li data-target="#indicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#indicators" data-slide-to="1"></li>
-                        <li data-target="#indicators" data-slide-to="2"></li>
+                        <li th:each="img, state: ${item.getImages()}" data-target="#indicators" th:attr="data-slide-to=${state.index}" th:class="${state.first} ? 'active'"></li>
                     </ol>
                     <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img th:src="@{/img/items/carbon/1.jpg}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img th:src="@{/img/items/carbon/2.jpg}" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item">
-                            <img th:src="@{/img/items/carbon/3.jpg}" class="d-block w-100" alt="...">
+                        <div th:class="${state.first ? 'carousel-item active' : 'carousel-item'}" th:each="img, state: ${item.getImages()}">
+                            <img th:src="${img.toBase64()}" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#indicators" role="button" data-slide="prev">
@@ -83,76 +81,28 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item p-3">
                         <ul class="mini-img-list pl-0">
-                            <li class="d-inline mr-2" id="mini-img-0" data-target="#indicators" data-slide-to="0">
-                                <img class="mini-img" th:src="@{/img/items/carbon/1.jpg}" alt="...">
-                            </li>
-                            <li class="d-inline mr-2" id="mini-img-1" data-target="#indicators" data-slide-to="1">
-                                <img class="mini-img" th:src="@{/img/items/carbon/2.jpg}" alt="...">
-                            </li>
-                            <li class="d-inline mr-2" id="mini-img-2" data-target="#indicators" data-slide-to="2">
-                                <img class="mini-img" th:src="@{/img/items/carbon/3.jpg}" alt="...">
+                            <li class="d-inline mr-2" th:id="'mini-img-' + ${state.index}" data-target="#indicators" th:attr="data-slide-to=${state.index}" th:each="img, state: ${item.getImages()}">
+                                <img class="mini-img" th:src="${img.toBase64()}" alt="...">
                             </li>
                         </ul>
                     </li>
-                    <li class="list-group-item p-3">Россия, Москва, ул.Большая малая 27к1</li>
                     <li class="list-group-item p-3">
-                        <p class="card-text">Избавляюсь от ненужных вещей, лежит без дала. Состояние на четверочку. На большой громкости начинает хрипеть, на умеренной можно слушать. В комплекте aux кабель. Продаю как есть, в качестве запчасти, без гарантий, проверка на месте.</p>
+                        <p class="card-text" th:text="'Страна: ' + ${item.getShop().getLocation().getName()}"></p>
+                    </li>
+                    <li class="list-group-item p-3">
+                        <p class="card-text" th:text="${item.getDescription()}"></p>
                     </li>
                 </ul>
             </div>
 
-            <h4 class="py-2">Похожие товары</h4>
-            <div id="similar" class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 mb-5">
-                <div>
-                    <a class="text-decoration-none text-reset" href="">
-                        <div class="gcard">
-                            <div class="d-flex justify-content-center"><img th:src="@{/img/items/carbon/1.jpg}" class="card-img-top" alt="..."></div>
-                            <div class="card-body">
-                                <h5 class="card-title">Harman kardon mini</h5>
-                                <p class="font-weight-bold">Цена: <span class="text-danger">500</span></p>
-                                <p>Избавляюсь от ненужных вещей, лежит без дала.</p>
-                                <a href="" class="btn btn-primary btn-sm">В корзину</a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div>
-                    <a class="text-decoration-none text-reset" href="">
-                        <div class="gcard">
-                            <div class="d-flex justify-content-center"><img th:src="@{/img/items/carbon/1.jpg}" class="card-img-top" alt="..."></div>
-                            <div class="card-body">
-                                <h5 class="card-title">Harman kardon mini</h5>
-                                <p class="font-weight-bold">Цена: <span class="text-danger">500</span></p>
-                                <p>Избавляюсь от ненужных вещей, лежит без дала.</p>
-                                <a href="" class="btn btn-primary btn-sm">В корзину</a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div>
-                    <a class="text-decoration-none text-reset" href="">
-                        <div class="gcard">
-                            <div class="d-flex justify-content-center"><img th:src="@{/img/items/carbon/1.jpg}" class="card-img-top" alt="..."></div>
-                            <div class="card-body">
-                                <h5 class="card-title">Harman kardon mini</h5>
-                                <p class="font-weight-bold">Цена: <span class="text-danger">500</span></p>
-                                <p>Избавляюсь от ненужных вещей, лежит без дала.</p>
-                                <a href="" class="btn btn-primary btn-sm">В корзину</a>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
             <div class="d-flex align-items-center">
                 <h4 class="py-2 mb-4 mr-auto">Отзывы</h4>
-                <a href="">Оставить отзыв</a>
-<!--                <button type="button" class="btn btn-warning btn-lg">Оставить отзыв</button>-->
+                <a href="#">Оставить отзыв</a>
             </div>
             <div id="reviews">
                 <div class="review mb-5">
                     <div class="review-info d-flex align-items-center mb-3">
-                        <img  class="rounded-circle" th:src="@{/img/users/user0.webp}" alt="">
+                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" alt="">
                         <span class="mx-3 mr-auto"><strong>Иван Иванов</strong></span>
                         <span class="mx-3">21 августа 2021</span>
                         <span><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
@@ -168,7 +118,7 @@
                 </div>
                 <div class="review mb-5">
                     <div class="review-info d-flex align-items-center mb-3">
-                        <img  class="rounded-circle" th:src="@{/img/users/user0.webp}" alt="">
+                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" alt="">
                         <span class="mx-3 mr-auto"><strong>Иван Иванов</strong></span>
                         <span class="mx-3">21 августа 2021</span>
                         <span><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
@@ -187,21 +137,20 @@
 
         <div class="w-25">
             <div class="d-flex flex-column align-items-center px-3">
-                <img class="mw-100" th:src="@{/img/shops/mskserver.jpg}" alt="...">
-                <p>Сеть салонов Hi-Fi техники</p>
-                <h3>8 296 999-99-99</h3>
+                <img class="mw-100" th:src="${item.getShop().getLogo().toBase64()}" alt="...">
+                <a class="py-2" th:href="@{/market/{id}(id=${item.getShop().getId()})}" th:text="${item.getShop().getName()}"></a>
+                <h3 class="mb-3" th:text="${item.getShop().getPhone()}"></h3>
                 <button type="button" class="btn btn-warning btn-block btn-lg mb-5">Задать вопрос</button>
                 <form class="d-flex flex-column w-100">
-                    <span class="d-inline align-self-end h2">500<small>р.</small>
-                        <del class="text-danger"><span class="d-inline h5 text-body">600<small>р.</small></span></del>
-                    </span>
+                    <span class="d-inline align-self-end h2" th:text="${item.getPrice().intValue()} + 'р.'"></span>
+<!--                    <del class="text-danger"><span class="d-inline h5 text-body" th:text="${item.getPrice()}">600<small>р.</small></span></del>-->
                     <div class="form-group">
-                        <small class="form-text pl-1">В наличии: 3 шт.</small>
+                        <small class="form-text pl-1" th:text="'В наличии: ' + ${item.getCount()}"></small>
                         <div>
-                            <input type="number" class="form-control form-control-sm" id="count" name="count" value="1" min="1" max="3" required>
+                            <input type="number" class="form-control form-control-sm" id="count" name="count" value="1" min="1" th:attr="max=${item.getCount()}" required>
                         </div>
                     </div>
-                <button type="button" class="btn btn-danger btn-block btn-lg">В корзину</button>
+                    <button type="button" class="btn btn-danger btn-block btn-lg">В корзину</button>
                 </form>
             </div>
         </div>

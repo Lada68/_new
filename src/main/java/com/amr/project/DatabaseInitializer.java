@@ -79,9 +79,6 @@ public class DatabaseInitializer {
             itemDao.persist(item);
         });
 
-        Optional<Item> item = itemDao.getByKey(Item.class, 1L);
-        System.out.println();
-
     }
 
     private Set<Role> getRoles() {
@@ -245,6 +242,7 @@ public class DatabaseInitializer {
         item1.addImage(new Image(path + "carbon/2.jpg"));
         item1.addImage(new Image(path + "carbon/3.jpg"));
         item1.setShop(randomListElement(shops));
+        item1.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item2 = new Item();
         item2.setName("iPhone 4 16gb");
@@ -255,6 +253,7 @@ public class DatabaseInitializer {
         item2.addImage(new Image(path + "iphone4/1.jpg"));
         item2.addImage(new Image(path + "iphone4/2.jpg"));
         item2.setShop(randomListElement(shops));
+        item2.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item3 = new Item();
         item3.setName("Зеркало правое Renault Logan 1");
@@ -265,6 +264,7 @@ public class DatabaseInitializer {
         item3.addImage(new Image(path + "mirror/1.jpg"));
         item3.addImage(new Image(path + "mirror/2.jpg"));
         item3.setShop(randomListElement(shops));
+        item3.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item4 = new Item();
         item4.setName("Дом каркасно щитовой");
@@ -274,6 +274,7 @@ public class DatabaseInitializer {
         item4.setRating(randomRating());
         item4.addImage(new Image(path + "house/1.jpg"));
         item4.setShop(randomListElement(shops));
+        item4.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item5 = new Item();
         item5.setName("Котенок Курильский бобтейл");
@@ -284,6 +285,7 @@ public class DatabaseInitializer {
         item5.addImage(new Image(path + "cat/1.jpg"));
         item5.addImage(new Image(path + "cat/2.jpg"));
         item5.setShop(randomListElement(shops));
+        item5.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item6 = new Item();
         item6.setName("Стол обеденный");
@@ -293,6 +295,7 @@ public class DatabaseInitializer {
         item6.setRating(randomRating());
         item6.addImage(new Image(path + "table/1.jpg"));
         item6.setShop(randomListElement(shops));
+        item6.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         List<Item> items = new ArrayList<>();
         items.add(item1);
