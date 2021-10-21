@@ -1,7 +1,6 @@
 package com.amr.project.model.dto.itemPageDto;
 
 import com.amr.project.model.dto.ImageDto;
-import com.amr.project.model.dto.itemPageDto.ReviewDto;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -20,4 +19,18 @@ public class ItemDto {
     private ShopDto shop;
     private List<ImageDto> images;
     private List<ReviewDto> reviews;
+
+    public String printRating() {
+        if (!reviews.isEmpty()) {
+            return String.format("%.1f", reviews.stream().mapToDouble(ReviewDto::getRating).sum() / reviews.size());
+        }
+        return null;
+    }
+
+    public Long getRating() {
+        if (!reviews.isEmpty()) {
+            return Math.round(reviews.stream().mapToDouble(ReviewDto::getRating).sum() / reviews.size());
+        }
+        return null;
+    }
 }

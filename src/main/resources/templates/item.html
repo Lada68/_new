@@ -53,7 +53,7 @@
   <div class="container pt-0">
     <h1 class="pt-2" th:text="${item.getName()}"></h1>
     <div class="top-panel mb-2">
-        <span class="rating mr-3"><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
+        <span class="rating mr-3"><img class="pb-1" th:src="@{'/img/rating/' +  ${item.getRating()}  + '.png'}" alt=""> <strong th:text="${item.printRating()}"></strong></span>
         <span class="reviews mr-3"><a id="toReviews" href="" th:text="'Отзывы: ' + ${item.getReviews().size()}"></a></span>
         <span class="favorite mr-3"><a th:href="@{/user/{id}/favorite(id=${item.getId()})}">В избранное</a></span>
     </div>
@@ -106,15 +106,15 @@
                         <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" th:unless="${review.getUser().getMainImage()}" alt="">
                         <span class="mx-3 mr-auto"><strong th:text="${review.getUser().getFirstName() + ' ' + review.getUser().getLastName()}"></strong></span>
                         <span class="mx-3" th:text="${review.getDate()}"></span>
-                        <span><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
+                        <span><img class="pb-1" th:src="@{'/img/rating/' +  ${review.getRating()} + '.png'}" alt=""></span>
                     </div>
                     <div class="review-content ml-5 pl-3">
                         <h6>Достоинства:</h6>
-                        <p th:text="${review.getDignity()}">Цена и функцильность</p>
+                        <p th:text="${review.getDignity()}"></p>
                         <h6>Недостатки:</h6>
-                        <p th:text="${review.getFlaw()}">Внешний вид нормально так потрепан</p>
+                        <p th:text="${review.getFlaw()}"></p>
                         <h6>Комментарий:</h6>
-                        <p th:text="${review.getText()}">В целом товар соответствует описанию. Доволен покупкой. Рекомендую этот товар!</p>
+                        <p th:text="${review.getText()}"></p>
                     </div>
                 </div>
             </div>
