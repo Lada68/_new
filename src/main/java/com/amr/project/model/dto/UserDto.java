@@ -1,5 +1,12 @@
 package com.amr.project.model.dto;
 
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+@Data
 public class UserDto {
 
     private String email;
@@ -8,7 +15,33 @@ public class UserDto {
     private String phone;
     private String firstName;
     private String lastName;
+    private List<AddressDto> address;
+    private List<ImageDto> images;
+    private Calendar birthday;
+    private List<OrderDto> orders = new ArrayList<>();
+    private List<ShopDto> shops = new ArrayList<>();
 
+    public UserDto(String email, String username, String password, String phone, String firstName, String lastName) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public UserDto() {
+        this.email = "";
+        this.username = "";
+        this.password = "";
+        this.phone = "";
+        this.firstName = "";
+        this.lastName = "";
+    }
+
+    public String getPassword() {
+        return password;
+    }
     public String getUsername() {
         return username;
     }
@@ -32,29 +65,6 @@ public class UserDto {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    public UserDto(String email, String username, String password, String phone, String firstName, String lastName) {
-        this.email = email;
-        this.username = username;
-        this.password = password;
-        this.phone = phone;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public UserDto() {
-        this.email = "";
-        this.username = "";
-        this.password = "";
-        this.phone = "";
-        this.firstName = "";
-        this.lastName = "";
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
