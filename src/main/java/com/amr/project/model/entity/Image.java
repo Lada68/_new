@@ -1,6 +1,7 @@
 package com.amr.project.model.entity;
 
 import com.amr.project.util.ImgUtil;
+import com.amr.project.util.ImgUtilFromUrl;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -32,6 +33,12 @@ public class Image {
 
     public Image() {
 
+    }
+
+    public Image ImageFromURL (String url) {
+        this.url = url;
+        this.picture = ImgUtilFromUrl.toByteArray(url);
+        return this;
     }
 
 }

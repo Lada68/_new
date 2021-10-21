@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class MarketRestController {
     private ReadWriteService<Shop, Long> shopService;
 
-    public MarketRestController(ReadWriteService<Shop, Long> shopService) {
+    private ShopMapper shopMapper;
+
+    public MarketRestController(ReadWriteService<Shop, Long> shopService, ShopMapper shopMapper) {
         this.shopService = shopService;
+        this.shopMapper = shopMapper;
     }
 
     @GetMapping("/info/{id}")
     public ShopDto getMarketInfo(@PathVariable(value = "id", required = true) Long id) {
-        return shopService.getByKey(Shop.class, id).map(ShopMapper.INSTANCE::shopToDto).orElse(new ShopDto());
+        return shopService.getByKey(Shop.class, id).map(shopMapper::shopToDto).orElse(new ShopDto());
     }
 }

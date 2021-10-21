@@ -15,4 +15,12 @@ public class ShopMainPageDaoImpl extends ReadWriteDaoImpl<Shop, Long> implements
                 .setMaxResults(6)
                 .getResultList();
     }
+
+
+    @Override
+    public List<Shop> searchShops(String search) {
+        return em.createQuery("select sh from Shop sh where sh.name LIKE :param", Shop.class)
+                .setParameter("param", "%" + search + "%")
+                .getResultList();
+    }
 }
