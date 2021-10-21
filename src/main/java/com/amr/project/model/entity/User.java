@@ -123,4 +123,11 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return activate;
     }
+
+    public void addImage(Image image) {
+        if (images == null) {
+            images = new ArrayList<>();
+        }
+        images.add(image);
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class DatabaseInitializer {
@@ -22,6 +23,7 @@ public class DatabaseInitializer {
     private final ItemDao itemDao;
     private final ImageDao imageDao;
     private final ShopDao shopDao;
+    private final ReviewDao reviewDao;
 
     private List<Category> categories;
     private List<Country> countries;
@@ -30,11 +32,12 @@ public class DatabaseInitializer {
     private List<User> users;
     private List<Item> items;
     private List<Shop> shops;
+    private List<Review> reviews;
 
     @Autowired
     public DatabaseInitializer(RoleDao roleDao, UserDao userDao, AddressDao addressDao,
                                CountryDao countryDao, CityDao cityDao, CategoryDao categoryDao,
-                               ItemDao itemDao, ImageDao imageDao, ShopDao shopDao) {
+                               ItemDao itemDao, ImageDao imageDao, ShopDao shopDao, ReviewDao reviewDao) {
 
         this.roleDao = roleDao;
         this.userDao = userDao;
@@ -45,6 +48,7 @@ public class DatabaseInitializer {
         this.itemDao = itemDao;
         this.imageDao = imageDao;
         this.shopDao = shopDao;
+        this.reviewDao = reviewDao;
     }
 
     @PostConstruct
@@ -86,8 +90,8 @@ public class DatabaseInitializer {
             itemDao.persist(item);
         });
 
-        Optional<Item> item = itemDao.getByKey(Item.class, 1L);
-        System.out.println();
+        reviews = getReviews();
+        reviews.forEach(reviewDao::persist);
 
     }
 
@@ -101,23 +105,24 @@ public class DatabaseInitializer {
     }
 
     private List<User> getUsers() {
+        String path = "src/main/resources/static/img/users/";
         List<User> users = new ArrayList<>();
 
-        users.add(getUser("Ivan", "Ivanov", Gender.MALE));
-        users.add(getUser("Vasily", "Vasiliev", Gender.MALE));
-        users.add(getUser("Piter", "Petrov", Gender.MALE));
-        users.add(getUser("Irina", "Irinova", Gender.FEMALE));
-        users.add(getUser("Sveta", "Svetova", Gender.FEMALE));
-        users.add(getUser("Alex", "Alexeev", Gender.MALE));
-        users.add(getUser("Kira", "Kireeva", Gender.FEMALE));
-        users.add(getUser("Dmitry", "Dmitrov", Gender.MALE));
-        users.add(getUser("Kiril", "Kirilov", Gender.MALE));
-        users.add(getUser("Pavel", "Pavlov", Gender.MALE));
+        users.add(getUser("Ivan", "Ivanov", Gender.MALE, path + "0.jpg"));
+        users.add(getUser("Vasily", "Vasiliev", Gender.MALE, path + "1.jpg"));
+        users.add(getUser("Piter", "Petrov", Gender.MALE, path + "2.jpg"));
+        users.add(getUser("Irina", "Irinova", Gender.FEMALE, path + "3.jpg"));
+        users.add(getUser("Sveta", "Svetova", Gender.FEMALE, path + "4.jpg"));
+        users.add(getUser("Alex", "Alexeev", Gender.MALE, path + "5.jpg"));
+        users.add(getUser("Kira", "Kireeva", Gender.FEMALE, path + "6.jpg"));
+        users.add(getUser("Dmitry", "Dmitrov", Gender.MALE, path + "7.jpg"));
+        users.add(getUser("Kiril", "Kirilov", Gender.MALE, path + "8.jpg"));
+        users.add(getUser("Pavel", "Pavlov", Gender.MALE, path + "9.jpg"));
 
         return users;
     }
 
-    private User getUser(String firstName, String lastName, Gender gender) {
+    private User getUser(String firstName, String lastName, Gender gender, String imagePath) {
         User user = new User();
 
         user.setFirstName(firstName);
@@ -141,6 +146,7 @@ public class DatabaseInitializer {
         user.addImages(getRandomImage());
         user.addImages(getRandomImage());
         user.setPhone(randomPhone());
+        user.addImage(new Image(imagePath, true));
 
         return user;
     }
@@ -263,6 +269,7 @@ public class DatabaseInitializer {
         item1.addImage(new Image(path + "carbon/2.jpg"));
         item1.addImage(new Image(path + "carbon/3.jpg"));
         item1.setShop(randomListElement(shops));
+        item1.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item2 = new Item();
         item2.setName("iPhone 4 16gb");
@@ -273,6 +280,7 @@ public class DatabaseInitializer {
         item2.addImage(new Image(path + "iphone4/1.jpg"));
         item2.addImage(new Image(path + "iphone4/2.jpg"));
         item2.setShop(randomListElement(shops));
+        item2.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item3 = new Item();
         item3.setName("Зеркало правое Renault Logan 1");
@@ -283,6 +291,7 @@ public class DatabaseInitializer {
         item3.addImage(new Image(path + "mirror/1.jpg"));
         item3.addImage(new Image(path + "mirror/2.jpg"));
         item3.setShop(randomListElement(shops));
+        item3.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item4 = new Item();
         item4.setName("Дом каркасно щитовой");
@@ -292,6 +301,7 @@ public class DatabaseInitializer {
         item4.setRating(randomRating());
         item4.addImage(new Image(path + "house/1.jpg"));
         item4.setShop(randomListElement(shops));
+        item4.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item5 = new Item();
         item5.setName("Котенок Курильский бобтейл");
@@ -302,6 +312,7 @@ public class DatabaseInitializer {
         item5.addImage(new Image(path + "cat/1.jpg"));
         item5.addImage(new Image(path + "cat/2.jpg"));
         item5.setShop(randomListElement(shops));
+        item5.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         Item item6 = new Item();
         item6.setName("Стол обеденный");
@@ -311,6 +322,7 @@ public class DatabaseInitializer {
         item6.setRating(randomRating());
         item6.addImage(new Image(path + "table/1.jpg"));
         item6.setShop(randomListElement(shops));
+        item6.setCount(Integer.parseInt(randomNumberString(1)) + 1);
 
         List<Item> items = new ArrayList<>();
         items.add(item1);
@@ -321,6 +333,98 @@ public class DatabaseInitializer {
         items.add(item6);
 
         return items;
+    }
+
+    private List<Review> getReviews() {
+        List<Review> reviews = new ArrayList<>();
+
+        reviews.add(getReview(
+                "Хорошие таблетки, посуда чистая",
+                "Единственное, когда открываешь упаковку с таблеткой, красный шарик выпадает.",
+                "Запах очень концентрированный, но аллергии нет."
+        ));
+        reviews.add(getReview(
+                "Хорошо отмывает, нет запаха",
+                "нет.",
+                "Отличные таблетки, пользуюсь давно, довольна"
+        ));
+        reviews.add(getReview(
+                "Цена ",
+                "Плохо отмывает .",
+                "Сравнивал с другой маркой - отмывает заметно хуже "
+        ));
+        reviews.add(getReview(
+                "Качество на 5+ ",
+                "Нет ",
+                "Спасибо ozon за скидки,такие таблетки в розничных магазинах стоят в 2-3 раза дороже "
+        ));
+        reviews.add(getReview(
+                "Компактный, тихий, яркий дизайн, быстро греет, шнур средней длинны, поворот на греющей платформе на 360",
+                "Не обнаружено и надеюсь не будет  ",
+                "Прекрасный вариант для работы. Преобрести удалось с хорошей скидкой. Нагревается быстро. Работает не громко. Запах пластика отсутствует. Закипает вода на 1 литр за 3 минуты "
+        ));
+        reviews.add(getReview(
+                "легкий, при нагреве тихий, после первых двух кипячений посторонние запахи улетучились. Очень доволен. ",
+                "не выявлено",
+                "Сенсор не подвел, соотношение цена-качество на отличном уровне"
+        ));
+        reviews.add(getReview(
+                "компактный, удобно, веселый цвет",
+                "пока не выявлено ",
+                "Удачная компактная конструкция небольшого объема, закипание быстрое, несмотря на невысокую мощность. Веселые расцветки на любой вкус. Фильтрующий элемент в носике, крышка открывается полностью, заливать воду и мыть удобно. Покупкой доволен "
+        ));
+        reviews.add(getReview(
+                "Маленький, яркий, экономичный в расходе электричества",
+                "Запах пластика есть, но это было ожидаемо",
+                "Нужен был именно небольшой чайник, а главное со средней мощностью, потому что прежний регулярно вышибал нам предохранитель. Из всех вариантов выбрала этот и пока не жалею. "
+        ));
+        reviews.add(getReview(
+                "красивый  ",
+                "немного пахнет пластиком  ",
+                "после кипячения остался запах пластика, но думаю со временем пройдет. а так в целом красивый, небольшой чайничек. купили в поездку  "
+        ));
+        reviews.add(getReview(
+                "Очень удобный размер чайника. Не большой, компактный. Удобен для работы и можно взять с собой в поездку.",
+                "пока не обнаружила",
+                "Первоначально был запах пластика. Но после мытья и 1 кипячения воды, запах исчез. Чайник работает довольно таки тихо. 1 литр воды кипятит примерно 5-6 минут."
+        ));
+        reviews.add(getReview(
+                "Нормальная мышь ",
+                "Неустойчива в горизонтальном положении",
+                "Мышь нормальная, темболее за свои деньги. Один только минус у нее, на поверхности у этой мыши 5 точек соприкосновения с поверхностью, причем одна из них в середине с одной стороны,"
+        ));
+        reviews.add(getReview(
+                "Качественная мышь. Удобная. Полноразмерная. Легко менять батарейки. Есть выключатель. ",
+                "Не обнаружено ",
+                "18 месецев на одной батарейке, посмотрим.."
+        ));
+        reviews.add(getReview(
+                "мышь полноразмерная, поэтому очень удобно лежит в руке, приятный на ощупь пластик",
+                "из мелких: достаточно громкие щелчки. ну как громкие, скорее, обычные.",
+                "почему-то не считывает вращение колёсико, если его крутить медленно."
+        ));
+        reviews.add(getReview(
+                "Отличная мышка за свои деньги. ",
+                "Пока очень нравится, недостатков не выявили",
+                "Мышь удобно лежит в руке, работает отлично без нареканий, удобно кликать и открывать документы.  "
+        ));
+        reviews.add(getReview(
+                "Цена, качество, удобство в использовании  ",
+                "недостатков не выявила  ",
+                "Я уже на протяжении долгих лет пользуюсь мышками исключительно от логитек. "
+        ));
+
+        return reviews;
+    }
+
+    private Review getReview(String dignity, String flaw, String comment) {
+        return new Review(dignity, flaw, comment,
+                new Date(),
+                new Random().nextInt(5) + 1,
+                randomListElement(items),
+                randomListElement(users),
+                randomListElement(shops)
+        );
     }
 
     /* Utilities */

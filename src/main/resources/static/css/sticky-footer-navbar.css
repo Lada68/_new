@@ -1,5 +1,6 @@
 main > .container {
-    padding: 60px 15px 0;
+  padding: 60px 15px 0;
+  min-width: 768px;
 }
 
 .footer {
@@ -24,6 +25,23 @@ code {
     margin: 1rem;
     border: 1px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
+}
+
+.mini-img-list img {
+  height: 4rem;
+  opacity: 0.5;
+}
+
+.mini-img-list img:hover, .mini-img-list .active img {
+  opacity: 1;
+}
+
+.mainlogo {
+  height: 65px;
+}
+
+.review-info .rounded-circle {
+  height: 50px;
 }
 
 .bd-placeholder-img {

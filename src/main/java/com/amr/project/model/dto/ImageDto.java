@@ -12,6 +12,7 @@ public class ImageDto {
     private Long id;
     private String url;
     private byte[] picture;
+    private Boolean isMain = false;
 
     public String toBase64() {
         return ImgUtil.toBase64img(url, picture);
