@@ -16,5 +16,5 @@ function getActiveImg() {
 
 linkToReviews.addEventListener('click', evt => {
     evt.preventDefault()
-    document.querySelector('#reviews').scrollIntoView({behavior: "smooth"})
+    document.querySelector('#reviews-panel').scrollIntoView({behavior: "smooth"})
 })

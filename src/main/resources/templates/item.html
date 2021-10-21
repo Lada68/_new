@@ -54,7 +54,7 @@
     <h1 class="pt-2" th:text="${item.getName()}"></h1>
     <div class="top-panel mb-2">
         <span class="rating mr-3"><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
-        <span class="reviews mr-3"><a id="toReviews" href="">Отзывы: 2</a></span>
+        <span class="reviews mr-3"><a id="toReviews" href="" th:text="'Отзывы: ' + ${item.getReviews().size()}"></a></span>
         <span class="favorite mr-3"><a th:href="@{/user/{id}/favorite(id=${item.getId()})}">В избранное</a></span>
     </div>
     <div class="row">
@@ -95,41 +95,26 @@
                 </ul>
             </div>
 
-            <div class="d-flex align-items-center">
+            <div id="reviews-panel" class="d-flex align-items-center">
                 <h4 class="py-2 mb-4 mr-auto">Отзывы</h4>
                 <a href="#">Оставить отзыв</a>
             </div>
-            <div id="reviews">
+            <div id="reviews" th:each="review: ${item.getReviews()}" th:if="${item.getReviews()}">
                 <div class="review mb-5">
                     <div class="review-info d-flex align-items-center mb-3">
-                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" alt="">
-                        <span class="mx-3 mr-auto"><strong>Иван Иванов</strong></span>
-                        <span class="mx-3">21 августа 2021</span>
+                        <img  class="rounded-circle" th:src="${review.getUser().getMainImage().toBase64()}" th:if="${review.getUser().getMainImage()}" alt="">
+                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" th:unless="${review.getUser().getMainImage()}" alt="">
+                        <span class="mx-3 mr-auto"><strong th:text="${review.getUser().getFirstName() + ' ' + review.getUser().getLastName()}"></strong></span>
+                        <span class="mx-3" th:text="${review.getDate()}"></span>
                         <span><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
                     </div>
                     <div class="review-content ml-5 pl-3">
                         <h6>Достоинства:</h6>
-                        <p>Цена и функцильность</p>
+                        <p th:text="${review.getDignity()}">Цена и функцильность</p>
                         <h6>Недостатки:</h6>
-                        <p>Внешний вид нормально так потрепан</p>
+                        <p th:text="${review.getFlaw()}">Внешний вид нормально так потрепан</p>
                         <h6>Комментарий:</h6>
-                        <p>В целом товар соответствует описанию. Доволен покупкой. Рекомендую этот товар!</p>
-                    </div>
-                </div>
-                <div class="review mb-5">
-                    <div class="review-info d-flex align-items-center mb-3">
-                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" alt="">
-                        <span class="mx-3 mr-auto"><strong>Иван Иванов</strong></span>
-                        <span class="mx-3">21 августа 2021</span>
-                        <span><img class="pb-1" th:src="@{/img/rating/4stars.png}" alt=""> <strong>3.9</strong></span>
-                    </div>
-                    <div class="review-content ml-5 pl-3">
-                        <h6>Достоинства:</h6>
-                        <p>Цена и функцильность</p>
-                        <h6>Недостатки:</h6>
-                        <p>Внешний вид нормально так потрепан</p>
-                        <h6>Комментарий:</h6>
-                        <p>В целом товар соответствует описанию. Доволен покупкой. Рекомендую этот товар!</p>
+                        <p th:text="${review.getText()}">В целом товар соответствует описанию. Доволен покупкой. Рекомендую этот товар!</p>
                     </div>
                 </div>
             </div>

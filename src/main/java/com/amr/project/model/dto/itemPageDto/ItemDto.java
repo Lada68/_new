@@ -1,6 +1,7 @@
 package com.amr.project.model.dto.itemPageDto;
 
 import com.amr.project.model.dto.ImageDto;
+import com.amr.project.model.dto.itemPageDto.ReviewDto;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -18,10 +19,5 @@ public class ItemDto {
 
     private ShopDto shop;
     private List<ImageDto> images;
-
-/*
     private List<ReviewDto> reviews;
-*/
-
-
 }
