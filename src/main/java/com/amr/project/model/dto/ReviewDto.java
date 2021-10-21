@@ -1,6 +1,5 @@
 package com.amr.project.model.dto;
 
-import com.amr.project.model.entity.Image;
 import lombok.*;
 
 import java.util.Date;
@@ -31,7 +30,11 @@ public class ReviewDto {
     private String moderatedRejectReason;
 
     public ImageDto getMainUserImage() {
-        return userImages.stream().filter(ImageDto::getIsMain).findAny().orElse(null);
+        ImageDto userMainImage =  userImages.stream().filter(ImageDto::getIsMain).findAny().orElse(new ImageDto());
+        if (userMainImage.getPicture() == null || userMainImage.getPicture().length == 0) {
+            return null;
+        }
+        return userMainImage;
     }
 
 }

@@ -68,6 +68,7 @@ public class DatabaseInitializer {
         users = getUsers();
         users.forEach(user -> {
             user.getAddress().forEach(addressDao::persist);
+            user.getImages().forEach(imageDao::persist);
             userDao.persist(user);
         });
 
@@ -98,23 +99,24 @@ public class DatabaseInitializer {
     }
 
     private List<User> getUsers() {
+        String path = "src/main/resources/static/img/users/";
         List<User> users = new ArrayList<>();
 
-        users.add(getUser("Ivan", "Ivanov", Gender.MALE));
-        users.add(getUser("Vasily", "Vasiliev", Gender.MALE));
-        users.add(getUser("Piter", "Petrov", Gender.MALE));
-        users.add(getUser("Irina", "Irinova", Gender.FEMALE));
-        users.add(getUser("Sveta", "Svetova", Gender.FEMALE));
-        users.add(getUser("Alex", "Alexeev", Gender.MALE));
-        users.add(getUser("Kira", "Kireeva", Gender.FEMALE));
-        users.add(getUser("Dmitry", "Dmitrov", Gender.MALE));
-        users.add(getUser("Kiril", "Kirilov", Gender.MALE));
-        users.add(getUser("Pavel", "Pavlov", Gender.MALE));
+        users.add(getUser("Ivan", "Ivanov", Gender.MALE, path + "0.jpg"));
+        users.add(getUser("Vasily", "Vasiliev", Gender.MALE, path + "1.jpg"));
+        users.add(getUser("Piter", "Petrov", Gender.MALE, path + "2.jpg"));
+        users.add(getUser("Irina", "Irinova", Gender.FEMALE, path + "3.jpg"));
+        users.add(getUser("Sveta", "Svetova", Gender.FEMALE, path + "4.jpg"));
+        users.add(getUser("Alex", "Alexeev", Gender.MALE, path + "5.jpg"));
+        users.add(getUser("Kira", "Kireeva", Gender.FEMALE, path + "6.jpg"));
+        users.add(getUser("Dmitry", "Dmitrov", Gender.MALE, path + "7.jpg"));
+        users.add(getUser("Kiril", "Kirilov", Gender.MALE, path + "8.jpg"));
+        users.add(getUser("Pavel", "Pavlov", Gender.MALE, path + "9.jpg"));
 
         return users;
     }
 
-    private User getUser(String firstName, String lastName, Gender gender) {
+    private User getUser(String firstName, String lastName, Gender gender, String imagePath) {
         User user = new User();
 
         user.setFirstName(firstName);
@@ -127,6 +129,7 @@ public class DatabaseInitializer {
         user.addRole(randomListElement(new ArrayList<>(roles)));
         user.setGender(gender);
         user.setPhone(randomPhone());
+        user.addImage(new Image(imagePath, true));
 
         return user;
     }

@@ -40,6 +40,10 @@ code {
   height: 65px;
 }
 
+.review-info .rounded-circle {
+  height: 50px;
+}
+
 .bd-placeholder-img {
   font-size: 1.125rem;
   text-anchor: middle;
