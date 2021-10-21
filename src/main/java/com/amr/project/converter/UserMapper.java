@@ -17,7 +17,7 @@ public interface UserMapper {
     @Mapping(target = "username", source = ".")
     UserDto toDto(User user);
 
-    User toModel(UserDto userDto);
+//    User toModel(UserDto userDto);
 
     @Mapping(target = "city", source = "city.name")
     @Mapping(target = "country", source = "country.name")

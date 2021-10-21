@@ -49,9 +49,9 @@ public class ShowMainPageServiceImpl implements ShowMainPageService {
     @Override
     public ShowMainPageDTO findItemsByCategory(Long categoryId) {
         return new ShowMainPageDTO(
-                mainPageShowConverter.shopListToListShopMainPageDTO(shopMainPageDao.findPopularShops()),
-                mainPageShowConverter.itemListToListItemMainPageDTO(itemMainPageDao.findItemsByCategoryId(categoryId)),
-                mainPageShowConverter.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class)),
+                shopMapper.shopListToListShopMainPageDTO(shopMainPageDao.findPopularShops()),
+                itemMapper.itemListToListItemMainPageDTO(itemMainPageDao.findItemsByCategoryId(categoryId)),
+                categoryMapper.categoryListToListCategoryMainPageDTO(categoryDao.getAll(Category.class)),
                 "Подборка популярных товаров по категориям",
                 "Подборка популярных магазинов"
         );

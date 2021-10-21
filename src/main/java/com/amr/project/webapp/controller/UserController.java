@@ -19,8 +19,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/signup")
-    public String createNewUser(@ModelAttribute UserDto userDto) { //@ModelAttribute UserDto userDto
-        User user = mapper.toModel(userDto);
+    public String createNewUser(@ModelAttribute User user) {
+//        User user = mapper.toModel(userDto);
         userService.registerNewUser(user);
         return "redirect:/";
     }

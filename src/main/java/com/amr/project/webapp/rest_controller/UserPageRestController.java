@@ -19,10 +19,9 @@ public class UserPageRestController {
 
     @GetMapping("/users/principal")
     public Object getUserPrincipal() {
-        User user = rwUser.getByKey (User.class,
+        return rwUser.getByKey (User.class,
                 ((User)SecurityContextHolder.getContext().getAuthentication()
                         .getPrincipal()).getId()).orElse(null);
-        return userMapper.userToUserDto(user);
     }
 }
 
