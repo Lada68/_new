@@ -27,8 +27,8 @@
               Каталог
             </button>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" th:href="@{/category/{categoryId}(categoryId=${category.getId()})}" th:each="category: ${categories}">
-                      <th:block th:text="${category.getName()}"></th:block>
+                  <a class="dropdown-item" th:href="@{/category/{categoryId}(categoryId=${category.id})}" th:each="category: ${categories}">
+                      <th:block th:text="${category.name}"></th:block>
                   </a>
               </div>
           </div>
@@ -51,11 +51,11 @@
 <!-- Begin item page content -->
 <main role="main" class="flex-shrink-0">
   <div class="container pt-0">
-    <h1 class="pt-2" th:text="${item.getName()}"></h1>
+    <h1 class="pt-2" th:text="${item.name}"></h1>
     <div class="top-panel mb-2">
         <span class="rating mr-3"><img class="pb-1" th:src="@{'/img/rating/' +  ${item.getRating()}  + '.png'}" alt=""> <strong th:text="${item.printRating()}"></strong></span>
-        <span class="reviews mr-3"><a id="toReviews" href="" th:text="'Отзывы: ' + ${item.getReviews().size()}"></a></span>
-        <span class="favorite mr-3"><a th:href="@{/user/{id}/favorite(id=${item.getId()})}">В избранное</a></span>
+        <span class="reviews mr-3"><a id="toReviews" href="" th:text="'Отзывы: ' + ${item.reviews.size()}"></a></span>
+        <span class="favorite mr-3"><a th:href="@{/user/{id}/favorite(id=${item.id})}">В избранное</a></span>
     </div>
     <div class="row">
         <div class="w-75 px-3">
@@ -87,7 +87,7 @@
                         </ul>
                     </li>
                     <li class="list-group-item p-3">
-                        <p class="card-text" th:text="'Страна: ' + ${item.getShop().getLocation().getName()}"></p>
+                        <p class="card-text" th:text="'Страна: ' + ${item.shopLocation.name}"></p>
                     </li>
                     <li class="list-group-item p-3">
                         <p class="card-text" th:text="${item.getDescription()}"></p>
@@ -99,20 +99,20 @@
                 <h4 class="py-2 mb-4 mr-auto">Отзывы</h4>
                 <a href="#">Оставить отзыв</a>
             </div>
-            <div id="reviews" th:each="review: ${item.getReviews()}" th:if="${item.getReviews()}">
+            <div id="reviews" th:each="review: ${item.reviews}" th:if="${item.reviews}">
                 <div class="review mb-5">
                     <div class="review-info d-flex align-items-center mb-3">
-                        <img  class="rounded-circle" th:src="${review.getUser().getMainImage().toBase64()}" th:if="${review.getUser().getMainImage()}" alt="">
-                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" th:unless="${review.getUser().getMainImage()}" alt="">
-                        <span class="mx-3 mr-auto"><strong th:text="${review.getUser().getFirstName() + ' ' + review.getUser().getLastName()}"></strong></span>
+                        <img  class="rounded-circle" th:src="${review.getMainUserImage().toBase64()}" th:if="${review.getMainUserImage()}" alt="">
+                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" th:unless="${review.getMainUserImage()}" alt="">
+                        <span class="mx-3 mr-auto"><strong th:text="${review.userFirstName + ' ' + review.userLastName}"></strong></span>
                         <span class="mx-3" th:text="${review.getDate()}"></span>
                         <span><img class="pb-1" th:src="@{'/img/rating/' +  ${review.getRating()} + '.png'}" alt=""></span>
                     </div>
                     <div class="review-content ml-5 pl-3">
                         <h6>Достоинства:</h6>
-                        <p th:text="${review.getDignity()}"></p>
+                        <p th:text="${review.dignity}"></p>
                         <h6>Недостатки:</h6>
-                        <p th:text="${review.getFlaw()}"></p>
+                        <p th:text="${review.flaw}"></p>
                         <h6>Комментарий:</h6>
                         <p th:text="${review.getText()}"></p>
                     </div>
@@ -122,17 +122,17 @@
 
         <div class="w-25">
             <div class="d-flex flex-column align-items-center px-3">
-                <img class="mw-100" th:src="${item.getShop().getLogo().toBase64()}" alt="...">
-                <a class="py-2" th:href="@{/market/{id}(id=${item.getShop().getId()})}" th:text="${item.getShop().getName()}"></a>
-                <h3 class="mb-3" th:text="${item.getShop().getPhone()}"></h3>
+                <img class="mw-100" th:src="${item.shopLogo.toBase64()}" alt="...">
+                <a class="py-2" th:href="@{/market/{id}(id=${item.shopId})}" th:text="${item.shopName}"></a>
+                <h3 class="mb-3" th:text="${item.shopPhone}"></h3>
                 <button type="button" class="btn btn-warning btn-block btn-lg mb-5">Задать вопрос</button>
                 <form class="d-flex flex-column w-100">
                     <span class="d-inline align-self-end h2" th:text="${item.getPrice().intValue()} + 'р.'"></span>
 <!--                    <del class="text-danger"><span class="d-inline h5 text-body" th:text="${item.getPrice()}">600<small>р.</small></span></del>-->
                     <div class="form-group">
-                        <small class="form-text pl-1" th:text="'В наличии: ' + ${item.getCount()}"></small>
+                        <small class="form-text pl-1" th:text="'В наличии: ' + ${item.count}"></small>
                         <div>
-                            <input type="number" class="form-control form-control-sm" id="count" name="count" value="1" min="1" th:attr="max=${item.getCount()}" required>
+                            <input type="number" class="form-control form-control-sm" id="count" name="count" value="1" min="1" th:attr="max=${item.count}" required>
                         </div>
                     </div>
                     <button type="button" class="btn btn-danger btn-block btn-lg">В корзину</button>

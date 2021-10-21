@@ -2,7 +2,7 @@ package com.amr.project.service.impl;
 
 import com.amr.project.converter.ItemPageMapper;
 import com.amr.project.model.dto.CategoryDto;
-import com.amr.project.model.dto.itemPageDto.ItemDto;
+import com.amr.project.model.dto.ItemDto;
 import com.amr.project.model.entity.Category;
 import com.amr.project.model.entity.Item;
 import com.amr.project.service.abstracts.ReadWriteService;
