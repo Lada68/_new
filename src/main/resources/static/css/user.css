@@ -1,0 +1,10 @@
+.nav-pills .nav-link {
+    text-align: center;
+    width: 350px;
+    background: white;
+    border-radius: 0;
+    border-color: blue;
+    border-width:thin;
+    border-style: solid;
+    margin-top: 10px;
+}

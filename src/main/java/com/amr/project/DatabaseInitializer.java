@@ -62,8 +62,15 @@ public class DatabaseInitializer {
         categories.forEach(categoryDao::persist);
 
         users = getUsers();
+        //USER Можно пока одного юзера сделать фискированным чтобы время сэкономить?
+        users.get(0).setUsername("user");
+        users.get(0).setPassword("user");
+        users.get(0).setRoles(null);
+        users.get(0).addRole(roles.stream().filter(r -> r.getName() == "USER").findFirst().orElse(null));
+        //USER Можно пока одного юзера сделать фискированным чтобы время сэкономить?
         users.forEach(user -> {
             user.getAddress().forEach(addressDao::persist);
+            user.getImages().forEach(imageDao::persist);
             userDao.persist(user);
         });
 
@@ -122,8 +129,17 @@ public class DatabaseInitializer {
         user.setUsername(user.getFirstName().toLowerCase() + user.getAge());
         user.setPassword(randomNumberString(4));
         user.addAddress(getRandomAddress());
+        user.addAddress(getRandomAddress());
+        user.addAddress(getRandomAddress());
+        user.addAddress(getRandomAddress());
+        user.addAddress(getRandomAddress());
         user.addRole(randomListElement(new ArrayList<>(roles)));
         user.setGender(gender);
+        user.addImages(getRandomImage());
+        user.addImages(getRandomImage());
+        user.addImages(getRandomImage());
+        user.addImages(getRandomImage());
+        user.addImages(getRandomImage());
         user.setPhone(randomPhone());
 
         return user;
@@ -324,6 +340,11 @@ public class DatabaseInitializer {
 
     private Double randomRating() {
         return Math.random()*5;
+    }
+
+    private Image getRandomImage() {
+        Image image = new Image();
+        return image.ImageFromURL("https://thispersondoesnotexist.com/image");
     }
 
     private String randomPhone() {
