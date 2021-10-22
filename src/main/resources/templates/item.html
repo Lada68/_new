@@ -53,7 +53,7 @@
   <div class="container pt-0">
     <h1 class="pt-2" th:text="${item.name}"></h1>
     <div class="top-panel mb-2">
-        <span class="rating mr-3"><img class="pb-1" th:src="@{'/img/rating/' +  ${item.getRating()}  + '.png'}" alt=""> <strong th:text="${item.printRating()}" th:if="${item.rating}"></strong></span>
+        <span class="rating mr-3"><img class="pb-1" th:src="@{'/img/rating/' +  ${item.countRating()}  + '.png'}" alt=""> <strong th:text="${item.printRating()}" th:if="${item.rating}"></strong></span>
         <span class="reviews mr-3"><a id="toReviews" href="" th:text="'Отзывы: ' + ${item.reviews.size()}"></a></span>
         <span class="favorite mr-3"><a th:href="@{/user/{id}/favorite(id=${item.id})}">В избранное</a></span>
     </div>
@@ -102,8 +102,8 @@
             <div id="reviews" th:each="review: ${item.reviews}" th:if="${item.reviews}">
                 <div class="review mb-5">
                     <div class="review-info d-flex align-items-center mb-3">
-                        <img  class="rounded-circle" th:src="${review.getMainUserImage().toBase64()}" th:if="${review.getMainUserImage()}" alt="">
-                        <img  class="rounded-circle hi" th:src="@{/img/users/no_img.webp}" th:unless="${review.getMainUserImage()}" alt="">
+                        <img  class="rounded-circle" th:src="${review.userImages.get(0).toBase64()}" th:if="${!review.userImages.isEmpty()}" alt="">
+                        <img  class="rounded-circle hi" th:src="@{/img/users/no_img.webp}" th:if="${review.userImages.isEmpty()}" alt="">
                         <span class="mx-3 mr-auto h5"><strong th:text="${review.userFirstName + ' ' + review.userLastName}"></strong></span>
                         <span class="mx-3" th:text="${review.getDate()}"></span>
                         <span><img class="pb-1" th:src="@{'/img/rating/' +  ${review.getRating()} + '.png'}" alt=""></span>
