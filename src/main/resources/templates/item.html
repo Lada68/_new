@@ -103,7 +103,7 @@
                 <div class="review mb-5">
                     <div class="review-info d-flex align-items-center mb-3">
                         <img  class="rounded-circle" th:src="${review.userImages.get(0).toBase64()}" th:if="${!review.userImages.isEmpty()}" alt="">
-                        <img  class="rounded-circle hi" th:src="@{/img/users/no_img.webp}" th:if="${review.userImages.isEmpty()}" alt="">
+                        <img  class="rounded-circle" th:src="@{/img/users/no_img.webp}" th:if="${review.userImages.isEmpty()}" alt="">
                         <span class="mx-3 mr-auto h5"><strong th:text="${review.userFirstName + ' ' + review.userLastName}"></strong></span>
                         <span class="mx-3" th:text="${review.getDate()}"></span>
                         <span><img class="pb-1" th:src="@{'/img/rating/' +  ${review.getRating()} + '.png'}" alt=""></span>
