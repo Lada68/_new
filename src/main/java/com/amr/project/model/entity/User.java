@@ -87,7 +87,16 @@ public class User implements UserDetails {
         this.images.add(image);
     }
 
+    public User() {
+    }
 
+    public User(String email, String username, String password, String firstName, String lastName) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
