@@ -8,4 +8,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CountryDaoImpl extends ReadWriteDaoImpl<Country,Long> implements CountryDao {
+
+    @Override
+    public Country findById(Long id){
+        return em.find(Country.class, id);
+    }
 }

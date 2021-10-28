@@ -25,6 +25,7 @@ public class Shop {
     @JoinColumn(name = "country_id")
     private Country location;
 
+
     @OneToMany(mappedBy = "shop")
     private List<Item> items = new ArrayList<>();
 

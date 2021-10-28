@@ -5,5 +5,9 @@ import com.amr.project.model.entity.Category;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class CategoryDaoImpl extends ReadWriteDaoImpl<Category,Long> implements CategoryDao {
+public class CategoryDaoImpl extends ReadWriteDaoImpl<Category, Long> implements CategoryDao {
+    @Override
+    public Category findById(Long id) {
+        return em.find(Category.class, id);
+    }
 }

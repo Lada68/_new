@@ -15,10 +15,10 @@ public class Address {
     private Long id;
     private String cityIndex;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE})
     private Country country;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE})
     private City city;
 
     private String street;
@@ -31,6 +31,12 @@ public class Address {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private Set<User> users;
+
+    @Transient
+    private Long countryId;
+
+    @Transient
+    private Long cityId;
 
     public Address(String cityIndex, Country country, City city, String street, String house) {
         this.cityIndex = cityIndex;

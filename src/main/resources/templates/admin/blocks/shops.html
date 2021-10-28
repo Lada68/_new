@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="shopsPage" >
+    <div class="container">
+        <div class="col-10">
+            <!--            <div class="row">-->
+            <div class="col-3">
+                <div>
+                    <div id="searchWrapperShops">
+                        <label for="searchBarShops"></label><input
+                            type="text"
+                            name="searchBar"
+                            id="searchBarShops"
+                            placeholder="search for a Shop"
+                    />
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-success btn" data-bs-toggle="modal"
+                        data-bs-target="#createModalShop">
+                    Create
+                </button>
+            </div>
+            <!--            </div>-->
+            <table class="table table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Shop</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="shopsList">
+                </tbody>
+            </table>
+            <!--            Модальные окна -->
+
+            <div class="modal fade" id="editModalShop" tabindex="-1" aria-labelledby="editModalLabelShop"
+                 aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabelShop">Edit Shop</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="editFormShop">
+                                <div class="row">
+                                    <div class="col-3">
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group text-center">
+                                            <label for="editIdShop" class="font-weight-bold">ID</label>
+                                            <input type="text" class="form-control" id="editIdShop" name="id" readonly/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="editNameShop" class="font-weight-bold">Name</label>
+                                            <input type="text" class="form-control" id="editNameShop" name="name"/>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <input type="button" class="btn btn-primary subBTNShop" data-bs-dismiss="modal"
+                                           value="edit"/>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="deleteModalShop" tabindex="-1" aria-labelledby="deleteModalLabelShop"
+                 aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabelShop">Delete Country</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="deleteFormShop">
+                                <div class="row">
+                                    <div class="col-3">
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group text-center">
+                                            <label for="deleteIdShop" class="font-weight-bold">ID</label>
+                                            <input type="text" class="form-control" id="deleteIdShop" name="id" readonly/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="deleteNameShop" class="font-weight-bold">Name</label>
+                                            <input type="text" class="form-control" id="deleteNameShop" name="name"
+                                                   readonly/>
+                                        </div>
+                                        <br>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <input type="button" class="btn btn-primary delBTNShop" data-bs-dismiss="modal"
+                                           value="delete"/>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="createModalShop" tabindex="-1" aria-labelledby="createModalLabelShop"
+                 aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createModalLabelShop">Create Shop</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="createFormShop">
+                                <div class="row">
+                                    <div class="col-3">
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group text-center">
+                                            <label for="createNameShop" class="font-weight-bold">Name</label>
+                                            <input type="text" class="form-control" id="createNameShop" name="name"/>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    </button>
+                                    <input type="button" class="btn btn-primary createBTNShop" data-bs-dismiss="modal"
+                                           value="create"/>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <script src="/js/adminShops.js"></script>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

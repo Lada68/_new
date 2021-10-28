@@ -1,5 +1,6 @@
 package com.amr.project.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Country {
             mappedBy = "country",
             cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE}
     )
+    @JsonIgnore
     private List<City> cities;
 
     public Country(String name) {

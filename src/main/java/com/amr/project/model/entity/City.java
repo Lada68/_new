@@ -17,9 +17,13 @@ public class City {
 
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE})
     @JoinColumn(name = "country_id")
     private Country country;
+
+    @Transient
+    private Long countryId;
 
     public City(String name, Country country) {
         this.name = name;

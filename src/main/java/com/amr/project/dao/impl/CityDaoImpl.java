@@ -6,4 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CityDaoImpl extends ReadWriteDaoImpl<City, Long> implements CityDao {
+    @Override
+    public City findById(Long id) {
+        return em.find(City.class, id);
+    }
 }
