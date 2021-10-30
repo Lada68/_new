@@ -29,12 +29,4 @@ public class ReviewDto {
     private boolean isModerateAccept;
     private String moderatedRejectReason;
 
-    public ImageDto getMainUserImage() {
-        ImageDto userMainImage =  userImages.stream().filter(ImageDto::getIsMain).findAny().orElse(new ImageDto());
-        if (userMainImage.getPicture() == null || userMainImage.getPicture().length == 0) {
-            return null;
-        }
-        return userMainImage;
-    }
-
 }

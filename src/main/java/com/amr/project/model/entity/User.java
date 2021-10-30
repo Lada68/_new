@@ -1,6 +1,7 @@
 package com.amr.project.model.entity;
 
 import com.amr.project.model.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,7 +46,7 @@ public class User implements UserDetails {
     private Gender gender;
     private Calendar birthday;
 
-    @OneToMany
+    @ManyToMany
     private List<Image> images;
 
     @OneToMany
