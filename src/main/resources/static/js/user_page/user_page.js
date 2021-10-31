@@ -11,8 +11,7 @@ function writeUserData() {
     rowsToDelete.forEach(row => row.remove())
 
     userFoto(user.images)
-    document.querySelectorAll('.avatar_name').innerHTML = user.firstName + " " + user.lastName;
-
+    document.querySelector('.avatar_name').innerHTML = user.firstName + " " + user.lastName;
 //    document.user_foto.src = user.images.url   // картинка по URL
 //    document.user_foto.src = "data:image/png;base64,"+user.images.picture  // картинка из файла
     let userData = document.querySelectorAll('.user_data')
@@ -44,18 +43,19 @@ function userFoto(images) {
 
         let img = document.createElement("img");
         img.className = "DEL d-block w-100"
-        img.style = "border-radius: 50%; border: solid black; max-width: 255px"
+        img.style = "border-radius: 50%; border: solid black; max-height:255px; max-width: 255px"
         img.alt = i + "slide"
         img.src = "data:image/png;base64," + image.picture
 
         let inner = document.createElement("div")
         inner.className = "DEL carousel-item";
-        if (i === 0) inner.className = "carousel-item active";
+        if (i === 0) inner.className = "DEL carousel-item active";
         inner.appendChild(img)
 
         document.querySelector('.carousel-inner').appendChild(inner)
 
         i++
+        console.log(document.querySelector('.carousel'))
     }
 }
 

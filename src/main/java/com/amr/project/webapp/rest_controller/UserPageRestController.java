@@ -1,11 +1,11 @@
 package com.amr.project.webapp.rest_controller;
 
 import com.amr.project.converter.UserMapper;
-import com.amr.project.model.dto.ImageDto;
 import com.amr.project.model.dto.UserDto;
 import com.amr.project.model.entity.*;
 import com.amr.project.repository.UserRepository;
 import com.amr.project.service.abstracts.ReadWriteService;
+import com.amr.project.util.UserProfileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +21,7 @@ public class UserPageRestController {
     private final ReadWriteService<User,Long> rwUser;
     private final ReadWriteService<Image,Long> rwImage;
     private final UserRepository userRepository;
+    private final UserProfileUtil userProfileUtil;
 
     @GetMapping("/users/principal")
     public Object getUserPrincipal() {
@@ -31,25 +32,10 @@ public class UserPageRestController {
     }
 
     @PutMapping("/users")
-    public String updateUser(@RequestBody UserDto userDto) {
-//        System.out.println(userDto.getFirstName());
-//        System.out.println(userMapper.toModel(userDto).getFirstName());
-        for (ImageDto imageDto:
-                userDto.getImages()) {
-            System.out.println(userDto.getGender()+ " DTO "+ imageDto.getId()+ " " + imageDto.getIsMain());
-        }
-        System.out.println(userDto.getAddress());
+    public UserDto updateUser(@RequestBody UserDto userDto) {
         User user = userMapper.toModel(userDto);
-    //        List<Image> images = user.getImages();
-    //        rwImage.persist(images.get((images.size() - 1)));
-        user.setId(userRepository.findUserByUsername(user.getUsername()).orElse(null).getId());
-        System.out.println(user.getId());
-        for (Image image:
-             user.getImages()) {
-            System.out.println("USER"+image.getId()+" "+image.getIsMain());
-        }
-        rwUser.update(user);
-        return "{  \"result\" : \"OK\" }";
+        rwUser.update(userProfileUtil.prepareUser(user));
+        return userMapper.toDto(user);
     }
 }
 

@@ -28,13 +28,7 @@ function getUserPrincipal() {
 
 async function updateUser() {
     sendRequest('PUT', "/api/users/",  tempUser).then(resp=>{
-        console.log("sendrequest")
-        console.log(user)
-        console.log(tempUser)
-        if(resp.result === "OK")   user= JSON.parse(JSON.stringify(tempUser));
-        console.log("resp")
-        console.log(user)
-        console.log(tempUser)
+        user = resp
         writeUserData()
     })
 }
