@@ -20,7 +20,13 @@ searchBarShop.addEventListener('keyup', (e) => {
 
     const filtered = hpShop.filter((entity) => {
         return (
-            entity.name.toLowerCase().includes(searchString)
+            entity.name.toLowerCase().includes(searchString) ||
+            entity.email.toLowerCase().includes(searchString) ||
+            entity.description.toLowerCase().includes(searchString) ||
+            entity.location.name.toLowerCase().includes(searchString) ||
+            entity.user.username.toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.rating).toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.id).toLowerCase().includes(searchString)
         );
     });
     displayShops(filtered);
@@ -34,7 +40,6 @@ const loadShops = async () => {
     loadShopsModals(hpShop)
     selectShops(hpShop)
 };
-
 
 const  selectShops = (shops) => {
     document.getElementById('inputShopCreateItem').innerHTML = shops
@@ -90,9 +95,6 @@ const loadShopsModals = (list) => {
     })
 };
 
-
-
-
 const displayShops = (list) => {
     shopsList.innerHTML = list
         .map((shop) => {
@@ -146,6 +148,8 @@ btnDelShop.addEventListener('click', async (e) => {
     }).then((res) => {
         res.json()
         loadShops()
+        loadItems()
+        loadUsers()
     })
 
 })
@@ -169,6 +173,8 @@ btnSubShop.addEventListener('click', async (e) => {
     }).then(res => {
         res.json()
         loadShops()
+        loadItems()
+        loadUsers()
     })
 })
 
@@ -191,6 +197,8 @@ btnCreateShop.addEventListener('click', async (e) => {
     }).then(res => {
         res.json();
         loadShops()
+        loadItems()
+        loadUsers()
     })
 })
 

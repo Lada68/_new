@@ -18,8 +18,13 @@ searchBarItem.addEventListener('keyup', (e) => {
 
     const filtered = hpItem.filter((entity) => {
         return (
-            entity.name.toLowerCase().includes(searchString)
-        );
+            entity.name.toLowerCase().includes(searchString) ||
+            entity.description.toLowerCase().includes(searchString) ||
+            entity.shop.name.toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.categories, ['name']).replace(/[^a-zа-яё ]/iug, "")
+                .replaceAll("name", "").toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.id).toLowerCase().includes(searchString)
+        )
     });
     displayItems(filtered);
     loadItemsModals(filtered)
@@ -96,6 +101,7 @@ btnDelItem.addEventListener('click', async (e) => {
     }).then((res) => {
         res.json()
         loadItems()
+        loadShops()
     })
 
 })
@@ -121,6 +127,7 @@ btnSubItem.addEventListener('click', async (e) => {
     }).then(res => {
         res.json()
         loadItems()
+        loadShops()
     })
 })
 
@@ -145,6 +152,7 @@ btnCreateItem.addEventListener('click', async (e) => {
     }).then(res => {
         res.json();
         loadItems()
+        loadShops()
     })
 })
 

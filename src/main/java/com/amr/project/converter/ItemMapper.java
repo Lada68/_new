@@ -12,12 +12,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
     List<ItemMainPageDTO> itemListToListItemMainPageDTO(List<Item> list);
-    List<ItemDto> itemListToListItemDto(List<Item> list);
-
     List<AdminItemDto> itemListToListAdminItemDto(List<Item> list);
-
-    List<AdminItemShortDto> itemListToListItemShortDto(List<Item> list);
-
-
-
+    AdminItemDto itemToAdminItemDto(Item item);
 }

@@ -17,10 +17,18 @@ const urlRole = "http://localhost:8888/adminapi/roles";
 
 searchBarUser.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
-
     const filtered = hpUser.filter((entity) => {
         return (
-            entity.firstName.toLowerCase().includes(searchString)
+            entity.firstName.toLowerCase().includes(searchString) ||
+            entity.lastName.toLowerCase().includes(searchString) ||
+            entity.username.toLowerCase().includes(searchString) ||
+            entity.email.toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.shops, ['name']).replace(/[^a-zа-яё ]/iug, "")
+                .replaceAll("name", "").toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.roles, ['name']).replace(/[^a-zа-яё ]/iug, "")
+                .replaceAll("name", "").replaceAll("ROLE_", "")
+                .toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.id).toLowerCase().includes(searchString)
         );
     });
     displayUsers(filtered);
@@ -99,7 +107,7 @@ const loadUsersModals = (list) => {
 const displayUsers = (list) => {
     usersList.innerHTML = list
         .map((user) => {
-            const regex = /[^\w\s]|_/g;
+            const regex = /[^a-zа-яё ]/iug;
             let uShops = JSON.stringify(user.shops, ['name']).replace(regex, "")
                 .replace("name", "").replaceAll("name", "\n");
             let uRoles = JSON.stringify(user.roles, ['name']).replace(regex, "")
@@ -157,6 +165,7 @@ btnDelUser.addEventListener('click', async (e) => {
     }).then((res) => {
         res.json()
         loadUsers()
+        loadShops()
     })
 
 })
@@ -185,6 +194,7 @@ btnSubUser.addEventListener('click', async (e) => {
     }).then(res => {
         res.json()
         loadUsers()
+        loadShops()
     })
 })
 
@@ -211,6 +221,7 @@ btnCreateUser.addEventListener('click', async (e) => {
     }).then(res => {
         res.json();
         loadUsers()
+        loadShops()
     })
 })
 

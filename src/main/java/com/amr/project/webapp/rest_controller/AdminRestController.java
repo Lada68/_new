@@ -1,8 +1,10 @@
 package com.amr.project.webapp.rest_controller;
 
+import com.amr.project.converter.*;
 import com.amr.project.model.dto.*;
 import com.amr.project.model.entity.*;
 import com.amr.project.service.abstracts.*;
+import org.mapstruct.factory.Mappers;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,14 @@ public class AdminRestController {
     private final ShopService shopService;
     private final ItemService itemService;
     private final RoleService roleService;
+
+    private final CountryMapper countryMapper = Mappers.getMapper(CountryMapper.class);
+    private final CityMapper cityMapper = Mappers.getMapper(CityMapper.class);
+    private final AddressMapper addressMapper = Mappers.getMapper(AddressMapper.class);
+    private final CategoryMapper categoryMapper = Mappers.getMapper(CategoryMapper.class);
+    private final ShopMapper shopMapper = Mappers.getMapper(ShopMapper.class);
+    private final ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
+    private final UserMapper userMapper = Mappers.getMapper(UserMapper.class);
 
     public AdminRestController(AdminService adminService, CountryService countryService, CityService cityService,
                                AddressService addressService, CategoryService categoryService, UserService userService,
@@ -52,8 +62,8 @@ public class AdminRestController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/countries/{id}")
-    public Country oneCountry(@PathVariable Long id) {
-        return countryService.findById(id);
+    public CountryDto oneCountry(@PathVariable Long id) {
+        return countryMapper.countryToCountryDto(countryService.findById(id));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
@@ -85,8 +95,8 @@ public class AdminRestController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/cities/{id}")
-    public City oneCity(@PathVariable Long id) {
-        return cityService.findById(id);
+    public AdminCityDto oneCity(@PathVariable Long id) {
+        return cityMapper.cityToAdminCityDto(cityService.findById(id));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
@@ -120,8 +130,8 @@ public class AdminRestController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/addresses/{id}")
-    public Address oneAddress(@PathVariable Long id) {
-        return addressService.findById(id);
+    public AdminAddressDto oneAddress(@PathVariable Long id) {
+        return addressMapper.addressToAdminAddressDto(addressService.findById(id));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
@@ -157,8 +167,8 @@ public class AdminRestController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/categories/{id}")
-    public Category oneCategory(@PathVariable Long id) {
-        return categoryService.findById(id);
+    public CategoryDto oneCategory(@PathVariable Long id) {
+        return categoryMapper.categoryToCategoryDto(categoryService.findById(id));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
@@ -190,8 +200,8 @@ public class AdminRestController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/users/{id}")
-    public User oneUser(@PathVariable Long id) {
-        return userService.findById(id);
+    public AdminUserDto oneUser(@PathVariable Long id) {
+        return userMapper.userToAdminUserDto(userService.findById(id));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
@@ -234,8 +244,8 @@ public class AdminRestController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/shops/{id}")
-    public Shop oneShop(@PathVariable Long id) {
-        return shopService.findById(id);
+    public AdminShopDto oneShop(@PathVariable Long id) {
+        return shopMapper.shopToAdminShopDto(shopService.findById(id));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
@@ -272,8 +282,8 @@ public class AdminRestController {
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @GetMapping("/items/{id}")
-    public Item oneItem(@PathVariable Long id) {
-        return itemService.findById(id);
+    public AdminItemDto oneItem(@PathVariable Long id) {
+        return itemMapper.itemToAdminItemDto(itemService.findById(id));
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")

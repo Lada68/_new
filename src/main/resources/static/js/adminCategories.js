@@ -19,7 +19,8 @@ searchBarCategory.addEventListener('keyup', (e) => {
 
     const filtered = hpCategory.filter((entity) => {
         return (
-            entity.name.toLowerCase().includes(searchString)
+            entity.name.toLowerCase().includes(searchString) ||
+            JSON.stringify(entity.id).toLowerCase().includes(searchString)
         );
     });
     displayCategories(filtered);
@@ -98,6 +99,7 @@ btnDelCategory.addEventListener('click', async (e) => {
     }).then((res) => {
         res.json()
         loadCategories()
+        loadUsers()
     })
 
 })
@@ -116,6 +118,7 @@ btnSubCategory.addEventListener('click', async (e) => {
     }).then(res => {
         res.json()
         loadCategories()
+        loadUsers()
     })
 })
 
@@ -132,6 +135,7 @@ btnCreateCategory.addEventListener('click', async (e) => {
     }).then(res => {
         res.json();
         loadCategories()
+        loadUsers()
     })
 })
 

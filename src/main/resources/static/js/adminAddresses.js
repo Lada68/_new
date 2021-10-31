@@ -19,7 +19,8 @@ searchBar.addEventListener('keyup', (e) => {
 
     const filteredCountries = hpCountry.filter((country) => {
         return (
-            country.name.toLowerCase().includes(searchString)
+            country.name.toLowerCase().includes(searchString) ||
+            JSON.stringify(country.id).toLowerCase().includes(searchString)
         );
     });
     displayCountries(filteredCountries);
@@ -32,8 +33,6 @@ const loadCountries = async () => {
     displayCountries(hpCountry);
     loadCountriesModals(hpCountry);
     selectCountry(hpCountry)
-
-
 };
 
 const loadCountriesModals = (list) => {
@@ -78,6 +77,7 @@ btnDel.addEventListener('click', async (e) => {
         loadCountries();
         loadCities();
         loadAddresses()
+        loadShops()
     })
 
 })
@@ -98,6 +98,7 @@ btnSub.addEventListener('click', async (e) => {
         loadCountries();
         loadCities();
         loadAddresses()
+        loadShops()
     })
 })
 
@@ -116,6 +117,7 @@ btnCreate.addEventListener('click', async (e) => {
         loadCountries();
         loadCities();
         loadAddresses()
+        loadShops()
     })
 })
 
@@ -143,7 +145,8 @@ searchBarCity.addEventListener('keyup', (e) => {
     const filteredCities = hpCity.filter((city) => {
         return (
             city.name.toLowerCase().includes(searchString) ||
-            city.country.name.toLowerCase().includes(searchString)
+            city.country.name.toLowerCase().includes(searchString) ||
+            JSON.stringify(city.id).toLowerCase().includes(searchString)
         );
     });
     displayCities(filteredCities);
@@ -363,7 +366,8 @@ searchBarAddress.addEventListener('keyup', (e) => {
             address.country.name.toLowerCase().includes(searchString) ||
             address.city.name.toLowerCase().includes(searchString) ||
             address.house.toLowerCase().includes(searchString) ||
-            address.cityIndex.toLowerCase().includes(searchString)
+            address.cityIndex.toLowerCase().includes(searchString) ||
+            JSON.stringify(address.id).toLowerCase().includes(searchString)
 
         );
     });

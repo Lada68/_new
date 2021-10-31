@@ -28,4 +28,6 @@ public interface ShopMapper {
 
     List<AdminShopDto> shopListToListAdminShopDto(List<Shop> list);
 
+    AdminShopDto shopToAdminShopDto(Shop shop);
+
 }

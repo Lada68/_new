@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AddressMapper {
-
-    List<AdminAddressDto> addressListToListAdminAddressDto(List<Address> countries);
+    List<AdminAddressDto> addressListToListAdminAddressDto(List<Address> addresses);
+    AdminAddressDto addressToAdminAddressDto(Address address);
 }

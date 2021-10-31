@@ -23,6 +23,8 @@ public interface UserMapper {
 
     List<AdminUserDto> userListToListAdminUserDto(List<User> list);
 
+    AdminUserDto userToAdminUserDto(User user);
+
     List<UserDto> userListToListUserDto(List<User> list);
 
     default String getUserName(User user) {
