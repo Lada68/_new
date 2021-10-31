@@ -15,10 +15,10 @@ public class Address {
     private Long id;
     private String cityIndex;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE})
+    @OneToOne(fetch = FetchType.LAZY)
     private Country country;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE})
+    @OneToOne(fetch = FetchType.LAZY)
     private City city;
 
     private String street;

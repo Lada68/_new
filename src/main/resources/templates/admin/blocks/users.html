@@ -38,7 +38,14 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">User</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">FirstName</th>
+                    <th scope="col">LastName</th>
+                    <th scope="col">Shops</th>
+                    <th scope="col">Roles</th>
+                    <th scope="col">Activity</th>
                     <th scope="col">Edit</th>
                     <th scope="col">Delete</th>
                 </tr>
@@ -73,6 +80,52 @@
                                             <input type="text" class="form-control" id="editNameUser" name="name"/>
                                         </div>
                                         <br>
+                                        <div class="form-group text-center">
+                                            <label for="editEmailUser" class="font-weight-bold">Электронная
+                                                почта:</label>
+                                            <input type="text" class="form-control" id="editEmailUser" name="email"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="editPasswordUser" class="font-weight-bold">Пароль:</label>
+                                            <input type="password" class="form-control" id="editPasswordUser"
+                                                   name="password"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="editPhoneUser" class="font-weight-bold">Телефон:</label>
+                                            <input type="text" class="form-control" id="editPhoneUser" name="phone"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="editFirstNameUser" class="font-weight-bold">Имя:</label>
+                                            <input type="text" class="form-control" id="editFirstNameUser"
+                                                   name="firstname"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="editLastNameUser" class="font-weight-bold">Фамилия:</label>
+                                            <input type="text" class="form-control" id="editLastNameUser"
+                                                   name="lastname"/>
+                                            <br>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value=""
+                                                   id="editActivateUser">
+                                            <label class="form-check-label" for="editActivateUser">
+                                                Вич Активити
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group text-center">
+                                            <label for="inputRoleEditUser"><p class="font-weight-bold">Список
+                                                ролей:</p>
+                                            </label>
+                                            <select id="inputRoleEditUser" class="form-control" multiple
+                                                    size="2" name="roles">
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -106,12 +159,46 @@
                                     <div class="col-6">
                                         <div class="form-group text-center">
                                             <label for="deleteIdUser" class="font-weight-bold">ID</label>
-                                            <input type="text" class="form-control" id="deleteIdUser" name="id" readonly/>
+                                            <input type="text" class="form-control" id="deleteIdUser" name="id"
+                                                   readonly/>
                                         </div>
                                         <div class="form-group text-center">
                                             <label for="deleteNameUser" class="font-weight-bold">Name</label>
                                             <input type="text" class="form-control" id="deleteNameUser" name="name"
                                                    readonly/>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="deleteEmailUser" class="font-weight-bold">Электронная почта:</label>
+                                            <input type="text" class="form-control" id="deleteEmailUser" name="email" readonly/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="deletePasswordUser" class="font-weight-bold">Пароль:</label>
+                                            <input type="password" class="form-control" id="deletePasswordUser" name="password" readonly/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="deletePhoneUser" class="font-weight-bold">Телефон:</label>
+                                            <input type="text" class="form-control" id="deletePhoneUser" name="phone" readonly/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="deleteFirstNameUser" class="font-weight-bold">Имя:</label>
+                                            <input type="text" class="form-control" id="deleteFirstNameUser" name="firstname" readonly/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="deleteLastNameUser" class="font-weight-bold">Фамилия:</label>
+                                            <input type="text" class="form-control" id="deleteLastNameUser" name="lastname" readonly/>
+                                            <br>
+                                        </div>
+
+                                        <div class="form-group text-center">
+                                            <label for="inputRoleDeleteUser"><p class="font-weight-bold">Список ролей:</p>
+                                            </label>
+                                            <select id="inputRoleDeleteUser" class="form-control" multiple
+                                                    size="2" name="roles" disabled>
+                                            </select>
                                         </div>
                                         <br>
                                     </div>
@@ -146,9 +233,55 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group text-center">
-                                            <label for="createNameUser" class="font-weight-bold">Name</label>
+                                            <label for="createNameUser" class="font-weight-bold">Username</label>
                                             <input type="text" class="form-control" id="createNameUser" name="name"/>
                                             <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="createEmailUser" class="font-weight-bold">Электронная
+                                                почта:</label>
+                                            <input type="text" class="form-control" id="createEmailUser" name="email"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="createPasswordUser" class="font-weight-bold">Пароль:</label>
+                                            <input type="password" class="form-control" id="createPasswordUser"
+                                                   name="password"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="createPhoneUser" class="font-weight-bold">Телефон:</label>
+                                            <input type="text" class="form-control" id="createPhoneUser" name="phone"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="createFirstNameUser" class="font-weight-bold">Имя:</label>
+                                            <input type="text" class="form-control" id="createFirstNameUser"
+                                                   name="firstname"/>
+                                            <br>
+                                        </div>
+                                        <div class="form-group text-center">
+                                            <label for="createLastNameUser" class="font-weight-bold">Фамилия:</label>
+                                            <input type="text" class="form-control" id="createLastNameUser"
+                                                   name="lastname"/>
+                                            <br>
+                                        </div>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="false"
+                                                   id="createActivateUser">
+                                            <label class="form-check-label" for="createActivateUser">
+                                                Вич Активити
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group text-center">
+                                            <label for="inputRoleCreateUser"><p class="font-weight-bold">Список
+                                                ролей:</p>
+                                            </label>
+                                            <select id="inputRoleCreateUser" class="form-control" multiple
+                                                    size="2" name="roles">
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

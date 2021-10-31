@@ -1,5 +1,6 @@
 package com.amr.project.model.dto;
 
+import com.amr.project.model.entity.Role;
 import com.amr.project.model.enums.Gender;
 import lombok.Data;
 
@@ -13,6 +14,7 @@ public class AdminUserDto {
     private Long id;
     private String email;
     private String username;
+    private String password;
     private boolean activate;
     private String phone;
     private String firstName;

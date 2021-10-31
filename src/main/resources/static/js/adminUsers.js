@@ -1,6 +1,7 @@
 const usersList = document.getElementById('usersList');
 const searchBarUser = document.getElementById('searchBarUsers');
 let hpUser = [];
+let hpRoles = [];
 
 const editFormUser = document.querySelector('.editFormUser')
 const btnSubUser = document.querySelector('.subBTNUser')
@@ -11,7 +12,7 @@ const btnDelUser = document.querySelector('.delBTNUser')
 const btnCreateUser = document.querySelector('.createBTNUser')
 
 const urlUser = "http://localhost:8888/adminapi/users";
-
+const urlRole = "http://localhost:8888/adminapi/roles";
 
 
 searchBarUser.addEventListener('keyup', (e) => {
@@ -31,20 +32,66 @@ const loadUsers = async () => {
     hpUser = await res.json();
     displayUsers(hpUser);
     loadUsersModals(hpUser)
+    selectUsers(hpUser)
 };
+
+const loadRoles = async () => {
+    const res = await fetch(urlRole);
+    hpRoles = await res.json();
+    displayRoles(hpRoles)
+};
+loadRoles().then();
+
+const displayRoles = (list) => {
+    document.getElementById('inputRoleCreateUser').innerHTML = list
+        .map((role) => {
+            return `
+            <option value="${role.name}">${role.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputRoleDeleteUser').innerHTML = list
+        .map((role) => {
+            return `
+            <option value="${role.name}">${role.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputRoleEditUser').innerHTML = list
+        .map((role) => {
+            return `
+            <option value="${role.name}">${role.name}</option>
+        `;
+        })
+        .join('');
+
+};
+
 
 const loadUsersModals = (list) => {
     list.forEach(entity => {
         const btnEdit = document.querySelector(`#dataIdUser${entity.id} .btn-info`);
         btnEdit.addEventListener('click', () => {
             editFormUser.id.value = entity.id
-            editFormUser.name.value = entity.firstName
+            editFormUser.name.value = entity.username
+            editFormUser.email.value = entity.email
+            editFormUser.password.value = entity.password
+            editFormUser.phone.value = entity.phone
+            editFormUser.firstname.value = entity.firstName
+            editFormUser.lastname.value = entity.lastName
+            editFormUser.roles.value = entity.roles
         })
 
         const btnDelete = document.querySelector(`#dataIdUser${entity.id} .btn-danger`);
         btnDelete.addEventListener('click', () => {
             deleteFormUser.id.value = entity.id
             deleteFormUser.name.value = entity.firstName
+            deleteFormUser.email.value = entity.email
+            deleteFormUser.password.value = entity.password
+            deleteFormUser.phone.value = entity.phone
+            deleteFormUser.firstname.value = entity.firstName
+            deleteFormUser.lastname.value = entity.lastName
+            deleteFormUser.roles.value = entity.roles
         })
     })
 };
@@ -52,10 +99,23 @@ const loadUsersModals = (list) => {
 const displayUsers = (list) => {
     usersList.innerHTML = list
         .map((user) => {
+            const regex = /[^\w\s]|_/g;
+            let uShops = JSON.stringify(user.shops, ['name']).replace(regex, "")
+                .replace("name", "").replaceAll("name", "\n");
+            let uRoles = JSON.stringify(user.roles, ['name']).replace(regex, "")
+                .replace("name", "").replaceAll("name", "\n")
+                .replaceAll("ROLE_", "");
             return `
             <tr id="dataIdUser${user.id}">
                 <td>${user.id}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
                 <td>${user.firstName}</td>
+                <td>${user.lastName}</td>
+                <td>${uShops}</td>
+                <td>${uRoles}</td>
+                <td>${user.activate}</td>
                 <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalUser">Edit</button></td>
                 <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalUser">Delete</button></td>
             </tr>
@@ -63,6 +123,30 @@ const displayUsers = (list) => {
         })
         .join('');
 };
+
+const selectUsers = (users) => {
+    document.getElementById('inputUserCreateShop').innerHTML = users
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.username}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputUserEditShop').innerHTML = users
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.username}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputUserDeleteShop').innerHTML = users
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.username}</option>
+        `;
+        })
+        .join('');
+}
 
 btnDelUser.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -79,6 +163,9 @@ btnDelUser.addEventListener('click', async (e) => {
 
 btnSubUser.addEventListener('click', async (e) => {
     e.preventDefault();
+    let selected = Array.from(document.querySelector(".editFormUser").roles.options)
+        .filter(option => option.selected)
+        .map(option => option.value);
     await fetch(urlUser, {
         method: 'PATCH',
         headers: {
@@ -86,7 +173,14 @@ btnSubUser.addEventListener('click', async (e) => {
         },
         body: JSON.stringify({
             id: document.getElementById('editIdUser').value,
-            firstName: document.getElementById('editNameUser').value,
+            username: document.getElementById('editNameUser').value,
+            email: document.getElementById('editEmailUser').value,
+            password: document.getElementById('editPasswordUser').value,
+            phone: document.getElementById('editPhoneUser').value,
+            firstName: document.getElementById('editFirstNameUser').value,
+            lastName: document.getElementById('editLastNameUser').value,
+            activate: document.getElementById('editActivateUser').checked,
+            roles: selected
         })
     }).then(res => {
         res.json()
@@ -96,18 +190,29 @@ btnSubUser.addEventListener('click', async (e) => {
 
 btnCreateUser.addEventListener('click', async (e) => {
     e.preventDefault();
+    let selected = Array.from(document.querySelector(".createFormUser").roles.options)
+        .filter(option => option.selected)
+        .map(option => option.value);
     await fetch(urlUser, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            firstName: document.getElementById('createNameUser').value,
+            username: document.getElementById('createNameUser').value,
+            email: document.getElementById('createEmailUser').value,
+            password: document.getElementById('createPasswordUser').value,
+            phone: document.getElementById('createPhoneUser').value,
+            firstName: document.getElementById('createFirstNameUser').value,
+            lastName: document.getElementById('createLastNameUser').value,
+            activate: document.getElementById('createActivateUser').checked,
+            roles: selected
         })
     }).then(res => {
         res.json();
         loadUsers()
     })
 })
+
 
 loadUsers().then();

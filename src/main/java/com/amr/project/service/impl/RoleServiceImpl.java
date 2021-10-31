@@ -21,4 +21,9 @@ public class RoleServiceImpl extends ReadWriteServiceImpl<Role, Long> implements
     public Role findById(Long id) {
         return roleDao.getRoleById(id);
     }
+
+    @Override
+    public Role findByName(String name) {
+        return roleDao.getRoleByName(name);
+    }
 }

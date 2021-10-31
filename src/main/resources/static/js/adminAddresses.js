@@ -236,6 +236,30 @@ const selectCountry = (countries) => {
         `;
         })
         .join('');
+
+    // shops
+
+    document.getElementById('inputCountryCreateShop').innerHTML = countries
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputCountryEditShop').innerHTML = countries
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputCountryDeleteShop').innerHTML = countries
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.name}</option>
+        `;
+        })
+        .join('');
 };
 
 

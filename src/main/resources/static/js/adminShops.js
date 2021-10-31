@@ -8,6 +8,7 @@ const btnSubShop = document.querySelector('.subBTNShop')
 const deleteFormShop = document.querySelector('.deleteFormShop')
 const btnDelShop = document.querySelector('.delBTNShop')
 
+
 const btnCreateShop = document.querySelector('.createBTNShop')
 
 const urlShop = "http://localhost:8888/adminapi/shops";
@@ -31,7 +32,33 @@ const loadShops = async () => {
     hpShop = await res.json();
     displayShops(hpShop)
     loadShopsModals(hpShop)
+    selectShops(hpShop)
 };
+
+
+const  selectShops = (shops) => {
+    document.getElementById('inputShopCreateItem').innerHTML = shops
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputShopDeleteItem').innerHTML = shops
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputShopEditItem').innerHTML = shops
+        .map((c) => {
+            return `
+            <option value="${c.id}">${c.name}</option>
+        `;
+        })
+        .join('');
+}
 
 const loadShopsModals = (list) => {
     list.forEach(entity => {
@@ -39,15 +66,32 @@ const loadShopsModals = (list) => {
         btnEdit.addEventListener('click', () => {
             editFormShop.id.value = entity.id
             editFormShop.name.value = entity.name
+            editFormShop.email.value = entity.email
+            editFormShop.phone.value = entity.phone
+            editFormShop.description.value = entity.description
+            editFormShop.country.value = entity.location.id
+            editFormShop.user.value = entity.user.id
         })
 
         const btnDelete = document.querySelector(`#dataIdShop${entity.id} .btn-danger`);
         btnDelete.addEventListener('click', () => {
             deleteFormShop.id.value = entity.id
             deleteFormShop.name.value = entity.name
+            deleteFormShop.email.value = entity.email
+            deleteFormShop.phone.value = entity.phone
+            deleteFormShop.description.value = entity.description
+            deleteFormShop.country.value = entity.location.id
+            deleteFormShop.user.value = entity.user.id
+        })
+        const btnItems = document.querySelector(`#dataIdShop${entity.id} .btn-warning`);
+        btnItems.addEventListener('click', () => {
+            displayItemsInShop(entity.items)
         })
     })
 };
+
+
+
 
 const displayShops = (list) => {
     shopsList.innerHTML = list
@@ -56,8 +100,37 @@ const displayShops = (list) => {
             <tr id="dataIdShop${shop.id}">
                 <td>${shop.id}</td>
                 <td>${shop.name}</td>
+                <td>${shop.email}</td>
+                <td>${shop.phone}</td>
+                <td>${shop.description}</td>
+                <td>${shop.location.name}</td>
+                <td>${JSON.stringify(shop.rating).substring(0,5)}</td>
+                <td>${shop.user.username}</td>
+                <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#itemsModalShop">Товары</button></td>
                 <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalShop">Edit</button></td>
                 <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalShop">Delete</button></td>
+            </tr>
+        `;
+        })
+        .join('');
+};
+
+
+
+const displayItemsInShop = (list) => {
+    document.getElementById('itemsListShop').innerHTML = list
+        .map((item) => {
+            let regexp = /[^a-zа-яё ]/iug;
+            let sCategories = JSON.stringify(item.categories, ['name']).replace(regexp, "")
+                .replace("name", "").replaceAll("name", "\n");
+            return `
+            <tr>
+                <td>${item.id}</td>
+                <td>${item.name}</td>
+                <td>${item.price}</td>
+                <td>${sCategories}</td>
+                <td>${JSON.stringify(item.rating).substring(0, 5)}</td>
+                <td>Des</td>
             </tr>
         `;
         })
@@ -87,6 +160,11 @@ btnSubShop.addEventListener('click', async (e) => {
         body: JSON.stringify({
             id: document.getElementById('editIdShop').value,
             name: document.getElementById('editNameShop').value,
+            email : document.getElementById('editEmailShop').value,
+            phone : document.getElementById('editPhoneShop').value,
+            countryId : document.getElementById('inputCountryEditShop').value,
+            description : document.getElementById('editDescriptionShop').value,
+            userId : document.getElementById('inputUserEditShop').value,
         })
     }).then(res => {
         res.json()
@@ -103,6 +181,12 @@ btnCreateShop.addEventListener('click', async (e) => {
         },
         body: JSON.stringify({
             name: document.getElementById('createNameShop').value,
+            email : document.getElementById('createEmailShop').value,
+            phone : document.getElementById('createPhoneShop').value,
+            countryId : document.getElementById('inputCountryCreateShop').value,
+            description : document.getElementById('createDescriptionShop').value,
+            userId : document.getElementById('inputUserCreateShop').value,
+
         })
     }).then(res => {
         res.json();

@@ -22,4 +22,9 @@ public class CategoryServiceImpl extends ReadWriteServiceImpl<Category, Long> im
     public Category findById(Long id) {
         return categoryDao.findById(id);
     }
+
+    @Override
+    public Category findByName(String name) {
+        return categoryDao.findByName(name);
+    }
 }

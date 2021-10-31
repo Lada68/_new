@@ -13,7 +13,7 @@ public class AdminShopDto {
     private String name;
     private String email;
     private String phone;
-    private Country location;
+    private CountryDto location;
     private List<AdminItemShortDto> items;
     private AdminUserDto user;
     private double rating;

@@ -66,6 +66,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Discount> discounts;
 
+
+
     public void addAddress(Address address) {
         if (this.address == null) {
             this.address = new ArrayList<>();

@@ -31,7 +31,32 @@ const loadCategories = async () => {
     hpCategory = await res.json();
     displayCategories(hpCategory);
     loadCategoriesModals(hpCategory)
+    selectCategories(hpCategory)
 };
+
+const  selectCategories = (categories) => {
+    document.getElementById('inputCategoriesCreateItem').innerHTML = categories
+        .map((c) => {
+            return `
+            <option value="${c.name}">${c.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputCategoriesDeleteItem').innerHTML = categories
+        .map((c) => {
+            return `
+            <option value="${c.name}">${c.name}</option>
+        `;
+        })
+        .join('');
+    document.getElementById('inputCategoriesEditItem').innerHTML = categories
+        .map((c) => {
+            return `
+            <option value="${c.name}">${c.name}</option>
+        `;
+        })
+        .join('');
+}
 
 const loadCategoriesModals = (list) => {
     list.forEach(entity => {

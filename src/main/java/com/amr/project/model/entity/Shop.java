@@ -51,4 +51,11 @@ public class Shop {
     private String moderatedRejectReason;
     private boolean isPretendedToBeDeleted = false;
 
+
+    //админ
+    @Transient
+    private Long countryId;
+    @Transient
+    private Long userId;
+
 }

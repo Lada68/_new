@@ -49,6 +49,9 @@ public class Item {
     private String moderatedRejectReason;
     private boolean isPretendedToBeDeleted;
 
+    @Transient
+    private Long shopId;
+
     public void addCategory(Category category) {
         if(categories == null) {
             categories = new ArrayList<>();
