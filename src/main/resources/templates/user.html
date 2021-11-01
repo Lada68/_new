@@ -38,6 +38,9 @@
                 <a class="nav-link" href="#">еще...</a>
             </div>
         </div>
+        <div>
+        <a class="centertext-secondary btn btn-outline-warning text-primary" style = "margin-right: 50px " href="/">На главную страницу для покупок</a>
+    </div>
 
 
         <div class="text-secondary">
@@ -116,11 +119,11 @@
 
                     <!-- TABS -->
                     <li>
-                        <ul class="address-tab nav nav-tabs" >
+                        <ul class="addr11 address-tab nav nav-tabs" >
 
                         </ul>
 
-                        <div class="address-content tab-content">
+                        <div class="addr12 address-content tab-content">
 
                         </div>
                     </li>
@@ -179,10 +182,11 @@
                                 <p>Добавить файл не более 1MB</p>
                                 <div class="btn btn-mdb-color btn-rounded float-left">
                                     <input type="file" accept = "image/jpeg,image/png" class="newfoto">
-                                    <button>Редактировать</button>
+                                    <button type="button" data-toggle="modal" data-target="#editFoto" onclick = "fotoEdit()" >Редактировать</button>
                                 </div>
                             </div>
                         </div>
+                        <!-- Edit Profile -->
                         <div class="py-2">
                             <div class="row py-2">
                                 <div class="col-md-6"> <label for="firstname">Имя</label> <input type="text" class="profile bg-light form-control" placeholder="Имя"> </div>
@@ -202,6 +206,16 @@
                                     <option class="profile" value="female">FEMALE</option>
                                 </select> </div>
                             </div>
+                            <div class="addresses row py-2">
+                                    <ul class="addr21 address-tab nav nav-tabs" >
+
+                                    </ul>
+                                    <!-- Addresses -->
+                                    <div class="addr22 address-content tab-content">
+
+                                    </div>
+                                <button type="button" class="btn btn-info">Изменить адреса</button>
+                            </div>
                             <div class="py-3 pb-4 border-bottom"> <button class="save btn btn-primary mr-3" onclick="handleClickSubmitProfile()">Сохранить</button> <button class="btn border button" onclick="openShops();">Закрыть</button> </div>
                             <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                                 <div> <b>Deactivate your account</b>
@@ -211,7 +225,29 @@
                             </div>
                         </div>
                     </div>
-
+                    <!-- Modal Delete Foto -->
+                    <div class="modal fade" id="editFoto" tabindex="-1" aria-labelledby="editFotoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editFotoModalLabel">Поменять картинки</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <!-- Modal windows -->
+                                <div class="modal-body">
+                                    <table class = "editFotoModal">
+                                        <!-- from scrip fotoEdit()  -->
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                    <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick = "saveFoto()">Изменить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
