@@ -22,8 +22,8 @@
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="dropdown mt-2 mr-3">
+            <div class="collapse navbar-collapse justify-content-between mt-2" id="navbarCollapse">
+                <div class="dropdown mr-3">
                     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Каталог
@@ -35,7 +35,7 @@
                         </a>
                     </div>
                 </div>
-                <form class="block mt-2 mr-3 w-100">
+                <form class="block mr-3 w-100">
                     <div class="input-group">
                         <input type="text" th:name="searchName" class="form-control" aria-describedby="button-2" placeholder="Введите запрос" pattern="^[^\s]+(\s.*)?$">
                         <div class="input-group-append">
@@ -43,13 +43,24 @@
                         </div>
                     </div>
                 </form>
-                <button class="btn btn-outline-warning mt-2 mr-3" data-toggle="modal" data-target="#cart-modal">
+                <button class="btn btn-outline-warning mr-3" data-toggle="modal" data-target="#cart-modal">
                     Корзина
                 </button>
-                <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-outline-primary mt-2"
+                <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-outline-primary"
                         data-toggle="modal" data-target="#loginModal">Войти
                 </button>
-                <a sec:authorize="isAuthenticated()" class="btn btn-outline-warning mt-2" href="/logout">Выйти</a>
+                <div sec:authorize="isAuthenticated()" class="d-flex">
+                    <div class="dropdown mr-1">
+                        <button type="button" class="btn btn-outline-warning dropdown-toggle" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Профиль
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
+                            <a class="dropdown-item" href="/user">Мой профиль</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout">Выйти</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
