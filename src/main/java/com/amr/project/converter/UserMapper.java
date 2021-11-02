@@ -11,8 +11,4 @@ import java.util.List;
 public interface UserMapper {
     UserDto toDto(User user);
     User toModel(UserDto userDto);
-
-    List<AdminUserDto> userListToListAdminUserDto(List<User> list);
-    AdminUserDto userToAdminUserDto(User user);
-    List<UserDto> userListToListUserDto(List<User> list);
 }
