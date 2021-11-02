@@ -22,8 +22,8 @@
                     aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                <div class="dropdown mt-2 mr-3">
+            <div class="collapse navbar-collapse justify-content-between mt-2" id="navbarCollapse">
+                <div class="dropdown mr-3">
                     <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Каталог
@@ -35,7 +35,7 @@
                         </a>
                     </div>
                 </div>
-                <form class="block mt-2 mr-3 w-100">
+                <form class="block mr-3 w-100">
                     <div class="input-group">
                         <input type="text" th:name="searchName" class="form-control" aria-describedby="button-2" placeholder="Введите запрос" pattern="^[^\s]+(\s.*)?$">
                         <div class="input-group-append">
@@ -43,13 +43,24 @@
                         </div>
                     </div>
                 </form>
-                <button class="btn btn-outline-warning mt-2 mr-3" data-toggle="modal" data-target="#cart-modal">
+                <button class="btn btn-outline-warning mr-3" data-toggle="modal" data-target="#cart-modal">
                     Корзина
                 </button>
-                <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-outline-primary mt-2"
+                <button sec:authorize="!isAuthenticated()" type="button" class="btn btn-outline-primary"
                         data-toggle="modal" data-target="#loginModal">Войти
                 </button>
-                <a sec:authorize="isAuthenticated()" class="btn btn-outline-warning mt-2" href="/logout">Выйти</a>
+                <div sec:authorize="isAuthenticated()" class="d-flex">
+                    <div class="dropdown mr-1">
+                        <button type="button" class="btn btn-outline-warning dropdown-toggle" id="dropdownMenuProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-offset="10,20">
+                            Профиль
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuProfile">
+                            <a class="dropdown-item" href="/user">Мой профиль</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/logout">Выйти</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -59,7 +70,7 @@
 <main role="main" class="flex-shrink-0">
   <div class="container pt-2">
     <h4 class="pt-4 py-2">Подборка популярных товаров</h4>
-    <div class="card-deck row row-cols-1 row-cols-sm-2 row-cols-lg-4">
+    <div id="items" class="card-deck row row-cols-1 row-cols-sm-2 row-cols-lg-4">
       <div th:each="item: ${mainPageDto.getPopularItem()}">
         <a class="text-decoration-none text-reset" th:href="@{'item/' + ${item.getId()}}">
           <div class="gcard">
@@ -68,7 +79,7 @@
               <h5 class="card-title" th:text="${item.getName()}">NAME</h5>
               <p class="font-weight-bold">Цена: <span class="text-danger" th:text="${item.getPrice().intValue()}">PRICE</span></p>
               <p th:text="${item.getDescription().substring(0, 50) + '...'}">DESCRIPTION</p>
-              <a th:href="@{'cart/' + ${item.getId()}}" class="btn btn-primary btn-sm">В корзину</a>
+              <a href="#" th:attr="data-item-id=${item.id}" class="btn btn-primary btn-sm">В корзину</a>
             </div>
           </div>
         </a>
@@ -197,5 +208,6 @@
         integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
         crossorigin="anonymous"></script>
 <script th:src="@{/js/cart.js}"></script>
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>

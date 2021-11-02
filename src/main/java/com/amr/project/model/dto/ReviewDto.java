@@ -28,5 +28,4 @@ public class ReviewDto {
     private boolean isModerated;
     private boolean isModerateAccept;
     private String moderatedRejectReason;
-
 }
