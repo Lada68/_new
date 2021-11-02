@@ -118,9 +118,73 @@ function editAddresses() {
 
     writeAddresses(user.address, "addr21", "addr22")
     let country = document.querySelectorAll('.countryaddr21addr22')
-    for (let cntry of country) cntry.insertAdjacentHTML('afterend', "<input type=\"text\" >введите страну")
+    for (let cntry of country) cntry.insertAdjacentHTML('afterend', "<input type=\"text\" class = \"inputCountry\" >введите страну")
     let city = document.querySelectorAll('.cityaddr21addr22')
-    for (let cty of city) cty.insertAdjacentHTML('afterend', "<input type=\"text\" >введите город")
+    for (let cty of city) cty.insertAdjacentHTML('afterend', "<input type=\"text\" class = \"inputCity\" >введите город")
     let street = document.querySelectorAll('.streetaddr21addr22')
-    for (let strt of street) strt.insertAdjacentHTML('afterend', "<p><input type=\"text\" >введите улицу<input type=\"text\" >введите дом</p>")
+    for (let strt of street) strt.insertAdjacentHTML('afterend', "<p><input type=\"text\" class = \"inputStreet\">введите улицу" +
+        "<input type=\"text\" class = \"inputBuilding\">введите дом" +
+        "                                                <div class=\"form-check\" style=\"padding-left: 100px\">\n" +
+        "                                                    <input class=\"delAddr form-check-input\" name = \"check\" type=\"checkbox\" id =\"" + strt + "\" >\n" +
+        "                                                    <label class=\"form-check-label\" for=\"" + strt + "\" >\n" +
+        "                                                        Исключить этот адрес\n" +
+        "                                                    </label>\n" +
+        "                                                </div>\n" +
+        "</p>")
+    ////////Add new address
+    let newLi = document.createElement('li')
+    newLi.className = "DEL nav-item addr21addr22"
+    let newA = document.createElement('a')
+    newA.className = "DEL nav-link addr21addr22"
+    newA.setAttribute('data-toggle',"tab")
+    newA.href ="#addr21new"
+    newA.text = "Добавить новый адрес"
+    newLi.appendChild(newA)
+    document.querySelector('.addr21').appendChild(newLi)
+
+    let newDiv = document.createElement('div')
+    newDiv.className = "DEL tab-pane addr21addr22"
+    newDiv.id = "addr21new"
+    newDiv.insertAdjacentHTML('beforeend', "<input type=\"text\" class = \"inputCountry\" >введите страну")
+    newDiv.insertAdjacentHTML('beforeend', "<input type=\"text\" class = \"inputCity\" >введите город")
+    newDiv.insertAdjacentHTML('beforeend', "<p><input type=\"text\" class = \"inputStreet\">введите улицу" +
+        "<input type=\"text\" class = \"inputBuilding\">введите дом</p>")
+
+    document.querySelector('.addr22').appendChild(newDiv)
+
+
+
+}
+
+function saveAddresses() {
+    let i = 0
+    let j=0
+    for (addr of user.address) {
+        let country =  $('#addr21' +i).find('.inputCountry')[0].value
+        let city = $('#addr21' +i).find('.inputCity')[0].value
+        let street = $('#addr21' +i).find('.inputStreet')[0].value
+        let building = $('#addr21' +i).find('.inputBuilding')[0].value
+        let isDelete = $('#addr21' +i).find('.delAddr')[0].checked
+
+        if(country !== "") tempUser.address[i].country = country
+        if(city !== "") tempUser.address[i].city = city
+        if(street !== "") tempUser.address[i].street = street
+        if(building !== "") tempUser.address[i].house =building
+        if(isDelete === true) {tempUser.address.splice(i,1); j--}
+        i++
+        j++
+    }
+
+    let country =  $('#addr21new').find('.inputCountry')[0].value
+    let city = $('#addr21new').find('.inputCity')[0].value
+    let street = $('#addr21new').find('.inputStreet')[0].value
+    let building = $('#addr21new').find('.inputBuilding')[0].value
+
+    if(country !== "" | city !== "" | street !== "" | building !== ""){
+        tempUser.address.push({id:null,cityIndex:null,street:null,house:null,city:null,country:null})
+        tempUser.address[j].country = country
+        tempUser.address[j].city = city
+        tempUser.address[j].street = street
+        tempUser.address[j].house =building
+    }
 }

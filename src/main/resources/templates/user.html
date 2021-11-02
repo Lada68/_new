@@ -149,7 +149,7 @@
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-shops-tab" data-bs-toggle="pill"
+                    <button class="nav-link" id="pills-shops-tab" data-bs-toggle="pill" onclick = "showUserShops()"
                             data-bs-target="#pills-shops" type="button" role="tab" aria-controls="pills-shops"
                             aria-selected="true">Мои Магазины</button>
                 </li>
@@ -166,7 +166,12 @@
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-shops" role="tabpanel"
-                     aria-labelledby="pills-shops-tab">Магазины здесь</div>
+                     aria-labelledby="pills-shops-tab">
+                    Магазины здесь
+                    <ul class = "usershops">
+
+                    </ul>
+                </div>
                 <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
                     Заказы здесь</div>
                 <div class="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab">
@@ -214,7 +219,7 @@
                                     <div class="addr22 address-content tab-content">
 
                                     </div>
-                                <button type="button" class="btn btn-info">Изменить адреса</button>
+                                <button type="button" class="btn btn-info"  onclick="saveAddresses()">Изменить адреса</button>
                             </div>
                             <div class="py-3 pb-4 border-bottom"> <button class="save btn btn-primary mr-3" onclick="handleClickSubmitProfile()">Сохранить</button> <button class="btn border button" onclick="openShops();">Закрыть</button> </div>
                             <div class="d-sm-flex align-items-center pt-3" id="deactivate">
