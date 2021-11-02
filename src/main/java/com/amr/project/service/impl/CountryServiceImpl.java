@@ -23,4 +23,9 @@ public class CountryServiceImpl extends ReadWriteServiceImpl<Country, Long> impl
     public Country findById(Long id) {
         return countryDao.findById(id);
     }
+
+    @Override
+    public Country findByName(String name) {
+        return countryDao.findByName(name);
+    }
 }

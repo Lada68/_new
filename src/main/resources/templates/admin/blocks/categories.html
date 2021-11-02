@@ -22,7 +22,7 @@
                                 type="text"
                                 name="searchBar"
                                 id="searchBarCategories"
-                                placeholder="search for a Category"
+                                placeholder="поиск по категориям"
                         />
                         </div>
 
@@ -31,7 +31,7 @@
                 <div class="col-3">
                     <button type="button" class="btn btn-success btn" data-bs-toggle="modal"
                             data-bs-target="#createModalCategory">
-                        Create
+                        Создать Категорию
                     </button>
                 </div>
 <!--            </div>-->
@@ -39,9 +39,9 @@
                 <thead>
                 <tr>
                     <th scope="col">ID</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Edit</th>
-                    <th scope="col">Delete</th>
+                    <th scope="col">Категория</th>
+                    <th scope="col">Редактирование</th>
+                    <th scope="col">Удаление</th>
                 </tr>
                 </thead>
                 <tbody id="categoriesList">
@@ -54,7 +54,7 @@
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabelCategory">Edit Category</h5>
+                            <h5 class="modal-title" id="editModalLabelCategory">Редактировать</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -69,18 +69,19 @@
                                             <label for="editIdCategory" class="font-weight-bold">ID</label>
                                             <input type="text" class="form-control" id="editIdCategory" name="id" readonly/>
                                         </div>
+                                        <br>
                                         <div class="form-group text-center">
-                                            <label for="editNameCategory" class="font-weight-bold">Name</label>
+                                            <label for="editNameCategory" class="font-weight-bold">Название</label>
                                             <input type="text" class="form-control" id="editNameCategory" name="name"/>
                                         </div>
                                         <br>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                                     </button>
                                     <input type="button" class="btn btn-primary subBTNCategory" data-bs-dismiss="modal"
-                                           value="edit"/>
+                                           value="Изменить"/>
                                 </div>
                             </form>
                         </div>
@@ -94,7 +95,7 @@
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabelCategory">Delete Country</h5>
+                            <h5 class="modal-title" id="deleteModalLabelCategory">Удалить Категорию</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -109,8 +110,9 @@
                                             <label for="deleteIdCategory" class="font-weight-bold">ID</label>
                                             <input type="text" class="form-control" id="deleteIdCategory" name="id" readonly/>
                                         </div>
+                                        <br>
                                         <div class="form-group text-center">
-                                            <label for="deleteNameCategory" class="font-weight-bold">Name</label>
+                                            <label for="deleteNameCategory" class="font-weight-bold">Название</label>
                                             <input type="text" class="form-control" id="deleteNameCategory" name="name"
                                                    readonly/>
                                         </div>
@@ -118,10 +120,10 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                                     </button>
                                     <input type="button" class="btn btn-primary delBTNCategory" data-bs-dismiss="modal"
-                                           value="delete"/>
+                                           value="Удалить"/>
                                 </div>
                             </form>
                         </div>
@@ -135,7 +137,7 @@
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="createModalLabelCategory">Create country</h5>
+                            <h5 class="modal-title" id="createModalLabelCategory">Создать Категорию</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -147,26 +149,23 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group text-center">
-                                            <label for="createNameCategory" class="font-weight-bold">Name</label>
+                                            <label for="createNameCategory" class="font-weight-bold">Название</label>
                                             <input type="text" class="form-control" id="createNameCategory" name="name"/>
-                                            <br>
                                         </div>
+                                        <br>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                                     </button>
                                     <input type="button" class="btn btn-primary createBTNCategory" data-bs-dismiss="modal"
-                                           value="create"/>
+                                           value="Создать"/>
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 

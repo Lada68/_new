@@ -58,8 +58,8 @@ const displayCountries = (countries) => {
             <tr id="dataId${country.id}">
                 <td>${country.id}</td>
                 <td>${country.name}</td>
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModal">Ред</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Удл</button></td>
             </tr>
         `;
         })
@@ -74,10 +74,10 @@ btnDel.addEventListener('click', async (e) => {
         method: 'DELETE'
     }).then((res) => {
         res.json()
-        loadCountries();
         loadCities();
-        loadAddresses()
-        loadShops()
+        loadAddresses();
+        loadCountries();
+        loadShops();
     })
 
 })
@@ -95,10 +95,10 @@ btnSub.addEventListener('click', async (e) => {
         })
     }).then(res => {
         res.json()
-        loadCountries();
         loadCities();
-        loadAddresses()
-        loadShops()
+        loadAddresses();
+        loadCountries();
+        loadShops();
     })
 })
 
@@ -114,10 +114,10 @@ btnCreate.addEventListener('click', async (e) => {
         })
     }).then(res => {
         res.json();
-        loadCountries();
         loadCities();
-        loadAddresses()
-        loadShops()
+        loadAddresses();
+        loadCountries();
+        loadShops();
     })
 })
 
@@ -188,8 +188,8 @@ const displayCities = (cities) => {
                 <td>${city.id}</td>
                 <td>${city.name}</td>
                 <td>${city.country.name}</td>
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalCity">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalCity">Delete</button></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalCity">Ред</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalCity">Удл</button></td>
             </tr>
         `;
         })
@@ -275,12 +275,13 @@ btnCreateCity.addEventListener('click', async (e) => {
         },
         body: JSON.stringify({
             name: document.getElementById('createNameCity').value,
-            countryId: document.getElementById('inputCountry').value
+            country: document.getElementById('inputCountry').value
         })
     }).then(res => {
         res.json();
         loadCities();
-        loadAddresses()
+        loadAddresses();
+        loadCountries();
     })
 })
 
@@ -293,7 +294,8 @@ btnDelCity.addEventListener('click', async (e) => {
     }).then((res) => {
         res.json()
         loadCities();
-        loadAddresses()
+        loadAddresses();
+        loadCountries();
     })
 
 })
@@ -308,12 +310,13 @@ btnSubCity.addEventListener('click', async (e) => {
         body: JSON.stringify({
             id: document.getElementById('editIdCity').value,
             name: document.getElementById('editNameCity').value,
-            countryId: document.getElementById('inputCountryEdit').value
+            country: document.getElementById('inputCountryEdit').value
         })
     }).then(res => {
         res.json()
         loadCities();
-        loadAddresses()
+        loadAddresses();
+        loadCountries();
     })
 })
 
@@ -349,8 +352,8 @@ const displayAddresses = (addresses) => {
                 <td>${address.city.name}</td>
                 <td>${address.street}</td>
                 <td>${address.house}</td>
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalAddress">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalAddress">Delete</button></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalAddress">Ред</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalAddress">Удл</button></td>
             </tr>
         `;
         })
@@ -415,7 +418,7 @@ btnCreateAddress.addEventListener('click', async (e) => {
         },
         body: JSON.stringify({
             cityIndex: document.getElementById('createIndexAddress').value,
-            cityId: document.getElementById('inputCity').value,
+            city: document.getElementById('inputCity').value,
             street: document.getElementById('createStreetAddress').value,
             house: document.getElementById('createHouseAddress').value
         })
@@ -448,7 +451,7 @@ btnSubAddress.addEventListener('click', async (e) => {
         body: JSON.stringify({
             id: document.getElementById('editIdAddress').value,
             cityIndex: document.getElementById('editIndexAddress').value,
-            cityId: document.getElementById('inputCityEdit').value,
+            city: document.getElementById('inputCityEdit').value,
             street: document.getElementById('editStreetAddress').value,
             house: document.getElementById('editHouseAddress').value
         })

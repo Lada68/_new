@@ -2,6 +2,7 @@ package com.amr.project.dao.impl;
 
 import com.amr.project.dao.abstracts.ItemDao;
 import com.amr.project.model.entity.Item;
+import com.amr.project.model.entity.Role;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,13 @@ public class ItemDaoImpl extends ReadWriteDaoImpl<Item,Long> implements ItemDao 
     public Item findById(Long id) {
         return em.find(Item.class, id);
     }
+
+    @Override
+    public Item findByName(String name) {
+        return em.createQuery("select i from Item i where i.name=:name", Item.class)
+                .setParameter("name", name).getSingleResult();
+    }
+
     @Override
     public List<Item> findItemsByCategoryId(Long categoryId) {
         return em.createQuery("SELECT u FROM Item u JOIN u.categories i where i.id = :id", Item.class)

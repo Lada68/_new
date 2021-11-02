@@ -22,4 +22,9 @@ public class ItemServiceImpl extends ReadWriteServiceImpl<Item, Long> implements
     public Item findById(Long id) {
         return itemDao.findById(id);
     }
+
+    @Override
+    public Item findByName(String name) {
+        return itemDao.findByName(name);
+    }
 }

@@ -14,7 +14,6 @@ const btnCreateShop = document.querySelector('.createBTNShop')
 const urlShop = "http://localhost:8888/adminapi/shops";
 
 
-
 searchBarShop.addEventListener('keyup', (e) => {
     const searchString = e.target.value.toLowerCase();
 
@@ -41,7 +40,7 @@ const loadShops = async () => {
     selectShops(hpShop)
 };
 
-const  selectShops = (shops) => {
+const selectShops = (shops) => {
     document.getElementById('inputShopCreateItem').innerHTML = shops
         .map((c) => {
             return `
@@ -106,17 +105,16 @@ const displayShops = (list) => {
                 <td>${shop.phone}</td>
                 <td>${shop.description}</td>
                 <td>${shop.location.name}</td>
-                <td>${JSON.stringify(shop.rating).substring(0,5)}</td>
+                <td>${JSON.stringify(shop.rating).substring(0, 5)}</td>
                 <td>${shop.user.username}</td>
                 <td><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#itemsModalShop">Товары</button></td>
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalShop">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalShop">Delete</button></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalShop">Редактировать</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalShop">Удалить</button></td>
             </tr>
         `;
         })
         .join('');
 };
-
 
 
 const displayItemsInShop = (list) => {
@@ -132,7 +130,7 @@ const displayItemsInShop = (list) => {
                 <td>${item.price}</td>
                 <td>${sCategories}</td>
                 <td>${JSON.stringify(item.rating).substring(0, 5)}</td>
-                <td>Des</td>
+           
             </tr>
         `;
         })
@@ -147,59 +145,66 @@ btnDelShop.addEventListener('click', async (e) => {
         method: 'DELETE'
     }).then((res) => {
         res.json()
-        loadShops()
-        loadItems()
-        loadUsers()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 
 })
 
 btnSubShop.addEventListener('click', async (e) => {
     e.preventDefault();
+    let shop = {
+        id: document.getElementById('editIdShop').value,
+        name: document.getElementById('editNameShop').value,
+        email: document.getElementById('editEmailShop').value,
+        phone: document.getElementById('editPhoneShop').value,
+        description: document.getElementById('editDescriptionShop').value,
+        location: document.getElementById('inputCountryEditShop').value,
+        user: {
+            email: document.getElementById('inputUserEditShop').value
+        }
+    }
     await fetch(urlShop, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            id: document.getElementById('editIdShop').value,
-            name: document.getElementById('editNameShop').value,
-            email : document.getElementById('editEmailShop').value,
-            phone : document.getElementById('editPhoneShop').value,
-            countryId : document.getElementById('inputCountryEditShop').value,
-            description : document.getElementById('editDescriptionShop').value,
-            userId : document.getElementById('inputUserEditShop').value,
-        })
+        body: JSON.stringify(shop)
     }).then(res => {
         res.json()
-        loadShops()
-        loadItems()
-        loadUsers()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 })
 
 btnCreateShop.addEventListener('click', async (e) => {
     e.preventDefault();
+    let shop = {
+        name: document.getElementById('createNameShop').value,
+        email: document.getElementById('createEmailShop').value,
+        phone: document.getElementById('createPhoneShop').value,
+        description: document.getElementById('createDescriptionShop').value,
+        userId: document.getElementById('inputUserCreateShop').value,
+        location: document.getElementById('inputCountryCreateShop').value,
+        user: {
+            email: document.getElementById('inputUserCreateShop').value
+        }
+    }
     await fetch(urlShop, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            name: document.getElementById('createNameShop').value,
-            email : document.getElementById('createEmailShop').value,
-            phone : document.getElementById('createPhoneShop').value,
-            countryId : document.getElementById('inputCountryCreateShop').value,
-            description : document.getElementById('createDescriptionShop').value,
-            userId : document.getElementById('inputUserCreateShop').value,
-
-        })
+        body: JSON.stringify(shop)
     }).then(res => {
         res.json();
-        loadShops()
-        loadItems()
-        loadUsers()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 })
 
 loadShops().then();
+

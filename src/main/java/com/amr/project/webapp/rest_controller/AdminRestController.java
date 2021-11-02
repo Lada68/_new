@@ -102,7 +102,8 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/cities")
     public City saveCity(@RequestBody City city) {
-        city.setCountry(countryService.findById(city.getCountryId()));
+        Long id = Long.parseLong(city.getCountry().getName());
+        city.setCountry(countryService.findById(id));
         cityService.persist(city);
         return city;
     }
@@ -110,7 +111,8 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PatchMapping("/cities")
     public City updateCity(@RequestBody City city) {
-        city.setCountry(countryService.findById(city.getCountryId()));
+        Long id = Long.parseLong(city.getCountry().getName());
+        city.setCountry(countryService.findById(id));
         cityService.update(city);
         return city;
     }
@@ -137,8 +139,9 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/addresses")
     public Address saveAddress(@RequestBody Address address) {
-        address.setCountry(cityService.findById(address.getCityId()).getCountry());
-        address.setCity(cityService.findById(address.getCityId()));
+        Long id = Long.parseLong(address.getCity().getName());
+        address.setCountry(cityService.findById(id).getCountry());
+        address.setCity(cityService.findById(id));
         addressService.persist(address);
         return address;
     }
@@ -146,8 +149,9 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PatchMapping("/addresses")
     public Address updateAddress(@RequestBody Address address) {
-        address.setCountry(cityService.findById(address.getCityId()).getCountry());
-        address.setCity(cityService.findById(address.getCityId()));
+        Long id = Long.parseLong(address.getCity().getName());
+        address.setCountry(cityService.findById(id).getCountry());
+        address.setCity(cityService.findById(id));
         addressService.update(address);
         return address;
     }
@@ -251,8 +255,10 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/shops")
     public Shop saveShop(@RequestBody Shop shop) {
-        shop.setLocation(countryService.findById(shop.getCountryId()));
-        shop.setUser(userService.findById(shop.getUserId()));
+        Long countryId = Long.parseLong(shop.getLocation().getName());
+        shop.setLocation(countryService.findById(countryId));
+        Long userId = Long.parseLong(shop.getUser().getEmail());
+        shop.setUser(userService.findById(userId));
         shopService.persist(shop);
         return shop;
     }
@@ -260,8 +266,10 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PatchMapping("/shops")
     public Shop updateShop(@RequestBody Shop shop) {
-        shop.setLocation(countryService.findById(shop.getCountryId()));
-        shop.setUser(userService.findById(shop.getUserId()));
+        Long countryId = Long.parseLong(shop.getLocation().getName());
+        shop.setLocation(countryService.findById(countryId));
+        Long userId = Long.parseLong(shop.getUser().getEmail());
+        shop.setUser(userService.findById(userId));
         shopService.update(shop);
         return shop;
     }
@@ -289,7 +297,8 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PostMapping("/items")
     public Item saveItem(@RequestBody Item item) {
-        item.setShop(shopService.findById(item.getShopId()));
+        Long id = Long.parseLong(item.getShop().getName());
+        item.setShop(shopService.findById(id));
         List<Category> categories = new ArrayList<>();
         for (Category category : item.getCategories()) {
             categories.add(categoryService.findByName(category.getName()));
@@ -302,7 +311,8 @@ public class AdminRestController {
     @PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
     @PatchMapping("/items")
     public Item updateItem(@RequestBody Item item) {
-        item.setShop(shopService.findById(item.getShopId()));
+        Long id = Long.parseLong(item.getShop().getName());
+        item.setShop(shopService.findById(id));
         List<Category> categories = new ArrayList<>();
         for (Category category : item.getCategories()) {
             categories.add(categoryService.findByName(category.getName()));

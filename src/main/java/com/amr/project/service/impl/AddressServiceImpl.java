@@ -20,4 +20,9 @@ public class AddressServiceImpl extends ReadWriteServiceImpl<Address, Long> impl
     public Address findById(Long id) {
         return addressDao.findById(id);
     }
+
+    @Override
+    public Address findByCityIndex(String index) {
+        return addressDao.findByCityIndex(index);
+    }
 }

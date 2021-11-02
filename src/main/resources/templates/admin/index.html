@@ -17,7 +17,7 @@
     </div>
     <div class="col-3">
         <h5><a class="btn btn-light  float-right" href="/logout" role="button"><h6>Переключиться на режим
-            администратора</h6></a></h5>
+            модератора</h6></a></h5>
     </div>
     <div class="col-1">
         <h5><a class="text-secondary  " href="/logout"><h5 class="text-center">Выйти</h5></a></h5>
@@ -25,11 +25,11 @@
 </div>
 <div class="container-fluid">
     <div class="d-flex align-items-start">
-        <div class="col-1">
+        <div class="col-2">
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button class="nav-link " id="v-pills-shops-tab" data-bs-toggle="pill"
+                <button class="nav-link active" id="v-pills-shops-tab" data-bs-toggle="pill"
                         data-bs-target="#v-pills-shops" type="button" role="tab" aria-controls="v-pills-home"
-                        aria-selected="false">Магазины
+                        aria-selected="true">Магазины
                 </button>
                 <button class="nav-link" id="v-pills-users-tab" data-bs-toggle="pill" data-bs-target="#v-pills-users"
                         type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Пользователи
@@ -41,17 +41,17 @@
                         data-bs-target="#v-pills-addresses" type="button" role="tab" aria-controls="v-pills-settings"
                         aria-selected="false">Адреса
                 </button>
-                <button class="nav-link active" id="v-pills-categories-tab" data-bs-toggle="pill"
+                <button class="nav-link " id="v-pills-categories-tab" data-bs-toggle="pill"
                         data-bs-target="#v-pills-categories" type="button" role="tab" aria-controls="v-pills-settings"
-                        aria-selected="true">Категории
+                        aria-selected="false">Категории
                 </button>
             </div>
 
         </div>
 
-        <div class="col-11">
+        <div class="col-10">
             <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade " id="v-pills-shops" role="tabpanel"
+                <div class="tab-pane fade show active" id="v-pills-shops" role="tabpanel"
                      aria-labelledby="v-pills-shops-tab">
                     <h1>Доступные магазины в базе данных</h1>
                     <div class="container overflow-hidden">
@@ -64,7 +64,8 @@
                         <div th:insert="~{admin/blocks/users :: usersPage}"></div>
                     </div>
                 </div>
-                <div class="tab-pane fade show active" id="v-pills-items" role="tabpanel" aria-labelledby="v-pills-items-tab">
+                <div class="tab-pane fade " id="v-pills-items" role="tabpanel"
+                     aria-labelledby="v-pills-items-tab">
                     <h1>Доступные товары в базе данных</h1>
                     <div class="container overflow-hidden">
                         <div th:insert="~{admin/blocks/items :: itemsPage}"></div>

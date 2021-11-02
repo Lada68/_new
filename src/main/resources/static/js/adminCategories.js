@@ -82,8 +82,8 @@ const displayCategories = (list) => {
             <tr id="dataIdCategory${category.id}">
                 <td>${category.id}</td>
                 <td>${category.name}</td>
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalCategory">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalCategory">Delete</button></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalCategory">Редактировать</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalCategory">Удалить</button></td>
             </tr>
         `;
         })
@@ -98,8 +98,9 @@ btnDelCategory.addEventListener('click', async (e) => {
         method: 'DELETE'
     }).then((res) => {
         res.json()
-        loadCategories()
-        loadUsers()
+        loadCategories();
+        loadItems();
+        loadUsers();
     })
 
 })
@@ -117,8 +118,9 @@ btnSubCategory.addEventListener('click', async (e) => {
         })
     }).then(res => {
         res.json()
-        loadCategories()
-        loadUsers()
+        loadCategories();
+        loadItems();
+        loadUsers();
     })
 })
 
@@ -134,8 +136,9 @@ btnCreateCategory.addEventListener('click', async (e) => {
         })
     }).then(res => {
         res.json();
-        loadCategories()
-        loadUsers()
+        loadCategories();
+        loadItems();
+        loadUsers();
     })
 })
 

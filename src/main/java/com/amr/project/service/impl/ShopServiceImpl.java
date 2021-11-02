@@ -23,4 +23,9 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     public Shop findById(Long id) {
         return shopDao.findById(id);
     }
+
+    @Override
+    public Shop findByName(String name) {
+        return shopDao.findByName(name);
+    }
 }

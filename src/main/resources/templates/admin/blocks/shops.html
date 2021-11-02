@@ -21,7 +21,7 @@
                             type="text"
                             name="searchBar"
                             id="searchBarShops"
-                            placeholder="search for a Shop"
+                            placeholder="поиск по магазинам"
                     />
                     </div>
 
@@ -30,7 +30,7 @@
             <div class="col-3">
                 <button type="button" class="btn btn-success btn" data-bs-toggle="modal"
                         data-bs-target="#createModalShop">
-                    Create
+                    Создать Магазин
                 </button>
             </div>
             <!--            </div>-->
@@ -46,7 +46,7 @@
                     <th scope="col">Рейтинг</th>
                     <th scope="col">Владелец</th>
                     <th scope="col">Список товаров</th>
-                    <th scope="col">Редактир- ование</th>
+                    <th scope="col">Редактирование</th>
                     <th scope="col">Удаление</th>
                 </tr>
                 </thead>
@@ -60,7 +60,7 @@
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabelShop">Edit Shop</h5>
+                            <h5 class="modal-title" id="editModalLabelShop">Редактировать Магазин</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -75,28 +75,36 @@
                                             <label for="editIdShop" class="font-weight-bold">ID</label>
                                             <input type="text" class="form-control" id="editIdShop" name="id" readonly/>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="form-group text-center">
                                             <label for="editNameShop" class="font-weight-bold">Название</label>
                                             <input type="text" class="form-control" id="editNameShop" name="name"/>
                                             <br>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="form-group text-center">
                                             <label for="editEmailShop" class="font-weight-bold">Электронная
                                                 почта</label>
                                             <input type="text" class="form-control" id="editEmailShop" name="email"/>
                                             <br>
                                         </div>
+                                    </div>
+
                                         <div class="form-group text-center">
                                             <label for="editPhoneShop" class="font-weight-bold">Телефон</label>
                                             <input type="text" class="form-control" id="editPhoneShop" name="phone"/>
                                             <br>
                                         </div>
-                                        <div class="form-group text-center">
-                                            <label for="editDescriptionShop" class="font-weight-bold">Описание</label>
-                                            <input type="text" class="form-control" id="editDescriptionShop"
-                                                   name="description"/>
-                                            <br>
-                                        </div>
+
+                                    <div class="form-group text-center">
+                                        <label for="editDescriptionShop" class="font-weight-bold">Описание</label>
+                                        <textarea type="text" class="form-control" id="editDescriptionShop"
+                                                  name="description"></textarea>
+                                        <br>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="mb-3">
                                             <label for="inputCountryEditShop"><p class="font-weight-bold">
                                                 Страна</p>
@@ -104,25 +112,27 @@
                                             <select id="inputCountryEditShop" class="form-control" name="country">
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="mb-3">
                                             <label for="inputUserEditShop"><p class="font-weight-bold">
-                                                Страна</p>
+                                                Пользователь</p>
                                             </label>
                                             <select id="inputUserEditShop" class="form-control" name="user">
                                             </select>
                                         </div>
-                                        <br>
                                     </div>
+                                    <br>
                                 </div>
+
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                                     </button>
                                     <input type="button" class="btn btn-primary subBTNShop" data-bs-dismiss="modal"
-                                           value="edit"/>
+                                           value="Изменить"/>
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -132,7 +142,7 @@
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabelShop">Delete Country</h5>
+                            <h5 class="modal-title" id="deleteModalLabelShop">Удалить Магазин</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -148,50 +158,66 @@
                                             <input type="text" class="form-control" id="deleteIdShop" name="id"
                                                    readonly/>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="form-group text-center">
                                             <label for="deleteNameShop" class="font-weight-bold">Название</label>
-                                            <input type="text" class="form-control" id="deleteNameShop" name="name"/>
+                                            <input type="text" class="form-control" id="deleteNameShop" name="name"
+                                                   readonly/>
                                             <br>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="form-group text-center">
                                             <label for="deleteEmailShop" class="font-weight-bold">Электронная
                                                 почта</label>
-                                            <input type="text" class="form-control" id="deleteEmailShop" name="email"/>
+                                            <input type="text" class="form-control" id="deleteEmailShop" name="email"
+                                                   readonly/>
                                             <br>
                                         </div>
+                                    </div>
+
                                         <div class="form-group text-center">
                                             <label for="deletePhoneShop" class="font-weight-bold">Телефон</label>
-                                            <input type="text" class="form-control" id="deletePhoneShop" name="phone"/>
+                                            <input type="text" class="form-control" id="deletePhoneShop" name="phone"
+                                                   readonly/>
                                             <br>
                                         </div>
-                                        <div class="form-group text-center">
-                                            <label for="deleteDescriptionShop" class="font-weight-bold">Описание</label>
-                                            <input type="text" class="form-control" id="deleteDescriptionShop"
-                                                   name="description"/>
-                                            <br>
-                                        </div>
+
+                                    <div class="form-group text-center">
+                                        <label for="deleteDescriptionShop" class="font-weight-bold">Описание</label>
+                                        <textarea type="text" class="form-control" id="deleteDescriptionShop"
+                                                  name="description" readonly></textarea>
+                                        <br>
+                                    </div>
+
+                                    <div class="col-6">
                                         <div class="mb-3">
                                             <label for="inputCountryDeleteShop"><p class="font-weight-bold">
                                                 Страна</p>
                                             </label>
-                                            <select id="inputCountryDeleteShop" class="form-control" name="country">
+                                            <select id="inputCountryDeleteShop" class="form-control" name="country"
+                                                    disabled>
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="mb-3">
                                             <label for="inputUserDeleteShop"><p class="font-weight-bold">
-                                                Страна</p>
+                                                Пользователь</p>
                                             </label>
-                                            <select id="inputUserDeleteShop" class="form-control" name="user">
+                                            <select id="inputUserDeleteShop" class="form-control" name="user" disabled>
                                             </select>
                                         </div>
-                                        <br>
                                     </div>
+                                    <br>
                                 </div>
+
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                                     </button>
                                     <input type="button" class="btn btn-primary delBTNShop" data-bs-dismiss="modal"
-                                           value="delete"/>
+                                           value="Удалить"/>
                                 </div>
                             </form>
                         </div>
@@ -205,7 +231,7 @@
                 <div class="modal-dialog ">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="createModalLabelShop">Create Shop</h5>
+                            <h5 class="modal-title" id="createModalLabelShop">Создать Магазин</h5>
                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -221,23 +247,30 @@
                                             <input type="text" class="form-control" id="createNameShop" name="name"/>
                                             <br>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="form-group text-center">
                                             <label for="createEmailShop" class="font-weight-bold">Электронная
                                                 почта</label>
                                             <input type="text" class="form-control" id="createEmailShop" name="email"/>
                                             <br>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="form-group text-center">
                                             <label for="createPhoneShop" class="font-weight-bold">Телефон</label>
                                             <input type="text" class="form-control" id="createPhoneShop" name="phone"/>
                                             <br>
                                         </div>
-                                        <div class="form-group text-center">
-                                            <label for="createDescriptionShop" class="font-weight-bold">Описание</label>
-                                            <input type="text" class="form-control" id="createDescriptionShop"
-                                                   name="description"/>
-                                            <br>
-                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <label for="createDescriptionShop" class="font-weight-bold">Описание</label>
+                                        <textarea type="text" class="form-control" id="createDescriptionShop"
+                                                  name="description"></textarea>
+                                        <br>
+                                    </div>
+
+                                    <div class="col-6">
                                         <div class="mb-3">
                                             <label for="inputCountryCreateShop"><p class="font-weight-bold">
                                                 Страна</p>
@@ -245,9 +278,11 @@
                                             <select id="inputCountryCreateShop" class="form-control" name="country">
                                             </select>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
                                         <div class="mb-3">
                                             <label for="inputUserCreateShop"><p class="font-weight-bold">
-                                                Страна</p>
+                                                Пользователь</p>
                                             </label>
                                             <select id="inputUserCreateShop" class="form-control" name="user">
                                             </select>
@@ -255,18 +290,16 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                                     </button>
                                     <input type="button" class="btn btn-primary createBTNShop" data-bs-dismiss="modal"
-                                           value="create"/>
+                                           value="Создать"/>
                                 </div>
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
-
 
 
             <div class="modal fade" id="itemsModalShop" tabindex="-1" aria-labelledby="itemsModalShopLabel"
@@ -289,14 +322,14 @@
                                         <th scope="col">Цена</th>
                                         <th scope="col">Категории</th>
                                         <th scope="col">Рейтинг</th>
-                                        <th scope="col">Описание</th>
+                                        <!--                                        <th scope="col">Описание</th>-->
                                     </tr>
                                     </thead>
                                     <tbody id="itemsListShop">
                                     </tbody>
                                 </table>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть
                                     </button>
                                 </div>
                             </form>

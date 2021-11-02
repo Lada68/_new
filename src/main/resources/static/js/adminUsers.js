@@ -78,6 +78,10 @@ const displayRoles = (list) => {
 
 const loadUsersModals = (list) => {
     list.forEach(entity => {
+        let mass = [];
+        for (let i = 0; i < entity.roles.length; i++) {
+            mass.push(entity.roles[i].name)
+        }
         const btnEdit = document.querySelector(`#dataIdUser${entity.id} .btn-info`);
         btnEdit.addEventListener('click', () => {
             editFormUser.id.value = entity.id
@@ -87,7 +91,7 @@ const loadUsersModals = (list) => {
             editFormUser.phone.value = entity.phone
             editFormUser.firstname.value = entity.firstName
             editFormUser.lastname.value = entity.lastName
-            editFormUser.roles.value = entity.roles
+            editFormUser.roles.value = mass[0]
         })
 
         const btnDelete = document.querySelector(`#dataIdUser${entity.id} .btn-danger`);
@@ -99,7 +103,8 @@ const loadUsersModals = (list) => {
             deleteFormUser.phone.value = entity.phone
             deleteFormUser.firstname.value = entity.firstName
             deleteFormUser.lastname.value = entity.lastName
-            deleteFormUser.roles.value = entity.roles
+            deleteFormUser.roles.value = mass[0]
+            // deleteFormUser.activate.value = entity.activate
         })
     })
 };
@@ -124,8 +129,8 @@ const displayUsers = (list) => {
                 <td>${uShops}</td>
                 <td>${uRoles}</td>
                 <td>${user.activate}</td>
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalUser">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalUser">Delete</button></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalUser">Редактировать</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalUser">Удалить</button></td>
             </tr>
         `;
         })
@@ -164,8 +169,9 @@ btnDelUser.addEventListener('click', async (e) => {
         method: 'DELETE'
     }).then((res) => {
         res.json()
-        loadUsers()
-        loadShops()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 
 })
@@ -193,8 +199,9 @@ btnSubUser.addEventListener('click', async (e) => {
         })
     }).then(res => {
         res.json()
-        loadUsers()
-        loadShops()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 })
 
@@ -220,8 +227,9 @@ btnCreateUser.addEventListener('click', async (e) => {
         })
     }).then(res => {
         res.json();
-        loadUsers()
-        loadShops()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 })
 

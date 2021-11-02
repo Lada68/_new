@@ -1,6 +1,7 @@
 package com.amr.project.dao.impl;
 
 import com.amr.project.dao.abstracts.ShopDao;
+import com.amr.project.model.entity.Role;
 import com.amr.project.model.entity.Shop;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,13 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop,Long> implements ShopDao 
     public Shop findById(Long id) {
         return em.find(Shop.class, id);
     }
+
+    @Override
+    public Shop findByName(String name) {
+        return em.createQuery("select u from Shop u where u.name=:name", Shop.class)
+                .setParameter("name", name).getSingleResult();
+    }
+
     @Override
     public List<Shop> findPopularShops() {
         return em.createQuery("Select u from Shop u order by u.rating DESC", Shop.class)

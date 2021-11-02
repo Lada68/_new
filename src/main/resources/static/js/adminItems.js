@@ -68,7 +68,6 @@ const loadItemsModals = (list) => {
 };
 
 
-
 const displayItems = (list) => {
     itemsList.innerHTML = list
         .map((item) => {
@@ -84,8 +83,8 @@ const displayItems = (list) => {
                 <td>${JSON.stringify(item.rating).substring(0, 5)}</td>
                 <td>Des</td>
                 <td>${item.shop.name}</td>
-                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalItem">Edit</button></td>
-                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalItem">Delete</button></td>
+                <td><button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#editModalItem">Редактировать</button></td>
+                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModalItem">Удалить</button></td>
             </tr>
         `;
         })
@@ -100,8 +99,9 @@ btnDelItem.addEventListener('click', async (e) => {
         method: 'DELETE'
     }).then((res) => {
         res.json()
-        loadItems()
-        loadShops()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 
 })
@@ -122,12 +122,16 @@ btnSubItem.addEventListener('click', async (e) => {
             price: document.getElementById('editPriceItem').value,
             description: document.getElementById('editDescriptionItem').value,
             categories: selected,
-            shopId: document.getElementById('inputShopEditItem').value,
+            rating: 0,
+            shop: {
+                name: document.getElementById('inputShopEditItem').value
+            }
         })
     }).then(res => {
         res.json()
-        loadItems()
-        loadShops()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 })
 
@@ -145,14 +149,17 @@ btnCreateItem.addEventListener('click', async (e) => {
             name: document.getElementById('createNameItem').value,
             price: document.getElementById('createPriceItem').value,
             description: document.getElementById('createDescriptionItem').value,
+            rating: 0,
             categories: selected,
-            shopId: document.getElementById('inputShopCreateItem').value,
-
+            shop: {
+                name: document.getElementById('inputShopCreateItem').value
+            }
         })
     }).then(res => {
         res.json();
-        loadItems()
-        loadShops()
+        loadUsers();
+        loadShops();
+        loadItems();
     })
 })
 

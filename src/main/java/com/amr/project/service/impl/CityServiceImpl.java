@@ -20,4 +20,9 @@ public class CityServiceImpl extends ReadWriteServiceImpl<City,Long> implements 
     public City findById(Long id) {
         return cityDao.findById(id);
     }
+
+    @Override
+    public City findByName(String name) {
+        return cityDao.findByName(name);
+    }
 }
