@@ -12,16 +12,12 @@ public interface ShopMapper {
     @Mapping(target = "username", source = "user.username")
     ShopDto shopToDto(Shop shop);
 
-    CountryDto countryToDto(Country country);
-
-    ItemDto itemToDto(Item item);
-
-    ReviewDto reviewToDto(Review review);
-
-    ImageDto imageToDto(Image image);
-
-    CategoryDto categoryDto(Category category);
-
     List<ShopMainPageDTO> shopListToListShopMainPageDTO(List<Shop> list);
+
+    List<ShopDto> shopListToListShopDto(List<Shop> list);
+
+    List<AdminShopDto> shopListToListAdminShopDto(List<Shop> list);
+
+    AdminShopDto shopToAdminShopDto(Shop shop);
 
 }

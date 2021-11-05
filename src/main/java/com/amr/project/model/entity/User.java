@@ -49,26 +49,37 @@ public class User implements UserDetails {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
-    @OneToMany
+
+    @ManyToMany
+    @ToString.Exclude
     private List<Image> images;
 
     @OneToMany
+    @ToString.Exclude
     private List<Coupon> coupons;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<CartItem> cart;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Order> orders;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Review> reviews;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",
+            cascade = CascadeType.ALL)
+    @ToString.Exclude
     private List<Shop> shops;
 
     @OneToMany(mappedBy = "user")
+    @ToString.Exclude
     private List<Discount> discounts;
+
+
 
     public User(String username, String password) {
     }
@@ -104,6 +115,13 @@ public class User implements UserDetails {
         this.images.add(image);
     }
 
+    public User(String email, String username, String password, String firstName, String lastName) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

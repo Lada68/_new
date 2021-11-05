@@ -1,7 +1,9 @@
 package com.amr.project.dao.impl;
 
 import com.amr.project.dao.abstracts.ShopDao;
+import com.amr.project.model.entity.Role;
 import com.amr.project.model.entity.Shop;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

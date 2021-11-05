@@ -3,6 +3,7 @@ package com.amr.project.service.impl;
 import com.amr.project.dao.abstracts.CountryDao;
 import com.amr.project.dao.abstracts.ReadWriteDao;
 import com.amr.project.model.entity.Country;
+import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.CountryService;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class CountryServiceImpl extends ReadWriteServiceImpl<Country, Long> impl
         super(readWriteDao);
         this.countryDao = countryDao;
     }
+
     @Override
     public Country findById(Long id) {
         return countryDao.findById(id);

@@ -2,6 +2,8 @@ package com.amr.project.dao.impl;
 
 import com.amr.project.dao.abstracts.ItemDao;
 import com.amr.project.model.entity.Item;
+import com.amr.project.model.entity.Role;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

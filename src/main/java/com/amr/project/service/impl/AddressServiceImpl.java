@@ -37,6 +37,6 @@ public class AddressServiceImpl extends ReadWriteServiceImpl<Address, Long> impl
     }
     @Override
     public Address findById(Long id) {
-      return   addressDao.findById(id);
+        return addressDao.findById(id);
     }
 }

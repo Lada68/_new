@@ -7,7 +7,10 @@ import com.amr.project.dao.abstracts.UserDao;
 import com.amr.project.model.entity.Address;
 import com.amr.project.model.entity.Role;
 import com.amr.project.model.entity.User;
+import com.amr.project.service.abstracts.RoleService;
 import com.amr.project.service.abstracts.UserService;
+import com.amr.project.util.EmailUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

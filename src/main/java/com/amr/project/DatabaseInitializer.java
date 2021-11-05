@@ -1,8 +1,9 @@
-package com.amr.project;
+    package com.amr.project;
 
 import com.amr.project.dao.abstracts.*;
 import com.amr.project.model.entity.*;
 import com.amr.project.model.enums.Gender;
+import com.amr.project.service.abstracts.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 public class DatabaseInitializer {
+
+    private final UserService userService;
 
     private final RoleDao roleDao;
     private final UserDao userDao;
@@ -37,7 +40,7 @@ public class DatabaseInitializer {
     @Autowired
     public DatabaseInitializer(RoleDao roleDao, UserDao userDao, AddressDao addressDao,
                                CountryDao countryDao, CityDao cityDao, CategoryDao categoryDao,
-                               ItemDao itemDao, ImageDao imageDao, ShopDao shopDao, ReviewDao reviewDao) {
+                               ItemDao itemDao, ImageDao imageDao, ShopDao shopDao, ReviewDao reviewDao,UserService userService) {
 
         this.roleDao = roleDao;
         this.userDao = userDao;
@@ -49,6 +52,7 @@ public class DatabaseInitializer {
         this.imageDao = imageDao;
         this.shopDao = shopDao;
         this.reviewDao = reviewDao;
+        this.userService = userService;
     }
 
     @PostConstruct
@@ -93,6 +97,12 @@ public class DatabaseInitializer {
         reviews = getReviews();
         reviews.forEach(reviewDao::persist);
 
+        User userAlexander = new User("kooppex@gmail.com", "root228", "root228",
+                "Alexander", "Baranov");
+        Set<Role> adminRole = new HashSet<>();
+        adminRole.add(roleDao.getRoleById(2L));
+        userService.registerNewUser(userAlexander);
+
     }
 
     private Set<Role> getRoles() {
@@ -111,14 +121,13 @@ public class DatabaseInitializer {
         users.add(getUser("Ivan", "Ivanov", Gender.MALE, path + "0.jpg"));
         users.add(getUser("Vasily", "Vasiliev", Gender.MALE, path + "1.jpg"));
         users.add(getUser("Piter", "Petrov", Gender.MALE, path + "2.jpg"));
-        users.add(getUser("Irina", "Irinova", Gender.FEMALE, path + "3.jpg"));
-        users.add(getUser("Sveta", "Svetova", Gender.FEMALE, path + "4.jpg"));
-        users.add(getUser("Alex", "Alexeev", Gender.MALE, path + "5.jpg"));
-        users.add(getUser("Kira", "Kireeva", Gender.FEMALE, path + "6.jpg"));
-        users.add(getUser("Dmitry", "Dmitrov", Gender.MALE, path + "7.jpg"));
-        users.add(getUser("Kiril", "Kirilov", Gender.MALE, path + "8.jpg"));
-        users.add(getUser("Pavel", "Pavlov", Gender.MALE, path + "9.jpg"));
-
+//        users.add(getUser("Irina", "Irinova", Gender.FEMALE, path + "3.jpg"));
+//        users.add(getUser("Sveta", "Svetova", Gender.FEMALE, path + "4.jpg"));
+//        users.add(getUser("Alex", "Alexeev", Gender.MALE, path + "5.jpg"));
+//        users.add(getUser("Kira", "Kireeva", Gender.FEMALE, path + "6.jpg"));
+//        users.add(getUser("Dmitry", "Dmitrov", Gender.MALE, path + "7.jpg"));
+//        users.add(getUser("Kiril", "Kirilov", Gender.MALE, path + "8.jpg"));
+//        users.add(getUser("Pavel", "Pavlov", Gender.MALE, path + "9.jpg"));
         return users;
     }
 
@@ -128,7 +137,6 @@ public class DatabaseInitializer {
         user.setFirstName(firstName);
         user.setLastName(lastName);
         user.setActivate(true);
-        user.setActivationCode("1");
         user.setEmail(user.getFirstName().toLowerCase() + user.getLastName().toLowerCase() + "@mail.com");
         user.setAge(Integer.parseInt(randomNumberString(2)));
         user.setUsername(user.getFirstName().toLowerCase() + user.getAge());
