@@ -26,4 +26,8 @@ public class CountryDaoImpl extends ReadWriteDaoImpl<Country, Long> implements C
         } else return true;
 
     }
+    @Override
+    public Country findById(Long id){
+        return em.find(Country.class, id);
+    }
 }

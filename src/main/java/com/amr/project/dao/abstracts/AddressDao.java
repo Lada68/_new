@@ -9,4 +9,7 @@ public interface AddressDao extends ReadWriteDao<Address, Long>  {
     boolean findByAddress(Address address);
 
     Address getByAddress(Address address);
+
+    Address findByCityIndex(String cityIndex);
+
 }

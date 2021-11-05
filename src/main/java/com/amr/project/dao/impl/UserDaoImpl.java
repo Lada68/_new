@@ -8,6 +8,13 @@ import java.util.List;
 
 @Repository
 public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao {
+
+    @Override
+    public User findUserByActivationCode(String activationCode) {
+        return (User) em.createQuery("Select e FROM User e WHERE e.activationCode = :activationCode")
+                .setParameter("activationCode", activationCode)
+                .getSingleResult();
+    }
     @Override
     public boolean getByUsername(String username) {
         List<User> listUser = (List<User>) em.createQuery("select uf from User uf where uf.username like :username", User.class).
@@ -23,6 +30,10 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
         return em.createQuery("select c from User c where c.username like :username", User.class)
                 .setParameter("username", username).getSingleResult();
 
+    }
+    @Override
+    public User findById(Long id) {
+        return em.find(User.class, id);
     }
 
     @Override

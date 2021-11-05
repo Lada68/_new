@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CityServiceImpl extends ReadWriteServiceImpl<City, Long> implements CityService {
+
     private final CityDao cityDao;
+
     protected CityServiceImpl(ReadWriteDao<City, Long> readWriteDao, CityDao cityDao) {
         super(readWriteDao);
         this.cityDao = cityDao;
@@ -20,8 +22,14 @@ public class CityServiceImpl extends ReadWriteServiceImpl<City, Long> implements
             cityDao.persist(city);
         }
     }
+
     @Override
-    public City findByName(String name){
+    public City findByName(String name) {
         return cityDao.findByName(name);
+    }
+
+    @Override
+    public City findById(Long id) {
+        return cityDao.findById(id);
     }
 }

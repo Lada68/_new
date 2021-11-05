@@ -29,4 +29,14 @@ public class ItemMainPageDaoImpl extends ReadWriteDaoImpl<Item, Long> implements
                 .setParameter("param", "%" + search + "%")
                 .getResultList();
     }
+    @Override
+    public Item findById(Long id) {
+        return em.find(Item.class, id);
+    }
+
+    @Override
+    public Item findByName(String name) {
+        return em.createQuery("select i from Item i where i.name=:name", Item.class)
+                .setParameter("name", name).getSingleResult();
+    }
 }

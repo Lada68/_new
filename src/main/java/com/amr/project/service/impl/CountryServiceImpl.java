@@ -15,6 +15,10 @@ public class CountryServiceImpl extends ReadWriteServiceImpl<Country, Long> impl
         super(readWriteDao);
         this.countryDao = countryDao;
     }
+    @Override
+    public Country findById(Long id) {
+        return countryDao.findById(id);
+    }
 
     @Override
     public void addNewCountry(Country country) {

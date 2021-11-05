@@ -1,7 +1,7 @@
 package com.amr.project.model.entity;
 
 import com.amr.project.model.enums.Gender;
-import lombok.Data;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,6 +33,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "address_id")
     )
+    @ToString.Exclude
     private List<Address> address;
 
     @ManyToMany
@@ -41,6 +42,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+    @ToString.Exclude
     private Set<Role> roles;
 
     private Gender gender;
@@ -72,6 +74,13 @@ public class User implements UserDetails {
     }
 
     public User() {
+    }
+    public User(String email, String username, String password, String firstName, String lastName) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public void addAddress(Address address) {

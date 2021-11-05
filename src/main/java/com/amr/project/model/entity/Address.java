@@ -22,13 +22,23 @@ public class Address {
     private Long id;
     private String cityIndex;
 
-    @OneToOne(fetch = FetchType.LAZY)
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    private Country country;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
     @ToString.Exclude
     private Country country;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
     @ToString.Exclude
     private City city;
+
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @ToString.Exclude
+//    private City city;
 
     private String street;
     private String house;
@@ -95,5 +105,16 @@ public class Address {
         }
         this.users.add(user);
     }
-
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Address address = (Address) o;
+//        return Objects.equals(cityIndex, address.cityIndex) && Objects.equals(country, address.country) && Objects.equals(city, address.city) && Objects.equals(street, address.street) && Objects.equals(house, address.house);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(cityIndex, country, city, street, house);
+//    }
 }

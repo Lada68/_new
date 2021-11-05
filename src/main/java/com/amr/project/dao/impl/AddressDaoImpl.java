@@ -56,4 +56,9 @@ public class AddressDaoImpl extends ReadWriteDaoImpl<Address, Long> implements A
                 .setParameter("house", house).getSingleResult();
 
     }
+    @Override
+    public Address findByCityIndex(String cityIndex) {
+        return em.createQuery("select a from Address a where a.cityIndex=:cityIndex", Address.class)
+                .setParameter("cityIndex", cityIndex).getSingleResult();
+    }
 }

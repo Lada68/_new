@@ -1,5 +1,6 @@
 package com.amr.project.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,6 +27,7 @@ public class Country {
             mappedBy = "country",
             cascade = {CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE}
     )
+    @JsonIgnore
     @ToString.Exclude
     private List<City> cities;
 
@@ -68,4 +70,18 @@ public class Country {
     public int hashCode() {
         return 752506755;
     }
+
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Country country = (Country) o;
+//        return Objects.equals(name, country.name) && Objects.equals(cities, country.cities);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(name, cities);
+//    }
+
 }

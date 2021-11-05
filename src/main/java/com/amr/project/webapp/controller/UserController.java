@@ -73,7 +73,7 @@ public class UserController {
 
         addressService.addNewAddress(address);
         address.setId(addressService.getByAddress(address).getId());
-        user.addAddress(userService.findById(address.getId()));
+        user.addAddress(addressService.findById(address.getId()));
         userService.updateUser(user);
         return "redirect:/";
     }

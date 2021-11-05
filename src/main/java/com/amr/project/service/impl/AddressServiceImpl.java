@@ -14,7 +14,10 @@ public class AddressServiceImpl extends ReadWriteServiceImpl<Address, Long> impl
         super(readWriteDao);
         this.addressDao = addressDao;
     }
-
+    @Override
+    public Address findByCityIndex(String index) {
+        return addressDao.findByCityIndex(index);
+    }
     @Override
     public void addNewAddress(Address address) {
         if (addressDao.findByAddress(address)) {
