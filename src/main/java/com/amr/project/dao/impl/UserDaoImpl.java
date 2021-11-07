@@ -37,15 +37,9 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
 
     }
     @Override
-    public User findById(Long id) {
-        return em.find(User.class, id);
-    }
-
-    @Override
     public void update(User user) {
-        System.out.println(user);
         User userDb = findUserByUsername(user.getUsername());
-        System.out.println("dao " + userDb);
+
         userDb.setAge(user.getAge());
         userDb.setEmail(user.getEmail());
         userDb.setFirstName(user.getFirstName());
@@ -57,10 +51,5 @@ public class UserDaoImpl extends ReadWriteDaoImpl<User, Long> implements UserDao
         persist(userDb);
     }
 
-    @Override
-    public User findUserByActivationCode(String activationCode) {
-        return (User) em.createQuery("Select e FROM User e WHERE e.activationCode = :activationCode")
-                .setParameter("activationCode", activationCode)
-                .getSingleResult();
-    }
+
 }

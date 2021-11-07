@@ -22,10 +22,6 @@ public class Address {
     private Long id;
     private String cityIndex;
 
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    private Country country;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     @ToString.Exclude
@@ -35,10 +31,6 @@ public class Address {
     @JoinColumn(name = "city_id")
     @ToString.Exclude
     private City city;
-
-//    @OneToOne(fetch = FetchType.LAZY)
-//    @ToString.Exclude
-//    private City city;
 
     private String street;
     private String house;
@@ -60,13 +52,20 @@ public class Address {
         this.house = house;
     }
 
+    public Address(String cityIndex, String street, String house) {
+        this.cityIndex = cityIndex;
+        this.street = street;
+        this.house = house;
+    }
+
+    public Address(Country country, City city) {
+        this.country = country;
+        this.city = city;
+    }
+
     public Address() {
-//        this.cityIndex = "cityIndex";
         this.country = new Country();
-//
         this.city = new City(); //починить - убрать null
-//        this.street = "street";
-//        this.house = "house";
     }
 
     public Country getCountry() {

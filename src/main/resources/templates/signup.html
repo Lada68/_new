@@ -56,11 +56,11 @@
            required=""/>
 
     <div th:object="${address}">
-        <input type="text" th:value="*{country.name}" name="country" id="inputCountry" class="form-control"
+          <input type="text" th:value="*{country.name}" name="nameCountry" id="inputCountry" class="form-control"
                placeholder="Страна" required=""/>
 
         <label for="inputCity" class="sr-only">City</label>
-        <input type="text" th:value="*{city.name}" name="city" id="inputCity" class="form-control" placeholder="Город"
+        <input type="text" th:value="*{city.name}" name="nameCity" id="inputCity" class="form-control" placeholder="Город"
                required=""/>
 
         <label for="inputCityIndex" class="sr-only">Index</label>

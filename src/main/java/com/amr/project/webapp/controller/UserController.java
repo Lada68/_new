@@ -3,6 +3,7 @@ package com.amr.project.webapp.controller;
 import com.amr.project.converter.UserMapper;
 import com.amr.project.model.entity.Address;
 import com.amr.project.model.entity.City;
+import com.amr.project.model.entity.Country;
 import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.AddressService;
 import com.amr.project.service.abstracts.CityService;
@@ -47,7 +48,7 @@ public class UserController {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("signup");
             modelAndView.addObject("date", new Date());
-            modelAndView.addObject("address", new Address());
+              modelAndView.addObject("address", new Address());
 
             return modelAndView;
         } else {
@@ -60,16 +61,17 @@ public class UserController {
 
     @PostMapping("/update")
     public String updateDataUser(@ModelAttribute User user,
+                                 @ModelAttribute("nameCountry") String name,
+                                 @ModelAttribute ("nameCity") String name1,
                                  @ModelAttribute Address address,
                                  @ModelAttribute String date) {
 
-        countryService.addNewCountry(address.getCountry());
+           countryService.addNewCountry(new Country(name));
+        cityService.addNewCity(new City(name1,
+                countryService.findByName(name)));
 
-        cityService.addNewCity(new City(address.getCity().getName(),
-                countryService.findByName(address.getCountry().getName())));
-
-        address.setCity(cityService.findByName(address.getCity().getName()));
-        address.setCountry(countryService.findByName(address.getCountry().getName()));
+        address.setCity(cityService.findByName(name1));
+        address.setCountry(countryService.findByName(name));
 
         addressService.addNewAddress(address);
         address.setId(addressService.getByAddress(address).getId());
