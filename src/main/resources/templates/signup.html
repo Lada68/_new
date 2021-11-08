@@ -18,7 +18,7 @@
     </head>
 <body>
 <form class="form-signin mx-auto font-weight-bold text-center p-3" content="application/json"
-      th:action="@{/update}" th:object="${user}" method="post"
+      th:action="@{/update}" th:object="${userDto}" method="post"
       style="width: 300px;">
     <div class="m-auto">
         <img th:src="@{/img/logo.png}" alt="logo">
@@ -55,12 +55,12 @@
     <input type="email" th:value="*{email}" name="email" id="inputEmail" class="form-control" placeholder="Email"
            required=""/>
 
-    <div th:object="${address}">
-          <input type="text" th:value="*{country.name}" name="nameCountry" id="inputCountry" class="form-control"
+    <div th:object="${addressDto}">
+          <input type="text" th:value="*{country}" name="country" id="inputCountry" class="form-control"
                placeholder="Страна" required=""/>
 
         <label for="inputCity" class="sr-only">City</label>
-        <input type="text" th:value="*{city.name}" name="nameCity" id="inputCity" class="form-control" placeholder="Город"
+        <input type="text" th:value="*{city}" name="city" id="inputCity" class="form-control" placeholder="Город"
                required=""/>
 
         <label for="inputCityIndex" class="sr-only">Index</label>

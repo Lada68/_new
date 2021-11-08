@@ -1,6 +1,9 @@
 package com.amr.project.webapp.controller;
 
 import com.amr.project.converter.UserMapper;
+import com.amr.project.converter.AddressMapper;
+import com.amr.project.model.dto.UserDto;
+import com.amr.project.model.dto.AddressDto;
 import com.amr.project.model.entity.Address;
 import com.amr.project.model.entity.City;
 import com.amr.project.model.entity.Country;
@@ -27,11 +30,12 @@ public class UserController {
     private final CityService cityService;
     private final AddressService addressService;
     private final UserMapper mapper;
+    private final AddressMapper addressMapper;
 
 
     public UserController(UserService userService,
                           CountryService countryService, CityService cityService, AddressService addressService,
-                          UserMapper mapper) {
+                          UserMapper mapper, AddressMapper addressMapper) {
 
         this.userService = userService;
         this.countryService = countryService;
@@ -39,16 +43,17 @@ public class UserController {
         this.addressService = addressService;
         this.mapper = mapper;
 
+        this.addressMapper = addressMapper;
     }
 
     @PostMapping("/signup")
-    public ModelAndView createNewUser(@ModelAttribute User user) {
-
+    public ModelAndView createNewUser(@ModelAttribute UserDto userDto) {
+User user = mapper.toModel(userDto);
         if (userService.registerNewUser(user)) {
             ModelAndView modelAndView = new ModelAndView();
             modelAndView.setViewName("signup");
             modelAndView.addObject("date", new Date());
-              modelAndView.addObject("address", new Address());
+              modelAndView.addObject("addressDto", new AddressDto());
 
             return modelAndView;
         } else {
@@ -60,18 +65,21 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updateDataUser(@ModelAttribute User user,
-                                 @ModelAttribute("nameCountry") String name,
-                                 @ModelAttribute ("nameCity") String name1,
-                                 @ModelAttribute Address address,
+    public String updateDataUser(@ModelAttribute UserDto userDto,
+                                 @ModelAttribute("country") String country,
+                                 @ModelAttribute ("city") String city,
+                                 @ModelAttribute("addressDto") AddressDto addressDto,
                                  @ModelAttribute String date) {
 
-           countryService.addNewCountry(new Country(name));
-        cityService.addNewCity(new City(name1,
-                countryService.findByName(name)));
+        System.out.println(addressDto);
+User user = mapper.toModel(userDto);
+Address address = addressMapper.toModel(addressDto);
+           countryService.addNewCountry(new Country(addressDto.getCountry()));
+        cityService.addNewCity(new City(addressDto.getCity(),
+                countryService.findByName(addressDto.getCountry())));
 
-        address.setCity(cityService.findByName(name1));
-        address.setCountry(countryService.findByName(name));
+        address.setCity(cityService.findByName(addressDto.getCity()));
+        address.setCountry(countryService.findByName(addressDto.getCountry()));
 
         addressService.addNewAddress(address);
         address.setId(addressService.getByAddress(address).getId());

@@ -1,9 +1,11 @@
 package com.amr.project.model.dto;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -19,7 +21,8 @@ public class UserDto {
     private String lastName;
     private List<AddressDto> address;
     private List<ImageDto> images;
-    private Calendar birthday;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthday;
     private List<OrderDto> orders = new ArrayList<>();
     private List<ShopDto> shops = new ArrayList<>();
 
