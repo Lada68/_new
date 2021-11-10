@@ -2,6 +2,7 @@ package com.amr.project.service.impl;
 
 import com.amr.project.dao.abstracts.ReadWriteDao;
 import com.amr.project.dao.abstracts.ShopDao;
+import com.amr.project.model.entity.Address;
 import com.amr.project.model.entity.Shop;
 import com.amr.project.service.abstracts.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,12 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     public Shop findByName(String name) {
         return shopDao.findByName(name);
     }
+
+    @Override
+    public void addNewShop(Shop shop) {
+        if (shopDao.findByDataShop(shop)) {
+            shopDao.persist(shop);
+        }
+    }
+
 }

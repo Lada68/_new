@@ -12,4 +12,6 @@ public interface ShopDao extends ReadWriteDao<Shop,Long> {
     Shop findByName(String name);
     List<Shop> findPopularShops();
     List<Shop> searchShops(String search);
+
+    boolean findByDataShop(Shop shop);
 }

@@ -100,6 +100,12 @@ public class User implements UserDetails {
         }
         this.address.add(address);
     }
+    public void addShop(Shop shop) {
+        if (this.shops == null) {
+            this.shops = new ArrayList<>();
+        }
+        this.shops.add(shop);
+    }
 
     public void addRole(Role role) {
         if (this.roles == null) {

@@ -1,8 +1,7 @@
 package com.amr.project.dao.impl;
 
 import com.amr.project.dao.abstracts.ShopDao;
-import com.amr.project.model.entity.Role;
-import com.amr.project.model.entity.Shop;
+import com.amr.project.model.entity.*;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -34,5 +33,29 @@ public class ShopDaoImpl extends ReadWriteDaoImpl<Shop,Long> implements ShopDao 
         return em.createQuery("select sh from Shop sh where sh.name LIKE :param", Shop.class)
                 .setParameter("param", "%" + search + "%")
                 .getResultList();
+    }
+
+    @Override
+    public boolean findByDataShop(Shop shop) {
+        Country country = shop.getLocation();
+        City city = shop.getCity();
+        String phone = shop.getPhone();
+        String email = shop.getEmail();
+        String name = shop.getName();
+        List<Shop> shopList = (List<Shop>) em.createQuery("select c from Shop c where c.location = :country" +
+                " and c.city = :city and c.phone =:phone " +
+                "and c.email = :email and c.name =:name", Shop.class)
+                .setParameter("country", country)
+                .setParameter("city", city)
+                .setParameter("phone", phone)
+                .setParameter("email", email)
+                .setParameter("name", name).getResultList();
+        if (shopList.size() > 0) {
+            return false;
+
+        } else {
+            return true;
+        }
+
     }
 }

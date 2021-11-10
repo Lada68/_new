@@ -1,5 +1,6 @@
 package com.amr.project.model.dto;
 
+import com.amr.project.model.entity.City;
 import lombok.*;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class ShopDto {
     private String phone;
     private String description;
     private CountryDto location;
+    private CityDto cityDto;
     private List<ItemDto> items;
     private ImageDto logo;
     private double rating;

@@ -10,7 +10,7 @@ import java.util.Objects;
 @ToString
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 @Entity
 @Table(name = "shops")
 public class Shop {
@@ -28,6 +28,10 @@ public class Shop {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "country_id")
     private Country location;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "city_id")
+    private City city;
 
 
     @OneToMany(mappedBy = "shop",
@@ -61,6 +65,40 @@ public class Shop {
     private String moderatedRejectReason;
     private boolean isPretendedToBeDeleted = false;
 
+    public Shop(String name, String email, String phone, String description, Country location, City city) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.description = description;
+        this.location = location;
+        this.city = city;
+    }
+
+    public Shop(Long id, String name, String email, String phone, String description, City city, Country location, List<Item> items, List<Review> reviews, Image logo, int count, double rating, User user, List<Discount> discounts, boolean isModerated, boolean isModerateAccept, String moderatedRejectReason, boolean isPretendedToBeDeleted) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.description = description;
+        this.location = location;
+        this.city = city;
+        this.items = items;
+        this.reviews = reviews;
+        this.logo = logo;
+        this.count = count;
+        this.rating = rating;
+        this.user = user;
+        this.discounts = discounts;
+        this.isModerated = isModerated;
+        this.isModerateAccept = isModerateAccept;
+        this.moderatedRejectReason = moderatedRejectReason;
+        this.isPretendedToBeDeleted = isPretendedToBeDeleted;
+    }
+        public Shop() {
+        this.location = new Country();
+        this.city = new City();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,4 +111,5 @@ public class Shop {
     public int hashCode() {
         return Objects.hash(name, email, phone, description, location);
     }
+
 }
