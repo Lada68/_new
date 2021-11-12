@@ -18,7 +18,7 @@
 </head>
 <body>
 <form class="form-shop mx-auto font-weight-bold text-center p-3" content="application/json"
-      th:action="@{/user/newShop}"  th:object="${shopDto}" method="post"
+      th:action="@{/user/newShop}"  th:href="@{/user/market/{id} (id=${shopDto.getId()})}" th:object="${shopDto}" method="post"
       style="width: 300px;">
     <h1 class="h3 mb-3 font-weight-normal">Введите данные для создания магазина</h1>
 

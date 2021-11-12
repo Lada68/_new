@@ -31,7 +31,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <img class="nav-link" style="max-height: 40px"
-                     src="https://seeklogo.com/images/S/shop-direct-logo-D86EF9FED5-seeklogo.com.png" alt="logo" />
+                     src="https://seeklogo.com/images/S/shop-direct-logo-D86EF9FED5-seeklogo.com.png" alt="logo"/>
                 <a class="nav-link" href="#">Магазины</a>
                 <a class="nav-link" href="#">Товары</a>
                 <a class="nav-link" href="#">Избранное</a>
@@ -39,8 +39,9 @@
             </div>
         </div>
         <div>
-        <a class="centertext-secondary btn btn-outline-warning text-primary" style = "margin-right: 50px " href="/">На главную страницу для покупок</a>
-    </div>
+            <a class="centertext-secondary btn btn-outline-warning text-primary" style="margin-right: 50px " href="/">На
+                главную страницу для покупок</a>
+        </div>
 
 
         <div class="text-secondary">
@@ -52,7 +53,8 @@
                              src="https://www.avito.st/stub_avatars/А/10_256x256.png" alt="Аватар">
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="avatar_name nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" name="avatar_name"
+                        <a class="avatar_name nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink"
+                           role="button" name="avatar_name"
                            data-bs-toggle="dropdown" aria-expanded="false">
                             Name Surname
                         </a>
@@ -77,8 +79,6 @@
                 </ul>
             </div>
         </div>
-
-
 
 
     </div>
@@ -107,9 +107,9 @@
                         <span class="sr-only">>>></span>
                     </a>
                 </div>
-<!--                <img style="border-radius: 50%; border: solid black; max-width: 255px" name="user_foto"-->
-<!--                     src="https://mirnivoin.ru/wp-content/uploads/2018/12/Prosvetlenie-za-1-chas.jpg"-->
-<!--                     class="round img-fluid" alt="фото" />-->
+                <!--                <img style="border-radius: 50%; border: solid black; max-width: 255px" name="user_foto"-->
+                <!--                     src="https://mirnivoin.ru/wp-content/uploads/2018/12/Prosvetlenie-za-1-chas.jpg"-->
+                <!--                     class="round img-fluid" alt="фото" />-->
                 <ul class="list-unstyled ps-0">
                     <li class="mb-1">
                         <h3 class="user_data">Имя Фамилия</h3>
@@ -119,7 +119,7 @@
 
                     <!-- TABS -->
                     <li>
-                        <ul class="addr11 address-tab nav nav-tabs" >
+                        <ul class="addr11 address-tab nav nav-tabs">
 
                         </ul>
 
@@ -139,7 +139,7 @@
                     <li><a href="#">Корзина</a></li>
                     <li><a href="#">История заказов</a></li>
                     <li><a href="#">Проданные товары</a></li>
-                    <li><a href="/newShop"> Новый магазин</a></li>
+                    <li><a href="#newShopModal" data-toggle="modal" data-target="#newShopModal"> Новый магазин</a></li>
 
                     </li>
                 </ul>
@@ -151,129 +151,329 @@
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-shops-tab" data-bs-toggle="pill" onclick = "showUserShops()"
+                    <button class="nav-link" id="pills-shops-tab" data-bs-toggle="pill" onclick="showUserShops()"
                             data-bs-target="#pills-shops" type="button" role="tab" aria-controls="pills-shops"
-                            aria-selected="true">Мои Магазины</button>
+                            aria-selected="true">Мои Магазины
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-orders-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-orders" type="button" role="tab" aria-controls="pills-orders"
-                            aria-selected="false">Мои Заказы</button>
+                            aria-selected="false">Мои Заказы
+                    </button>
                 </li>
                 <li hidden class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-settings-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-settings" type="button" role="tab" aria-controls="pills-settings"
-                            aria-selected="false">Настройки профиля</button>
+                            aria-selected="false">Настройки профиля
+                    </button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-shops" role="tabpanel"
                      aria-labelledby="pills-shops-tab">
-                    Магазины здесь
+                    <div class="container">
+                        <table class="table table-hover" style="background-color: white">
+                            <thead>
+                            <tr>
+                                <!--                                <td><h4>ID</h4></td>-->
+                                <td><h4> Name</h4></td>
+                                <td><h4> Email</h4></td>
+                                <td><h4>Phone</h4></td>
+                                <td><h4>Country</h4></td>
+                                <td><h4>City</h4></td>
+                                <td><h4>Description</h4></td>
+                                <td><h4>Edit</h4></td>
+                                <td><h4>Delete</h4></td>
 
-                        <frame src="http://www.kakprosto.ru" />
-                        <frame src="http://www.sapato.ru" />
-
-                    <p>блабла</p>
-                    <ul class = "usershops">
-                        <!-- Shops -->
-                    </ul>
+                            </tr>
+                            </thead>
+                            <tr th:each="shop:${shops}">
+                                <td><a th:href="@{/market/{id}(id=${shop.getId()})}" th:text="${shop.getName()}">Нвзвание</a>
+                                </td>
+                                <td><a th:href="@{/market/{id}(id=${shop.getId()})}"
+                                       th:text="${shop.getEmail()}">Email</a>
+                                </td>
+                                <td><a th:href="@{/market/{id}(id=${shop.getId()})}" th:text="${shop.getPhone()}">Last
+                                    name</a>
+                                </td>
+                                <td><a th:href="@{/market/{id}(id=${shop.getId()})}"
+                                       th:text="${shop.getLocation().getName()}">Age</a>
+                                </td>
+                                <td><a th:href="@{/market/{id}(id=${shop.getId()})}"
+                                       th:text="${shop.getCity().getName()}">Username</a>
+                                </td>
+                                <td><a th:href="@{/market/{id}(id=${shop.getId()})}"
+                                       th:text="${shop.getDescription()}"></a>
+                                    <!--                                       th:text="${user.rolesToString(user.getRoles())}">Roles</a>-->
+                                </td>
+                                <td><a th:href="@{/getOne/(id=${shop.id})}"
+                                       type="button" class="btn btn-primary" id="editButton" data-toggle="modal"
+                                       data-target="#updateShopModal">
+                                    id="editButton">Edit</a></td>
+                                <td><a th:href="@{/getOne/(id=${shop.id})}" type="button" class="btn btn-danger"
+                                       id="deleteButton">Delete</a></td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
-                    Заказы здесь</div>
-                <div class="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab">
-                    <!-- шаблон профиля https://bbbootstrap.com/snippets/bootstrap-edit-profile-accounts-setting-template-80240656 -->
+
+                <!--                Магазины здесь-->
+
+                <!--                <frame src="http://www.kakprosto.ru"/>-->
+                <!--                <frame src="http://www.sapato.ru"/>-->
+
+                <!--                <p>блабла</p>-->
+                <ul class="usershops">
+                    <!-- Shops -->
+                </ul>
+            </div>
+            <div class="tab-pane fade" id="pills-orders" role="tabpanel" aria-labelledby="pills-orders-tab">
+                Заказы здесь
+            </div>
+            <div class="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab">
+                <!-- шаблон профиля https://bbbootstrap.com/snippets/bootstrap-edit-profile-accounts-setting-template-80240656 -->
 
 
-
-                    <div class="wrapper bg-white mt-sm-5">
-                        <h4 class="pb-4 border-bottom">Настройки профиля</h4>
-                        <div class="d-flex align-items-start py-3 border-bottom">
-                            <img style="border-radius: 50%; max-width: 100px" src="https://www.avito.st/stub_avatars/А/10_256x256.png" name="loadfoto" class="img mx-2" alt="">
-                            <div class="pl-sm-4 pl-2" id="img-section"> <b>Фото профиля</b>
-                                <p>Добавить файл не более 1MB</p>
-                                <div class="btn btn-mdb-color btn-rounded float-left">
-                                    <input type="file" accept = "image/jpeg,image/png" class="newfoto">
-                                    <button type="button" data-toggle="modal" data-target="#editFoto" onclick = "fotoEdit()" >Редактировать</button>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Edit Profile -->
-                        <div class="py-2">
-                            <div class="row py-2">
-                                <div class="col-md-6"> <label for="firstname">Имя</label> <input type="text" class="profile bg-light form-control" placeholder="Имя"> </div>
-                                <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Фамилия</label> <input type="text" class="profile bg-light form-control" placeholder="Фамилия"> </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-md-6"> <label for="email">Почта</label> <input type="text" class="profile bg-light form-control" placeholder="email@email.com"> </div>
-                                <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Телефон</label> <input type="tel" class="profile bg-light form-control" placeholder="+7 000 000 0000"> </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-md-6"> <label for="age">Возраст</label> <input type="number" class="profile bg-light form-control" placeholder="100"> </div>
-                                <div class="col-md-6 pt-md-0 pt-3"> <label for="birthday">Дата рождения</label> <input type="date" class="profile bg-light form-control" placeholder="01.01.2001"> </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-md-6"> <label for="gender">Пол</label> <select name="gender" id="gender" class="bg-light">
-                                    <option class="profile" value="male">MALE</option>
-                                    <option class="profile" value="female">FEMALE</option>
-                                </select> </div>
-                            </div>
-                            <div class="addresses row py-2">
-                                    <ul class="addr21 address-tab nav nav-tabs" >
-
-                                    </ul>
-                                    <!-- Addresses -->
-                                    <div class="addr22 address-content tab-content">
-
-                                    </div>
-                                <button type="button" class="btn btn-info"  onclick="saveAddresses()">Изменить адреса</button>
-                            </div>
-                            <div class="py-3 pb-4 border-bottom"> <button class="save btn btn-primary mr-3" onclick="handleClickSubmitProfile()">Сохранить</button> <button class="btn border button" onclick="openShops();">Закрыть</button> </div>
-                            <div class="d-sm-flex align-items-center pt-3" id="deactivate">
-                                <div> <b>Deactivate your account</b>
-                                    <p>Details about your company account and password</p>
-                                </div>
-                                <div class="ml-auto"> <button class="btn danger">Deactivate</button> </div>
+                <div class="wrapper bg-white mt-sm-5">
+                    <h4 class="pb-4 border-bottom">Настройки профиля</h4>
+                    <div class="d-flex align-items-start py-3 border-bottom">
+                        <img style="border-radius: 50%; max-width: 100px"
+                             src="https://www.avito.st/stub_avatars/А/10_256x256.png" name="loadfoto" class="img mx-2"
+                             alt="">
+                        <div class="pl-sm-4 pl-2" id="img-section"><b>Фото профиля</b>
+                            <p>Добавить файл не более 1MB</p>
+                            <div class="btn btn-mdb-color btn-rounded float-left">
+                                <input type="file" accept="image/jpeg,image/png" class="newfoto">
+                                <button type="button" data-toggle="modal" data-target="#editFoto" onclick="fotoEdit()">
+                                    Редактировать
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <!-- Modal Delete Foto -->
-                    <div class="modal fade" id="editFoto" tabindex="-1" aria-labelledby="editFotoModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="editFotoModalLabel">Поменять картинки</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <!-- Modal windows -->
-                                <div class="modal-body">
-                                    <table class = "editFotoModal">
-                                        <!-- from scrip fotoEdit()  -->
-                                    </table>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                                    <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick = "saveFoto()">Изменить</button>
-                                </div>
+                    <!-- Edit Profile -->
+                    <div class="py-2">
+                        <div class="row py-2">
+                            <div class="col-md-6"><label for="firstname">Имя</label> <input type="text"
+                                                                                            class="profile bg-light form-control"
+                                                                                            placeholder="Имя"></div>
+                            <div class="col-md-6 pt-md-0 pt-3"><label for="lastname">Фамилия</label> <input type="text"
+                                                                                                            class="profile bg-light form-control"
+                                                                                                            placeholder="Фамилия">
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-6"><label for="email">Почта</label> <input type="text"
+                                                                                          class="profile bg-light form-control"
+                                                                                          placeholder="email@email.com">
+                            </div>
+                            <div class="col-md-6 pt-md-0 pt-3"><label for="phone">Телефон</label> <input type="tel"
+                                                                                                         class="profile bg-light form-control"
+                                                                                                         placeholder="+7 000 000 0000">
+                            </div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-6"><label for="age">Возраст</label> <input type="number"
+                                                                                          class="profile bg-light form-control"
+                                                                                          placeholder="100"></div>
+                            <div class="col-md-6 pt-md-0 pt-3"><label for="birthday">Дата рождения</label> <input
+                                    type="date" class="profile bg-light form-control" placeholder="01.01.2001"></div>
+                        </div>
+                        <div class="row py-2">
+                            <div class="col-md-6"><label for="gender">Пол</label> <select name="gender" id="gender"
+                                                                                          class="bg-light">
+                                <option class="profile" value="male">MALE</option>
+                                <option class="profile" value="female">FEMALE</option>
+                            </select></div>
+                        </div>
+                        <div class="addresses row py-2">
+                            <ul class="addr21 address-tab nav nav-tabs">
+
+                            </ul>
+                            <!-- Addresses -->
+                            <div class="addr22 address-content tab-content">
+
+                            </div>
+                            <button type="button" class="btn btn-info" onclick="saveAddresses()">Изменить адреса
+                            </button>
+                        </div>
+                        <div class="py-3 pb-4 border-bottom">
+                            <button class="save btn btn-primary mr-3" onclick="handleClickSubmitProfile()">Сохранить
+                            </button>
+                            <button class="btn border button" onclick="openShops();">Закрыть</button>
+                        </div>
+                        <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                            <div><b>Deactivate your account</b>
+                                <p>Details about your company account and password</p>
+                            </div>
+                            <div class="ml-auto">
+                                <button class="btn danger">Deactivate</button>
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
                 </div>
+                <!-- Modal Delete Foto -->
+                <div class="modal fade" id="editFoto" tabindex="-1" aria-labelledby="editFotoModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editFotoModalLabel">Поменять картинки</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <!-- Modal windows -->
+                            <div class="modal-body">
+                                <table class="editFotoModal">
+                                    <!-- from scrip fotoEdit()  -->
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="saveFoto()">
+                                    Изменить
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
-
     </div>
+
 </div>
 
+
+<div class="modal fade" id="newShopModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center text-muted">
+            <div class="modal-header flex-column p-4">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="m-auto">
+                    <img th:src="@{/img/logo.png}" alt="logo">
+                </div>
+            </div>
+            <div class="modal-body p-4 pb-3 border-bottom">
+                <form class="form-shop mx-auto font-weight-bold text-center p-3" content="application/json"
+                      action="/user/newShop" method="post" style="width: 300px;">
+                    <!--                      th:action="@{/user/newShop}"  th:object="${shopDto}" method="post"-->
+
+                    <h1 class="h3 mb-3 font-weight-normal">Введите данные для создания магазина</h1>
+
+                    <label for="inputName" class="sr-only">name</label>
+                    <input type="text" name="name" id="inputName"
+                           class="form-control" placeholder="Название"
+                           required=""/>
+
+                    <label for="inputCountry" class="sr-only">Country</label>
+                    <input type="text" name="country" id="inputCountry"
+                           class="form-control"
+                           placeholder="Страна" required=""/>
+
+                    <label for="inputCity" class="sr-only">City</label>
+                    <input type="text" name="cityLocation" id="inputCity" class="form-control"
+                           placeholder="Город" required=""/>
+
+                    <label for="inputEmail" class="sr-only">Email</label>
+                    <input type="email" name="email" id="inputEmail"
+                           class="form-control"
+                           placeholder="Email" required=""/>
+
+                    <label for="inputPhone" class="sr-only">Phone</label>
+                    <input type="text" name="phone" id="inputPhone" class="form-control"
+                           placeholder="Телефон" required=""/>
+
+                    <label for="inputDescription" class="sr-only">Description</label>
+                    <input type="text" name="description" id="inputDescription" class="form-control"
+                           placeholder="Описание" required=""/>
+
+                    <!--                    <label for="inputLogo" class="sr-only">Logo</label>-->
+                    <!--                    <input type="image" th:value="*{logo}" name="logo" id="inputLogo" class="form-control"-->
+                    <!--                           placeholder="Логотип"-->
+                    <!--                           required=""/>-->
+
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block mt--5" type="submit">Сохранить данные</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateShopModal" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content text-center text-muted">
+            <div class="modal-header flex-column p-4">
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="m-auto">
+                    <img th:src="@{/img/logo.png}" alt="logo">
+                </div>
+            </div>
+            <!--        <div th:each="shop : ${shops}" th:attr="id=${'updateShopModal' + shop.id}">-->
+
+            <div class="modal-body p-4 pb-3 border-bottom">
+                <form class="form-shop mx-auto font-weight-bold text-center p-3" content="application/json"
+                      th:action="@{/updateShop/}" th:method="put"
+                      style="width: 300px;">
+                    <h1 class="h3 mb-3 font-weight-normal">Введите данные для создания магазина</h1>
+                    <div class="form-group">
+
+                        <label for="inputId" class="cr-only">ID</label>
+                        <input type="text" name="id" id="inputId" class="form-control"
+                               required="">
+
+                        <label for="inputName1" class="sr-only">name</label>
+                        <input type="text" name="name" id="inputName1"
+                               class="form-control"
+                               required=""/>
+
+                        <label for="inputCountry1" class="sr-only">Country</label>
+                        <input type="text" name="country" id="inputCountry1"
+                               class="form-control"
+                               required=""/>
+
+                        <label for="inputCity1" class="sr-only">City</label>
+                        <input type="text" name="cityLocation" id="inputCity1"
+                               class="form-control"
+                               required=""/>
+
+                        <label for="inputEmail1" class="sr-only">Email</label>
+                        <input type="email" name="email" id="inputEmail1"
+                               class="form-control"
+                               required=""/>
+
+                        <label for="inputPhone1" class="sr-only">Phone</label>
+                        <input type="text" name="phone" id="inputPhone1" class="form-control"
+                               required=""/>
+
+                        <label for="inputDescription1" class="sr-only">Description</label>
+                        <input type="text" name="description" id="inputDescription1"
+                               class="form-control"
+                               required=""/>
+
+                        <!--                    <label for="inputLogo" class="sr-only">Logo</label>-->
+                        <!--                    <input type="image" th:value="*{logo}" name="logo" id="inputLogo" class="form-control"-->
+                        <!--                           placeholder="Логотип"-->
+                        <!--                           required=""/>-->
+
+                        <br>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block mt--5" type="submit">Сохранить данные</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 
 
 <!-- custom scripts -->
@@ -285,9 +485,15 @@
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 <!-- Optional JavaScript; choose one of the two! -->
 <!-- Option 1: Bootstrap Bundle with Popper -->
