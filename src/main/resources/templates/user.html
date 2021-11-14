@@ -189,7 +189,7 @@
                             </tr>
                             </thead>
                             <tr th:each="shop:${shops}">
-                                <td><a th:href="@{/market/{id}(id=${shop.getId()})}" th:text="${shop.getName()}">Нвзвание</a>
+                                <td><a th:href="@{/user/market/{id}(id=${shop.getId()})}" th:text="${shop.getName()}">Нвзвание</a>
                                 </td>
                                 <td><a th:href="@{/market/{id}(id=${shop.getId()})}"
                                        th:text="${shop.getEmail()}">Email</a>
@@ -207,12 +207,19 @@
                                        th:text="${shop.getDescription()}"></a>
                                     <!--                                       th:text="${user.rolesToString(user.getRoles())}">Roles</a>-->
                                 </td>
-                                <td><a th:href="@{/getOne/(id=${shop.id})}"
+
+<!--                                th:href="@{/getOne/(id=${shop.id})}"-->
+                                <td>
+
+<!--                                    <a-->
+<!--                                       type="button" class="btn btn-primary" id="editButton" data-toggle="modal" th:onclick="'javascript:jqFunc(' + ${shop.id} + ')'"-->
+<!--                                       data-target="#updateShopModal">-->
+<!--                                    id="editButton">Edit</a></td>-->
+                                <td><a th:href="@{/getOne/{id}(id=${shop.id})}"
                                        type="button" class="btn btn-primary" id="editButton" data-toggle="modal"
-                                       data-target="#updateShopModal">
-                                    id="editButton">Edit</a></td>
-                                <td><a th:href="@{/getOne/(id=${shop.id})}" type="button" class="btn btn-danger"
-                                       id="deleteButton">Delete</a></td>
+                                       data-target="#updateShopModal">Редактировать</a></td>
+                                <td><a th:href="@{/deleteUserShop/{id} (id=${shop.id})}" type="button" class="btn btn-danger"
+                                       id="deleteButton">Закрыть магазин</a></td>
                             </tr>
                         </table>
                     </div>
@@ -421,9 +428,9 @@
 
             <div class="modal-body p-4 pb-3 border-bottom">
                 <form class="form-shop mx-auto font-weight-bold text-center p-3" content="application/json"
-                      th:action="@{/updateShop/}" th:method="put"
+                      th:action="@{/updateShop}" th:method="put" method="post"
                       style="width: 300px;">
-                    <h1 class="h3 mb-3 font-weight-normal">Введите данные для создания магазина</h1>
+                    <h1 class="h3 mb-3 font-weight-normal">Измените необходимые данные</h1>
                     <div class="form-group">
 
                         <label for="inputId" class="cr-only">ID</label>
@@ -436,7 +443,7 @@
                                required=""/>
 
                         <label for="inputCountry1" class="sr-only">Country</label>
-                        <input type="text" name="country" id="inputCountry1"
+                        <input type="text" name="location" id="inputCountry1"
                                class="form-control"
                                required=""/>
 
@@ -481,16 +488,17 @@
 <script src="/js/user_page/user_page.js"></script>
 <script src="/js/user_page/user_page_tabs.js"></script>
 <script src="/js/user_page/user_page_profile.js"></script>
-<script src="/js/user_page/user_page_shops.js"></script>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
+<!--        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"-->
+<!--        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
+<!--        crossorigin="anonymous"></script>-->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
@@ -500,6 +508,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
+<script src="/js/user_page/user_page_shops.js"></script>
 </body>
 
 

@@ -4,10 +4,13 @@ import com.amr.project.dao.abstracts.ReadWriteDao;
 import com.amr.project.dao.abstracts.ShopDao;
 import com.amr.project.model.entity.Address;
 import com.amr.project.model.entity.Shop;
+import com.amr.project.model.entity.User;
 import com.amr.project.service.abstracts.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements ShopService {
@@ -33,8 +36,17 @@ public class ShopServiceImpl extends ReadWriteServiceImpl<Shop, Long> implements
     @Override
     public void addNewShop(Shop shop) {
         if (shopDao.findByDataShop(shop)) {
+            shop.setModerateAccept(true);
             shopDao.persist(shop);
         }
+    }
+
+    @Override
+    public void deleteUserShop(Shop shopDb) {
+        User user = shopDb.getUser();
+        shopDb.setUser(null);
+        shopDb.setModerateAccept(false);
+        shopDao.update(shopDb);
     }
 
 }

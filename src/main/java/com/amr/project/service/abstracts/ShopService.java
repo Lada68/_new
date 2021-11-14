@@ -7,4 +7,6 @@ public interface ShopService extends ReadWriteService<Shop,Long> {
     Shop findByName(String name);
 
     void addNewShop(Shop shop);
+
+    void deleteUserShop(Shop shopDb);
 }

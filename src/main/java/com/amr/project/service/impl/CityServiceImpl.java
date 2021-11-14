@@ -22,6 +22,13 @@ public class CityServiceImpl extends ReadWriteServiceImpl<City, Long> implements
             cityDao.persist(city);
         }
     }
+    @Override
+    public City getByName(String name){
+        if(cityDao.getByName(name)){
+            addNewCity(new City(name));
+        }
+        return cityDao.findByName(name);
+    }
 
     @Override
     public City findByName(String name) {

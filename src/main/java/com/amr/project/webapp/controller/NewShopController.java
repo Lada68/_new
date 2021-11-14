@@ -1,7 +1,6 @@
 package com.amr.project.webapp.controller;
 
 import com.amr.project.converter.ShopMapper;
-import com.amr.project.model.dto.ShopDto;
 import com.amr.project.model.entity.City;
 import com.amr.project.model.entity.Country;
 import com.amr.project.model.entity.Shop;
@@ -13,8 +12,6 @@ import com.amr.project.service.abstracts.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import java.security.Principal;
 
@@ -32,6 +29,7 @@ public class NewShopController {
         this.countryService = countryService;
         this.cityService = cityService;
         this.shopMapper = shopMapper;
+
     }
 
     @PostMapping("/user/newShop")
@@ -57,54 +55,44 @@ public class NewShopController {
         shopService.addNewShop(shop);
         return "redirect:/user";
     }
-    @GetMapping("/user/market/{id}")
-    public String marketHome(Model model, @PathVariable(value = "id", required = true) Long id) {
-        if (shopService.existsById(Shop.class, id)) {
-            return "market";
-        }
-        return "404";
-    }
-//    @GetMapping("/updateShop/{id}")
-//    public ModelAndView getUpdateShop(@ModelAttribute Shop shop, @PathVariable("id") Long id){
-//        System.out.println(shop);
-//       System.out.println(id);
-//        shop = shopService.findById(id);
-//        System.out.println(shop);
-//     //   shopDto = shopMapper.shopToDto(shop);
-//        ModelAndView modelAndView = new ModelAndView();
-//       modelAndView.addObject("shop", shop);
-//        modelAndView.setViewName("updateShop");
-//        return modelAndView;
-//    }
 
-    @RequestMapping(value = "/updateShop", method = {RequestMethod.PUT, RequestMethod.GET})
-    public ModelAndView updateShop(Principal principal, @ModelAttribute Shop shop,
-                             @ModelAttribute("country") String location,
-                             @ModelAttribute("cityLocation") String cityLocation){
-        System.out.println(location);
-        System.out.println(cityLocation);
+
+
+
+    @RequestMapping(value = "/updateShop", method = {RequestMethod.POST, RequestMethod.GET})
+    public String  updateShop(Principal principal,
+                                   @ModelAttribute("location") String location,
+                                   @ModelAttribute("cityLocation") String cityLocation,
+                                   @ModelAttribute("name") String name,
+                                   @ModelAttribute("email") String email,
+                                   @ModelAttribute("phone") String phone,
+                                   @ModelAttribute("description") String description,
+                                   @ModelAttribute("id") Long id) {
+
         System.out.println(principal);
-        Country country = countryService.findByName(location);
-        if(country == null){
-        countryService.addNewCountry(new Country(location));}
+        Shop shop = shopService.findById(id);
+        System.out.println(shop);
+        Country country = countryService.getByName(location);
         shop.setLocation(country);
-        City city = cityService.findByName(cityLocation);
-        if(city == null){
-            cityService.addNewCity(new City(cityLocation, country));
-        }
+        City city = cityService.getByName(cityLocation);
         shop.setCity(city);
-       //Shop shop = shopMapper.dtoToModel(shopDto);
-//        User user = userService.findUserByUsername(principal.getName());
-//        user.addShop(shop);
+        shop.setName(name);
+        shop.setPhone(phone);
+        shop.setEmail(email);
+        shop.setDescription(description);
+        User user = userService.findUserByUsername(principal.getName());
+        user.addShop(shop);
         shopService.update(shop);
 
-
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("shop", shop);
-        modelAndView.setViewName("user");
-//        modelAndView.addObject("user", );
-        return modelAndView;
+        return "redirect:/user";
     }
+
+    @GetMapping("/deleteUserShop/{id}")
+    public String deleteShop(@PathVariable("id") Long id){
+        Shop shopDb = shopService.findById(id);
+        shopService.deleteUserShop(shopDb);
+
+   return "redirect:/user" ;}
 
 
 }

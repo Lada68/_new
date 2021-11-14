@@ -9,4 +9,5 @@ public interface CountryService extends ReadWriteService<Country, Long>{
 
     Country findById(Long id);
 
+    Country getByName(String name);
 }
